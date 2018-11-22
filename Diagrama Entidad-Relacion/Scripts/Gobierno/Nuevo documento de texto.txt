@@ -1,0 +1,26 @@
+DynaActionForm sorteos;
+    	sorteos= new LinkedList<SorteosCabecera>();
+    	SorteosCabecera sorteo;
+    	
+		
+		this.connect();
+		
+		this.setProcedure("dbo.Obtener_Sorteos()", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        
+        ResultSet result = this.getStatement().executeQuery();
+
+        result.next();
+        	
+        	while(result.getRow() > 0)
+        	{	
+	            sorteo = new SorteosCabecera();
+	        	sorteo.setFecha(result.getString("Fecha"));
+	        	sorteo.setNro_sorteo(result.getString("nro_sorteo"));
+	        	sorteo.setDescripcion(result.getString("Descripcion"));
+	        	sorteos.add(sorteo);
+	        	result.next();
+        	}
+        	
+               
+		this.disconnect();
+		return  sorteos;
