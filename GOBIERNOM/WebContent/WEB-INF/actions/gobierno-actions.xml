@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
+    <form-beans>
+    </form-beans>
+    <action-mappings>
+        <action path="/Content.do" type="ContentAction">
+            <forward name="success" path="/gobierno/content.jsp"/>
+        </action>
+        <action path="/Buscar.do" type="BuscarAction">
+            <forward name="success" path="/gobierno/entrar.jsp"/>
+        </action>
+        <action path="/Guardar.do" type="Guardar">
+            <forward name="success" path="/gobierno/guardar.jsp"/>
+        </action>
+        <action path="/OpcionesAction.do" type="OpcionesAction">
+            <forward name="success" path="/gobierno/opciones.jsp"/>
+        </action>
+        <action path="/EstadisticasAction.do" type="EstadisticasAction">
+            <forward name="success" path="/gobierno/estadisticas.jsp"/>
+        </action>
+        <action path="/SorteosCabeceraAction.do" type="SorteosCabeceraAction">
+            <forward name="success" path="/gobierno/sorteos_cabecera.jsp"/>
+        </action>
+        <action path="/SorteosDetallesAction.do" type="SorteosDetallesAction">
+            <forward name="success" path="/gobierno/sorteos_detalles.jsp"/>
+        </action>
+        <action path="/ConcesionariasCabeceraAction.do" type="ConcesionariasCabeceraAction">
+            <forward name="success" path="/gobierno/concesionarias_cabecera.jsp"/>
+        </action>
+         <action path="/ConcesionariasDetallesAction.do" type="ConcesionariasDetallesAction">
+            <forward name="success" path="/gobierno/concesionarias_detalles.jsp"/>
+        </action>
+         <action path="/GuardarConcesionariaAction.do" type="GuardarConcesionariaAction">
+            <forward name="success" path="/gobierno/concesionarias_cabecera.jsp"/>
+        </action>
+        <action path="/CrearConcesionariaAction.do" type="CrearConcesionariaAction">
+            <forward name="success" path="/gobierno/concesionarias_cabecera.jsp"/>
+        </action>
+        <action path="/SorteosPendientesCabeceraAction.do" type="SorteosPendientesCabeceraAction">
+            <forward name="success" path="/gobierno/sorteos_pendientes_cabecera.jsp"/>
+        </action>
+         <action path="/SorteosPendientesDetallesAction.do" type="SorteosPendientesDetallesAction">
+            <forward name="success" path="/gobierno/sorteo_pendientes_detalles.jsp"/>
+        </action>
+         <action path="/GuardarSorteoAction.do" type="GuardarSorteoAction">
+            <forward name="success" path="/gobierno/sorteos_pendientes_cabecera.jsp"/>
+        </action>
+        <action path="/CrearSorteoAction.do" type="CrearSorteoAction">
+            <forward name="success" path="/gobierno/sorteos_pendientes_cabecera.jsp"/>
+        </action>
+        <action path="/UsuarioDetallesAction.do" type="UsuarioDetallesAction">
+            <forward name="success" path="/gobierno/usuario_detalles.jsp"/>
+        </action>
+        <action path="/ActualizarUsuarioAction.do" type="ActualizarUsuarioAction">
+            <forward name="success" path="/gobierno/usuario_detalles.jsp"/>
+        </action>
+         <action path="/EstadoCuentaAction.do" type="EstadoCuentaAction">
+            <forward name="success" path="/gobierno/estado_cuenta.jsp"/>
+        </action>
+        <action path="/ConcesionariasHabilitadasAction.do" type="ConcesionariasHabilitadasAction">
+            <forward name="success" path="/gobierno/concesionarias_habilitadas.jsp"/>
+        </action>
+    </action-mappings>
+</actions>

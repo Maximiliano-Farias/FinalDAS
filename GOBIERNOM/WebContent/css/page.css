@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+
+html, body {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10pt;
+    color: #000;
+   height:100%;
+	width:100%;
+	background-repeat:no-repeat;
+	bgproperties:fixed;
+	margin:0;
+	padding:0;
+	position: absolute;
+	 top: 0; 
+	 left: 0;
+}
+
+
+
+
+body{
+background: url("https://www.simplesoftware.com.ar/sitio/wp-content/uploads/2011/05/fondo-celeste-oscuro-6269.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}

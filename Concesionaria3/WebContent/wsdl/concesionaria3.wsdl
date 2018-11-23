@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Concesionaria3Service" targetNamespace="http://action.das.ubp.edu.ar/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://action.das.ubp.edu.ar/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://action.das.ubp.edu.ar/" version="1.0" xmlns:tns="http://action.das.ubp.edu.ar/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="Concesionaria" type="tns:Concesionaria"/>
+
+  <xs:element name="ConcesionariaResponse" type="tns:ConcesionariaResponse"/>
+
+  <xs:complexType name="Concesionaria">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="ConcesionariaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ConcesionariaResponse">
+    <wsdl:part name="parameters" element="tns:ConcesionariaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Concesionaria">
+    <wsdl:part name="parameters" element="tns:Concesionaria">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Concesionaria3">
+    <wsdl:operation name="Concesionaria">
+      <wsdl:input name="Concesionaria" message="tns:Concesionaria">
+    </wsdl:input>
+      <wsdl:output name="ConcesionariaResponse" message="tns:ConcesionariaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Concesionaria3ServiceSoapBinding" type="tns:Concesionaria3">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Concesionaria">
+      <soap:operation soapAction="urn:Concesionaria" style="document"/>
+      <wsdl:input name="Concesionaria">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ConcesionariaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Concesionaria3Service">
+    <wsdl:port name="Concesionaria3Port" binding="tns:Concesionaria3ServiceSoapBinding">
+      <soap:address location="http://localhost:8080/Concesionaria3/services/Concesionaria3Port"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

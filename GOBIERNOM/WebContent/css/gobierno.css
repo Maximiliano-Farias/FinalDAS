@@ -1,0 +1,795 @@
+@CHARSET "ISO-8859-1";
+
+html, body, input {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    color: #000;
+}
+
+#main {
+	clear: both;	
+	opacity: 0.8;
+	
+}
+
+#message, #response, #result {
+	display: none;
+	clear: both;	
+}
+
+
+fieldset {
+	border-color: #004080;
+	background-color: #e0e0e0;
+	
+}
+
+label{
+	color: #004080;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
+
+span {
+	color: #004080;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
+
+a {
+	color: #004080;
+}
+
+input[type="button"] {
+border: none;
+background: #3a7999;
+color: #f2f2f2;
+padding: 3px;
+font-size: 12px;
+border-radius: 5px;
+position: relative;
+box-sizing: border-box;
+transition: all 500ms ease;
+}
+
+#entrar:hover {
+background: #008000;
+color: #ffffff;
+box-shadow: inset #008000 #008000 #008000 3px #ffffff;
+}
+
+#salir:hover {
+background: #800000;
+color: #ffffff;
+box-shadow: inset #008000 #008000 #008000 3px #ffffff;
+}
+
+
+
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+#imagen {
+    min-height: 100%;
+	min-width: 800px;
+	width: 100%;
+	
+   
+}
+
+#Logueado
+{
+	 font-family: Arial, sans-serif;
+    font-size: 12pt;
+    color: #0000a0;
+    float: left;
+   margin-right: 2pt;
+   margin-top: 2pt;
+}
+
+#resultados{
+	border-radius: 5px;
+	border-color: border-color: #004080;
+   width: 100%;
+	height: 100%;
+	position:absolute;
+	repeat: no-repeat;
+	
+}
+
+
+
+
+#DatosPlanes, #SorteoAnterior,#Cuentas,#Consesionarias,#NuevoSorteo,#DatosPersonales,#Estadisticas{
+border: none;
+background: #008040;
+color: #f2f2f2;
+padding: 10px;
+font-size: 20px;
+border-radius: 5px;
+border: 20px;
+margin: 40px;
+position: relative;
+box-sizing: border-box;
+transition: all 500ms ease;
+width: 220px;
+height: 220px;
+}
+
+#UltimoSorteo{
+    background-color: rgba(197, 197, 223, 0.7);
+	height: 100%;
+	width: 100%;
+	border: 20px;
+	color: black;
+	margin-top:1px;	
+	vertical-align: top;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    align: center;
+	
+}
+
+#UltimoSorteo:hover{
+    background-color: rgba(197, 197, 223, 1);
+	height: 100%;
+	width: 100%;
+	border: 20px;
+	color: black;
+	margin-top:1px;	
+	vertical-align: top;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    align: center;
+	
+}
+
+#datos_pantalla{
+	margin-top:21%;
+}
+
+#UltimoSorteo h2{
+	margin-bottom:40px;
+	font-size: 25px;
+	
+}
+
+h2{
+	position: relative;
+    margin: 1px;
+    margin-top:1px;	
+    top: 1px;
+    text-decoration: underline;
+    
+}
+
+
+#DatosPlanes:hover, #SorteoAnterior:hover,#Cuentas:hover,#Consesionarias:hover,#NuevoSorteo:hover,#DatosPersonales:hover,#Estadisticas:hover {
+background: #004080;
+color: #ffffff;
+transition       : 0.5s cubic-bezier(.7,.24,0.26,1.52);
+padding-left:6px;
+font-size: 23px;
+}
+
+
+
+#UltimoSorteo label{
+	color:black;
+	text-decoration: underline;
+}
+
+
+.ocultar{
+	
+	display:none;
+}
+
+#estadisticas_titulo
+{
+	text-decoration: underline;
+	text-align: center;
+	border-bottom:0px;
+	
+}
+
+#estadisticas_conc,#estadisticas_plan{
+	
+	text-align: left;
+	font-family: Arial, sans-serif;
+	border-left: 0;
+    margin-left:10px;
+    margin-top:0px;
+  text-decoration: underline;
+}
+
+#estdisticas_titulo{
+	
+	text-align: center;
+	font-family: Arial, sans-serif;
+	margin-bottom: 0px;
+	border: 0px;
+}
+
+
+
+#estdisticas_concesionaria table td,#estadisticas_planes table td {
+    
+   border-top:10%;
+   border: 1px solid black;
+   border-collapse: collapse;
+   padding: 7px;
+   font-size: 15pt;
+   color: #000;
+   text-align: center;
+   border-left:5px;
+   margin-left:5px;
+}
+
+#estdisticas_concesionaria table, #estadisticas_planes table {
+   border: 3px solid black;
+   border-collapse: collapse;
+   margin-left:3px;
+}
+
+
+#estdisticas_concesionaria,#estadisticas_planes,#autos_vendidos {
+	text-align:left;
+	background :#c0c0c0;
+}
+
+
+#estdisticas_concesionaria,#estadisticas_planes,#autos_vendidos {
+	 background-color: rgba(197, 197, 223, 0.5);
+}
+
+#Detalle_concesionarias
+{
+
+border: none;
+background: #008040;
+color: #f2f2f2;
+padding: 5px;
+font-size: 15px;
+border-radius: 5px;
+border: 10px;
+margin: 40px;
+position: relative;
+box-sizing: border-box;
+transition: all 500ms ease;
+width: 100px;
+height: 50px;
+margin-left:70px;
+	
+}
+
+#Detalle_concesionarias:hover {
+background: #00a400;
+color: #000000;
+box-shadow: inset #008000 #008000 #008000 3px #ffffff;
+}
+
+#estadisticas_plan,#autos_vendidos{
+	
+	text-align: center;
+	font-family: Arial, sans-serif;
+    margin-right:40px;
+  text-decoration: underline;
+}
+
+#estadisticas_planes table,#autos_vendidos table {
+   border: 3px solid black;
+   border-collapse: collapse;
+   margin-left:20px;
+   margin-right:20px;
+   margin-bottom:20px;
+   
+}
+
+#estdisticas_concesionaria,#autos_vendidos{
+	float: left;
+	float: top;
+	
+}
+
+#estadisticas_planes{
+	float: right;
+	float: top;	
+	height :170px;
+	width : 120px;
+	margin-right:70px;
+}
+
+#autos_vendidos{
+	margin-left:14%;
+}
+
+
+#autos_vendidos table td {
+
+   border-top:10%;
+   border: 1px solid black;
+   border-collapse: collapse;
+   padding: 7px;
+   font-size: 12pt;
+   color: #000;
+   text-align: center;
+   border-left:5px;
+   margin-left:5px;
+   font-weight: bold;
+}
+
+
+#div_volver {
+	height :40px;
+	width : 75px;
+}
+
+#volver{
+	margin-top:5px;
+	margin-left:2px;
+	float:left;
+	float:top;
+	padding: 2px;
+	height :30px;
+	width : 70px;
+	background-color : #808080;
+	font-size:12;
+}
+
+#volver:hover {
+    background-color : #008040;
+    transition       : 0.5s cubic-bezier(.7,.24,0.26,1.52);
+    margin-left      :0px;
+}
+
+#estdisticas_concesionaria:hover,#estadisticas_planes:hover,#autos_vendidos:hover {
+	 background-color: rgba(197, 197, 223, 0.8);
+}
+ 
+#elegir_sorteo, #elegir_concesionaria{
+    background-color: rgba(197, 197, 223, 0.8);
+	text-align: center;
+    border: 1px solid #c0c0c0;
+    height: 60px;
+    font-size:17px;
+    padding-top:15px;
+    letter-spacing: 2px;
+	font-weight: bold;
+}
+
+#Elegido{
+	background-color : #004080;
+	height :35px;
+	width : 75px;
+	font-size:13px;
+}
+
+#Elegido:hover{
+	background-color : #005cb9;
+	font-size:15px;
+}
+
+#sorteos_detalles,#concesionarias_detalles,#Estado_detalles, #Facturas_detalles{
+	font-family: Arial, sans-serif;
+	font-size:15px;
+	letter-spacing: 2px;
+}
+
+#sorteos_detalles div, #concesionarias_detalles div,#Estado_detalles, #Facturas_detalles{
+	font-family: Arial, sans-serif;
+	font-size:18px;
+	letter-spacing: 2px;
+	opacity: 0.8;
+}
+
+
+#sorteos_detalles div:hover, #Estado_detalles div:hover{
+	font-family: Arial, sans-serif;
+	font-size:19px;
+	letter-spacing: 2px;
+	opacity: 1;
+}
+
+
+
+
+#concesionaria_detalles,#tipo_modelo_detalles,#ganador_detalles,#nombre_auto_detalles,#fecha_notificacion_detalles,#ganador_detalles,#error_detalles{
+	float:left;
+	position:relative;
+    margin-top:28px;
+    font-weight: bold;
+     margin-left:70px;
+	margin-right:70px;
+}
+
+
+#ganador_detalles,#error_detalles{
+	float:left;
+    margin-left:70px;
+	margin-right:70px;
+	position:relative;
+}
+
+.verde{
+	background-color : #80ff00;
+}
+
+#concesionarias_detalles, #sorteos_detalles{
+	margin-top:20px;
+	margin-left:20px;
+	
+}
+
+#concesionarias_detalles table {
+	margin-top:20px;
+	margin-botton:20px;
+	
+}
+
+
+
+
+
+#guardar_concesionaria,#guardar_sorteo{
+	margin-left: 7px;
+    height :30px;
+	width : 30px;
+}
+
+#titulo1,#titulo2{
+	margin-top:45px;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+	margin-left:40%;
+	width : 250px;
+}
+
+#titulo2{
+	width : 100px;
+	margin-left:46%;
+	margin-top: 70px;
+}
+
+#concesionarias_detalles ,#concesionaria_nueva,#sorteos_detalles{
+	
+	font-weight: bold;
+	letter-spacing: 0px;
+	margin-top: 30px;
+	
+}
+
+
+
+
+
+#concesionaria_nueva,#sorteos_nuevo{
+	
+	margin-left:130px;
+	width : 1000px;
+	vertical-align: center;
+	padding:5px;
+	margin-botton:0;
+	height: 30px;
+}
+
+#crear_concesionaria_nueva,#crear_sorteo_nuevo{
+	width : 57px;
+	height: 21px;
+	text-size: 10px;
+	font-weight: bold;
+	transition: all 0ms ease;
+	
+}
+
+#crear_concesionaria_nueva:hover,#crear_sorteo_nuevo:hover{
+	width : 59px;
+	height: 23px;
+	text-size: 12px;
+	font-weight: bold;
+	background-color : #008040;
+	transition: all 0ms ease;
+	
+}
+
+#sorteos_detalles,#sorteos_nuevo{
+	margin-left:21%;
+	width : 880px;
+	font-weight: bold;
+}
+
+#sorteos_detalles_nuevos{
+	margin-left:21%;
+	width : 830px;
+	font-weight: bold;
+}
+
+#crear_sorteo_nuevo{
+	margin-left:11px;
+}
+
+
+#Datos_Usuario td{
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: underline;
+	padding:10px;
+}
+
+
+#Datos_Usuario input{
+	font-size: 20px;
+	font-weight: bold;
+	padding:15px;
+	margin-let:500px;
+}
+
+
+#Actualizar_Datos_Usuario{
+	float:left;
+	width : 100%;
+	height: 100%;
+	
+}
+
+#seleccion{
+	margin-left: 40%;
+	width : 100%;
+	height: 100%;
+}
+
+#seleccion_sorteo_ant, #seleccion_sorteo_nuevo{
+margin-left: 400px;
+font-size:17px;
+font-weight: bold;
+text-decoration: underline;
+letter-spacing: 2px;
+}
+
+#elegir_sorteo_anterior{
+	background-color: #e0e0e0;
+}
+
+
+#Datos_Usuario{
+
+	 width : 1220px;
+	height: 370px;
+	margin-top:5%;
+	margin-left:5%;
+}
+
+#Actualizar_Datos_Usuario:hover{
+	float:left;
+	width : 100%;
+	height: 100%;
+	background-color: #008000;
+	transition       : 0.8s cubic-bezier(.7,.24,0.26,1.52);
+	font-size:21px;
+	padding:15px;
+	text-decoration: underline;
+}
+
+#TITULO_DATOS{
+
+	letter-spacing: 2px;
+	font-size:23px;
+    padding:15px;
+	text-decoration: underline;
+	text-align: center;
+	margin-left: 35%;
+	font-weight: bold;
+}	
+
+#Sortear{
+	
+	float:left;
+	width : 500px;
+	height: 65px;
+	font-size:23px;
+	text-align: center;
+	margin-left: 32%;
+	letter-spacing: 2px;
+	margin-top: 5%;
+	font-weight: bold;
+	padding:5px;
+	transition       : 0s cubic-bezier(.7,.24,0.26,1.52);
+}
+
+#Sortear:hover{
+	
+	float:left;
+	text-align: center;
+	margin-left: 32%;
+    margin-top: 5%;
+	letter-spacing: 2px;
+	background-color: #008000;
+	transition       : 0.7s cubic-bezier(.7,.24,0.26,1.52);
+	font-size:28px;
+	text-decoration: underline;
+	font-weight: bold;
+	padding:15px;
+}
+
+#Verificar{
+	color: #ff0000;
+	font-weight: bold;
+	font-size:13px;
+}
+
+.rojo{
+	color: #ff0000;
+}
+
+#Facturas_detalles{
+	margin-top:5%;
+	float:left;
+	margin-left :32%;
+	margin-bottom: 5%;
+
+	
+}
+
+
+
+#Facturas_detalles table, #Facturas_detalles table tr,#Facturas_detalles table td, #concesionaria_habilitadas table td, #concesionaria_habilitadas table tr, #concesionaria_habilitadas table  {
+    
+   border: 1px solid black;
+   border-collapse: collapse;
+   padding: 3px;
+   color: #000;
+   text-align: center;
+   font-size:17px;
+   font-weight: bold;
+   padding:5px;
+   
+}
+
+#Facturas_detalles table thead, #Facturas_detalles table tfoot, #concesionaria_habilitadas table thead, #concesionaria_habilitadas table tfood {
+   background-color:rgba(238, 140, 133, 0.8);
+   border: 2px solid black;
+   border-collapse: collapse;
+   padding: 3px;
+   color: #000;
+   text-align: center;
+   font-size:19px;
+   font-weight: bold;
+   padding:6px;
+
+}
+
+
+
+#Estado_detalles{
+	margin-top:5%;
+	float:left;
+	margin-left :8%;
+
+}
+
+#nomb,#mod,#conc,#fec{
+	margin-left:8px;
+	margin-rigth:10px;
+	float:left;
+    color: #000;
+    text-align: center;
+    font-size:20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#titulo_estado{
+	
+	margin-top:10px;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+	margin-left:36%;
+	float:left;
+}
+
+
+#descripcion_ingreso, #paso1, #paso2{
+	margin-left:10px;
+	font-size:19px;
+    font-weight: bold;
+    margin-top:5%;
+	
+}
+
+#Sucursales{
+	
+	float:left;
+	width : 500px;
+	height: 65px;
+	font-size:23px;
+	text-align: center;
+	margin-left: 31%;
+	letter-spacing: 2px;
+	margin-top: 3%;
+	font-weight: bold;
+	padding:5px;
+}
+
+#Sucursales:hover{
+	
+	float:left;
+	text-align: center;
+	margin-left: 31%;
+    margin-top: 3%;
+	letter-spacing: 2px;
+	background-color: #008000;
+	transition       : 0.9s cubic-bezier(.7,.24,0.26,1.52);
+	font-size:28px;
+	text-decoration: underline;
+	font-weight: bold;
+	padding:15px;
+
+}
+
+
+#con_hab
+{
+	margin-left:40%;
+	font-size:28px;
+	text-decoration: underline;
+	font-weight: bold;
+	margin-bottom:5px;
+}
+
+#tabla_conce
+{
+	margin-left:25%;
+	margin-top:6px;
+}
+
+#conces_habi{
+	margin-top:2%;
+}
+
+#div_vuelta {
+	margin-top:2%;
+	margin-left:3px;
+	font-size:15px;
+	
+}
+
+#div_vuelta a{
+	margin-top:2%;
+	margin-left:3px;
+	font-size:15px;
+	font-weight: bold;
+	color :white;
+	text-decoration:none
+}
+
+#div_vuelta a:hover{
+
+	
+	font-weight: bold;
+    text-decoration: underline;
+    color :#00df00;
+}
+
+#estdisticas_concesionaria{
+	margin-left:15px;
+}
+
+
+#titulo4{
+	
+	margin-top:2%;
+	margin-left:42%;
+	font-size:26px;
+	font-weight: bold;
+    text-decoration: underline;
+}
