@@ -645,6 +645,17 @@ select  *
 from personas
 GO
 
+--****************************ACTUALIZAR  GANADOR*********************
+CREATE Procedure Ganador
+(   
+     @Identificador varchar(20)
+    
+)
+AS
+update Facturas 
+set Estado = 1
+where Identificador = @Identificador
+
 
 
 
