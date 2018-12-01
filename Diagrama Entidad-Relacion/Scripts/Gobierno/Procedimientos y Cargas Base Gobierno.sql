@@ -1328,7 +1328,7 @@ EXEC dbo.Insertar_Permisos_Usuarios @Identificador = 'A1A1A1A1A12', -- varchar(1
 go
 
 
-
+-------------------------------------------------------------------------------------
 
 select TOP 1 Nombre_Auto,Tipo_modelo,C.Nombre,c.id_concesionaria,CA.Fecha_actualizacion
 from planes_detalles PD
@@ -1338,12 +1338,7 @@ JOIN concesionarias_actualizaciones CA
 ON CA.id_concesionaria = C.id_concesionaria
 ORDER BY Fecha_actualizacion DESC
 
-
-
-
-dbo.Obtener_DATOS_PLAN 'A1A1A1A1A12'
-
-
+--------------------------------------------------------------------------------------
 
 select TOP 1 Nombre_Auto,Tipo_modelo,C.Nombre,c.id_concesionaria,CA.Fecha_actualizacion
 from planes_detalles PD
@@ -1354,6 +1349,29 @@ ON CA.id_concesionaria = C.id_concesionaria
 WHERE Identificador = @Identificador
 order by CA.Fecha_actualizacion DESC
 
+
+
+--***********************ALTA DE USUARIO INEXISTENTE***********************
+
+CREATE PROCEDURE EXISTE_PERSONA(
+@id_persona int,
+@Identificador Varchar(20)
+)AS
+select EXISTE = case when COUNT(*) > 0 Then 'SI' Else 'NO' End 
+from Personas
+where id_persona = @id_persona
+AND Identificador = @Identificador
+group by id_persona,Identificador
+
+
+
+CREATE PROCEDURE EXISTE_USUARIO(
+@Identificador Varchar(20)
+)AS
+select EXISTE = case when COUNT(*) > 0 Then 'SI' Else 'NO' End 
+from Personas_Usuarios
+where Identificador = @Identificador
+group by Identificador
 
 
 
