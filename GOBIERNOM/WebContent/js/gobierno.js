@@ -32,15 +32,20 @@ var jGobierno = {
 	                jUtils.showing("message", hr.responseText);
 	            },
 	            success: function(html) {
-	            	jUtils.showing("Logueado", html);
-	            	jUtils.hiding("result");
-	            	if(document.getElementById('texto_usuario').value  == undefined)
-	                {  document.getElementById('us').style.Color = '#ff0000';
+	            	jUtils.showing("result", html);
+	            	if ( $("#nuevo_igreso_titulo").length > 0 ) 
+	                { jUtils.hiding("resultados");
+	                jUtils.hiding("cabecera");
+	                }
+	            	if(document.getElementById('texto_usuario').value  == '')
+	                {  
+	            	   document.getElementById('us').style.Color = '#ff0000';
 	                   document.getElementById('con').style.Color = '#ff0000';
 	            		jUtils.showing("cabecera", '');
 	                	document.getElementById('usuario').focus()
 	                }
 	                else {
+		            	
 	                	jUtils.hiding("message");
 		            	jUtils.hiding("entrar");
 		            	jUtils.hiding("Verificar");
@@ -50,6 +55,7 @@ var jGobierno = {
 		            	jUtils.hiding("usuario");
 		            	jUtils.hiding("contrasena");
 		            	jUtils.hiding("result");
+		            	jUtils.showing("Logueado", html);
 		            	jUtils.showing("salir");
 		            	document.cookie ="perfil="+ document.getElementById('perfil').value+";path=/";
 		            	document.cookie ="dni="+ document.getElementById('dni').value+";path=/";

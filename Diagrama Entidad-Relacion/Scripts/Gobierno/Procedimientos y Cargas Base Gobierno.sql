@@ -1354,8 +1354,10 @@ order by CA.Fecha_actualizacion DESC
 --***********************ALTA DE USUARIO INEXISTENTE***********************
 
 CREATE PROCEDURE EXISTE_PERSONA(
-@id_persona int,
-@Identificador Varchar(20)
+
+@Identificador Varchar(20),
+@id_persona Varchar(20)
+
 )AS
 select EXISTE = case when COUNT(*) > 0 Then 'SI' Else 'NO' End 
 from Personas
@@ -1372,8 +1374,6 @@ select EXISTE = case when COUNT(*) > 0 Then 'SI' Else 'NO' End
 from Personas_Usuarios
 where Identificador = @Identificador
 group by Identificador
-
-
 
 
 

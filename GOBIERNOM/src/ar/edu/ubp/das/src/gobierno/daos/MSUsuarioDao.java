@@ -47,8 +47,12 @@ public class MSUsuarioDao extends DaoImpl {
     	
 
     	UsuarioForm usuario = null;
+    	String existe_persona="";
+    	String existe_identificador="";
+    	String usuario_error="NO";
+
     	
-		
+   //**********************    VERIFICA SI PUEDE INGRESAR CON USUARIO Y CONTRASENA
 		this.connect();
 		
 		this.setProcedure("dbo.Logueo ( ?, ? ) ", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -77,10 +81,105 @@ public class MSUsuarioDao extends DaoImpl {
         	}
         	else
         	{
-        		usuario.setNombre_Usuario("Error");
+        		usuario_error= "SI";
+        	}
+        
+		this.disconnect();
+		
+//******************** VERIFICO SI LA PERSONA EXISTE Y ES PRIMER LOGUEO ***************
+	if (usuario_error.equals("SI")){
+		
+        this.connect();
+		
+		this.setProcedure("dbo.EXISTE_PERSONA  (?, ?) ", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+       
+		 try {
+				if(form.getItem("usuario").isEmpty() || form.getItem("contrasena").isEmpty() ) {
+		        	this.setNull(1, Types.TINYINT);
+		        	this.setNull(2, Types.TINYINT);
+		        }
+		        else {
+		        	this.setParameter(1,form.getItem("usuario"));
+		        	this.setParameter(2,Integer.parseInt(form.getItem("contrasena")) );
+		        	
+		        }
+		 }
+		 catch (NumberFormatException excepcion){
+			 this.setNull(1, Types.TINYINT);
+	         this.setNull(2, Types.TINYINT);
+		 }
+	
+        
+        result = this.getStatement().executeQuery();
+
+        result.next();
+        	usuario = new UsuarioForm();
+        	if(result.getRow() > 0)
+        	{	
+        	existe_persona=(result.getString("EXISTE"));
+
+        	}
+        	else
+        	{
+        		existe_persona = "NO";
         	}
                
 		this.disconnect();
+		
+		
+		//******************** VERIFICO SI NO EXISTE USUARIO PARA ESE IDENTIFICADOR ***************
+		
+      this.connect();
+		
+		this.setProcedure("dbo.EXISTE_USUARIO ( ? ) ", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+		
+		
+		if(form.getItem("usuario").isEmpty() || form.getItem("contrasena").isEmpty() ) {
+       	this.setNull(1, Types.TINYINT);
+       }
+       else {
+       	this.setParameter(1,(form.getItem("usuario")));
+       }
+       
+       result = this.getStatement().executeQuery();
+
+       result.next();
+       	usuario = new UsuarioForm();
+       	if(result.getRow() > 0)
+       	{	
+       	  existe_identificador=(result.getString("EXISTE"));
+
+       	}
+       	else
+       	{
+       		existe_identificador= "NO";
+       	}   
+       	
+		this.disconnect();
+		
+		
+
+		
+		if (usuario_error.equals("SI"))
+		{
+			if (existe_persona.equals("SI"))
+			{
+				if(existe_identificador.equals("SI"))
+				{
+					usuario.setPermiso("ERROR");
+				}
+				else{
+					usuario.setPermiso("CREAR");
+				}
+			}
+			else {
+				usuario.setPermiso("ERROR");
+			}
+			
+		}
+	}	
+	
 		return  usuario;
 	}
 
