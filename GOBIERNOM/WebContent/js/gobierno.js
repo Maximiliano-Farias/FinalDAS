@@ -426,30 +426,61 @@ var jGobierno = {
 					        });		
 						},
 						
-				    Sucursales: function() {
-			        jUtils.executing("resultados");
-			        jUtils.hiding("message");
-			        $.ajax({
-			            url: "/gobierno/ConcesionariasHabilitadasAction.do",
-			            type: "post",
-			            dataType: "html", 
-			            error: function(hr){
-			                jUtils.hiding("result");
-			                jUtils.showing("message", hr.responseText);
-			            },
-			            success: function(html) {  	
-			                jUtils.showing("resultados", html);
-			                
-			            }
-			        });		
-				},
-							
+			    Sucursales: function() {
+		        jUtils.executing("resultados");
+		        jUtils.hiding("message");
+		        $.ajax({
+		            url: "/gobierno/ConcesionariasHabilitadasAction.do",
+		            type: "post",
+		            dataType: "html", 
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("message", hr.responseText);
+		            },
+		            success: function(html) {  	
+		                jUtils.showing("resultados", html);
+		                
+		            }
+		        });		
+			   },
 			
-	
-	
-	volver: function() {
-		jUtils.hiding("response");
-        jUtils.showing("main");
-	}
+			CrearUsuario: function(){
+		        jUtils.executing("resultados");
+		        jUtils.hiding("message");
+				var nuevo_usuario = $('#nuevo_usuario').val();
+				var usuario = $('#usuario').val();
+		        var nueva_contrasena_1 = $('#nueva_contrasena_1').val();
+		        var nueva_contrasena_2 = $('#nueva_contrasena_2').val();
+		        var iguales = 0;
+		        if ($("#nueva_contrasena_2").val()== $("#nueva_contrasena_1").val())
+		        	{
+		        	iguales=1;
+		        	}
+		        $.ajax({
+		            url: "/gobierno/CrearUsuarioAction.do",
+		            type: "post",
+		            dataType: "html", 
+		            data: $.param({"nuevo_usuario":nuevo_usuario,"usuario":usuario,"nueva_contrasena_1":nueva_contrasena_1,"nueva_contrasena_2":nueva_contrasena_2,"iguales":iguales}),
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("message", hr.responseText);
+		            },
+		            success: function(html) {  	
+		            	jUtils.hiding("resultados");
+		                jUtils.showing("resultado_creacion", html);
+		                if(iguales == 1){
+		                setTimeout("jGobierno.salir()",2000);
+		                }
+		            }
+		        });					
+			},
+			
+						
+			volver: function() {
+				jUtils.hiding("response");
+		        jUtils.showing("main");
+			}
+			
+			
 		
 };

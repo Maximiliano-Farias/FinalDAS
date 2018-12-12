@@ -61,5 +61,8 @@
         <action path="/ConcesionariasHabilitadasAction.do" type="ConcesionariasHabilitadasAction">
             <forward name="success" path="/gobierno/concesionarias_habilitadas.jsp"/>
         </action>
+        <action path="/CrearUsuarioAction.do" type="CrearUsuarioAction">
+            <forward name="success" path="/gobierno/crear_usuario.jsp"/>
+        </action>
     </action-mappings>
 </actions>

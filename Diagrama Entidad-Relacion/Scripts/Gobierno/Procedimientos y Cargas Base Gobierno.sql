@@ -372,7 +372,7 @@ go
 
 
 
-ALTER Procedure Insertar_Permisos_Usuarios
+CREATE Procedure Insertar_Permisos_Usuarios
 (
  @Identificador varchar(20),
  @nro_permiso  varchar(18),
@@ -1374,6 +1374,7 @@ select EXISTE = case when COUNT(*) > 0 Then 'SI' Else 'NO' End
 from Personas_Usuarios
 where Identificador = @Identificador
 group by Identificador
+
 
 
 

@@ -29,6 +29,9 @@
 			<tr>  
 			 <td colspan ='2'><input type="button" id="crear_usuario" name="crear_usuario" Onclick="jGobierno.CrearUsuario()" value ="<fmt:message key="CREAR_USUARIO" bundle="${etq}" />" /></td>
 		    </tr>
+		    <tr>  
+			 <td colspan ='2'><div id="resultado_creacion"></div></td>
+		    </tr>
 		   </table>
 		</div>
 	 </div>
