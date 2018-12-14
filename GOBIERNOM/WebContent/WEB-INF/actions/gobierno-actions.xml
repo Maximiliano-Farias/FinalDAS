@@ -64,5 +64,11 @@
         <action path="/CrearUsuarioAction.do" type="CrearUsuarioAction">
             <forward name="success" path="/gobierno/crear_usuario.jsp"/>
         </action>
+        <action path="/BuscarEstadoAction.do" type="BuscarEstadoAction">
+            <forward name="success" path="/gobierno/resultado_planes.jsp"/>
+        </action>
+        
+        
+        
     </action-mappings>
 </actions>

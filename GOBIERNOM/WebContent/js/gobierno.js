@@ -68,6 +68,28 @@ var jGobierno = {
 	        });		
 		},
 		
+		Buscando: function(){
+			 if ($("#buscador_plan").val().length > 2)
+	        	{var texto = $('#buscador_plan').val();
+				 jUtils.executing("buscando");
+	            $.ajax({
+	            url: "/gobierno/BuscarEstadoAction.do",
+	            type: "post",
+	            dataType: "html", 
+	            data: $.param({"texto":texto}),
+	            error: function(hr){
+	                jUtils.hiding("result");
+	                jUtils.showing("message", hr.responseText);
+	            },
+	            success: function(html) {  	
+	            	jUtils.hiding("buscando");
+	                jUtils.showing("resultado_busqueda", html);  
+	            }
+	             });	
+	        	}
+		},
+		
+		
 		Opciones: function() {
             $.ajax({
 	            url: "/gobierno/OpcionesAction.do",
@@ -408,13 +430,17 @@ var jGobierno = {
 		    
 					
 		      EstadoCuenta: function() {
-					        jUtils.executing("resultados");
+		    	  var Id_plan = $('#Id_plan').val();
+		    	  var permiso = $('#perfil').val();
+		    	  alert(Id_plan);
+		    	  alert(permiso);
+		    	            jUtils.executing("resultados");
 					        jUtils.hiding("message");
 					        $.ajax({
 					            url: "/gobierno/EstadoCuentaAction.do",
 					            type: "post",
 					            dataType: "html",
-					            data: $.param($("input[name=Id_plan]", $("#form"))),  
+					            data: $.param({"Id_plan":Id_plan,"permiso":permiso}), 
 					            error: function(hr){
 					                jUtils.hiding("result");
 					                jUtils.showing("message", hr.responseText);
@@ -475,7 +501,6 @@ var jGobierno = {
 		        });					
 			},
 			
-						
 			volver: function() {
 				jUtils.hiding("response");
 		        jUtils.showing("main");
