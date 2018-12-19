@@ -15,8 +15,8 @@
 <td colspan=4><var id="TITULO_DATOS"><fmt:message key="DATOS_PERSONALES" bundle="${etq}"/></var></td>
 </tr>
 <tr>
-<td><fmt:message key="NOMBRE" bundle="${etq}"/></td><td><input type="text" id="Nombre_Usuario" name="Nombre_Usuario" value="${detalles.getNombre()}" readonly="readonly" size="40" /></td>
-<td><fmt:message key="APELLIDO" bundle="${etq}"/></td><td><input type="text" id="Apellido_Usuario" name="Apellido_Usuario" value="${detalles.getApellido()}" readonly="readonly" size="40" /></td>
+<td><fmt:message key="NOMBRE" bundle="${etq}"/>:</td><td><input type="text" id="Nombre_Usuario" name="Nombre_Usuario" value="${detalles.getNombre()}" readonly="readonly" size="40" /></td>
+<td><fmt:message key="APELLIDO" bundle="${etq}"/>:</td><td><input type="text" id="Apellido_Usuario" name="Apellido_Usuario" value="${detalles.getApellido()}" readonly="readonly" size="40" /></td>
 </tr>
 
 <tr>

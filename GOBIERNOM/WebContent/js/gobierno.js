@@ -69,8 +69,7 @@ var jGobierno = {
 		},
 		
 		Buscando: function(){
-			 if ($("#buscador_plan").val().length > 2)
-	        	{var texto = $('#buscador_plan').val();
+		        var texto = $('#buscador_plan').val();
 				 jUtils.executing("buscando");
 	            $.ajax({
 	            url: "/gobierno/BuscarEstadoAction.do",
@@ -86,7 +85,7 @@ var jGobierno = {
 	                jUtils.showing("resultado_busqueda", html);  
 	            }
 	             });	
-	        	}
+	        	
 		},
 		
 		
@@ -432,8 +431,6 @@ var jGobierno = {
 		      EstadoCuenta: function() {
 		    	  var Id_plan = $('#Id_plan').val();
 		    	  var permiso = $('#perfil').val();
-		    	  alert(Id_plan);
-		    	  alert(permiso);
 		    	            jUtils.executing("resultados");
 					        jUtils.hiding("message");
 					        $.ajax({

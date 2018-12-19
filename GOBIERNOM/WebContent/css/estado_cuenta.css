@@ -1,0 +1,37 @@
+@CHARSET "ISO-8859-1";
+
+#cabecera_buscador label{
+	margin-top:2%;
+	margin-bottom:4%;
+	margin-left:19%;
+	font-size:20px;
+	font-weight: bold;
+	text-decoration:underline;
+	color:black;
+}
+
+
+#cabecera_buscador label{
+	color:black;
+}
+
+#boton_buscador{
+	margin-left:8px;
+	font-size:15px;
+}
+
+#boton_buscador:hover{
+	background-color: #008040;
+	text-decoration:underline;
+}
+
+#busca_plan{
+	height :30px;
+	width : 30px;
+	margin: 3px;
+}
+
+
+
+
+
