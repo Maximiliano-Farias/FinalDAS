@@ -626,15 +626,6 @@ letter-spacing: 2px;
 	color: #ff0000;
 }
 
-#Facturas_detalles{
-	margin-top:5%;
-	float:left;
-	margin-left :32%;
-	margin-bottom: 5%;
-
-	
-}
-
 
 
 #Facturas_detalles table, #Facturas_detalles table tr,#Facturas_detalles table td, #concesionaria_habilitadas table td, #concesionaria_habilitadas table tr, #concesionaria_habilitadas table  {

@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
-
 <div id= 'concesionaria_habilitadas'>
 <table id='tabla_conce'>
 <thead> 
@@ -32,6 +30,9 @@
        </c:forEach>
 </tbody>          
 </table>
+</div>
+<div id="plan_buscado">
+
 </div>
 
 

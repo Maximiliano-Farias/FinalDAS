@@ -38,7 +38,7 @@
 	</c:when>
 		
 	  <c:when test="${requestScope.usuario.getPermiso() != 'CREAR' && requestScopeusuario.getPermiso() != 'ERROR'}">
-	   <var id='var' >${usuario.getNombre_Usuario()} </var>, Plan:  <var id='var' >${usuario.getId_Plan()} </var>
+	   <var id='var' >${usuario.getNombre_Usuario()} </var>, Plan:  <var id='var1' >${usuario.getId_Plan()} </var>
 	   <input type="hidden" id="texto_usuario"name="texto_usuario" value='${usuario.getNombre_Usuario()}'/>
 	   <input type="hidden" id="perfil"name="perfil" value='${usuario.getPermiso()}'/>
 	   <input type="hidden" id="dni"name="dni" value='${usuario.getDni()}'/>

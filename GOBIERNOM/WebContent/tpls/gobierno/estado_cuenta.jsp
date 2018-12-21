@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
-
 <div id="div_volver">
 <input type="button" id="volver" name="volver" Onclick="jGobierno.Opciones()" value ="<fmt:message key="Volver" bundle="${etq}" />" /> 
 </div>
@@ -14,23 +12,20 @@
    <div id="cabecera_buscador"><label><fmt:message key="BUSCADOR_PLANES" bundle="${etq}" /></label><input type="text" name="buscador_plan" id="buscador_plan" size="35"  /><input type="button" id="boton_buscador" name="boton_buscador" onclick="jGobierno.Buscando()" value ="<fmt:message key="Buscar" bundle="${etq}" />"  /></div>
     <div id="resultado_busqueda"></div>
     </c:when>
-    <c:otherwise> test="${requestScope.Datos.getNombre() != 'admin'}">
-		
-		<h1 id="titulo_estado"><fmt:message key="Cuentas" bundle="${etq}"/>  </h1>
-		
-		<div id="Estado_detalles">
-		
+    <c:otherwise> 
+		<h1 id="titulo_estado"><fmt:message key="Cuentas" bundle="${etq}"/>  </h1>	
+		<div id="Estado_detalles">		
 			<table >
-			<tr>
-				<td id= 'nomb'><fmt:message key="Nombre_Auto" bundle="${etq}"/></td><td> ${Datos.getNombre_Auto()}</td>
-				<td id= 'mod'><fmt:message key="Tipo_Modelo" bundle="${etq}"/></td><td> ${Datos.getTipo_Modelo()}</td>
-				<td id= 'conc'><fmt:message key="Consesionaria" bundle="${etq}"/></td><td> ${Datos.getNombre()}</td>
-				<td id= 'fec'><fmt:message key="Actualizacion" bundle="${etq}"/></td><td> ${Datos.getFecha_actualizada()}</td>		
+				<tr>
+					<td id= 'nomb'><fmt:message key="Nombre_Auto" bundle="${etq}"/>:</td><td id= 'nombr'> ${Datos.getNombre_Auto()}</td>
+					<td id= 'mod'><fmt:message key="Tipo_Modelo" bundle="${etq}"/>:</td><td id= 'mode'> ${Datos.getTipo_Modelo()}</td>
+					<td id= 'conc'><fmt:message key="Consesionaria" bundle="${etq}"/></td><td id= 'conce'> ${Datos.getNombre()}</td>
+					<td id= 'fec'><fmt:message key="Actualizacion" bundle="${etq}"/></td><td id= 'fech'> ${Datos.getFecha_actualizada()}</td>		
 				</tr>		
 			</table>		
 		</div>
 		<div id="Facturas_detalles">
-		<table >
+		<table id="tabla_facturas">
 			<thead>
 				<tr>
 					<td>NRO</td>
@@ -39,8 +34,7 @@
 					<td><fmt:message key="Monto" bundle="${etq}"/></td>
 			    </tr>
 			</thead>
-		<tbody>
-		
+		<tbody>		
 		    <c:forEach var="Factura" items="${Datos.getFacturas()}">
 		         <tr>
 			         <td>${Factura.getNro_factura()} </td>
@@ -52,12 +46,15 @@
 		</tbody>
 		<tfoot>
 		<tr>
-		<td colspan= '3'><fmt:message key="Deuda" bundle="${etq}"/></td><td>$ ${Datos.getMonto_Adeudado()}</td>
+		<td><fmt:message key="Deuda" bundle="${etq}"/></td><td></td><td></td><td>$ ${Datos.getMonto_Adeudado()}</td>
 		</tr>
 		</tfoot>
 		</table>
 		</div>
+		<input type="button" id="imprimir_estado" name="imprimir_estado" Onclick="jGobierno.imprimirPDFEstado()" value ="<fmt:message key="Imprimir" bundle="${etq}" />" /> 
     </c:otherwise>
 </c:choose>
+
+
 
 

@@ -54,34 +54,21 @@ public class MSEstadoCuentaDao extends DaoImpl {
     	FacturaForm Factura;
     	EstadoCuentaForm  Datos;
     	Datos = new EstadoCuentaForm();
-
-    	if(form.getItem("permiso").equals("admin")) { 	
-    		
-    		Datos.setNombre("admin");
-   
+    	if(form.getItem("permiso").equals("admin")) { 	   		
+    		Datos.setNombre("admin"); 
     	}
     	else{
-    		
-    	
-				this.connect();
-				
-				this.setProcedure("dbo.Obtener_Estado_Cuenta (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		
+				this.connect();				
+				this.setProcedure("dbo.Obtener_Estado_Cuenta (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);		
 			       if(form.getItem("Id_plan").isEmpty()) {
 					  JOptionPane.showMessageDialog(null,"ERROR ID PLAN", "ERROR", JOptionPane.ERROR_MESSAGE);
-					  this.setNull(1, Types.TINYINT);	
-			        	
+					  this.setNull(1, Types.TINYINT);		
 			        }
 			        else {
-			        	this.setParameter(1,(form.getItem("Id_plan")));
-			        	
-			        	
+			        	this.setParameter(1,(form.getItem("Id_plan")));	
 			        }
-				
-		        ResultSet result = this.getStatement().executeQuery();
-		
-		        result.next();
-		        	
+		        ResultSet result = this.getStatement().executeQuery();		
+		        result.next();		        	
 		        	while(result.getRow() > 0)
 		        	{	
 		        		Factura = new FacturaForm();
@@ -91,78 +78,51 @@ public class MSEstadoCuentaDao extends DaoImpl {
 			        	Factura.setMonto(result.getInt("Monto"));
 			        	Facturas.add(Factura);
 			        	result.next();
-		        	}
-		        	     
+		        	}     
 				this.disconnect();
-				
-				Datos.setFacturas(Facturas);
-				
-				
-			this.connect();
-				
-				this.setProcedure("dbo.Obtener_Monto_Adeudado (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		
+				Datos.setFacturas(Facturas);	
+			    this.connect();				
+				this.setProcedure("dbo.Obtener_Monto_Adeudado (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);		
 			       if(form.getItem("Id_plan").isEmpty()) {
 					  JOptionPane.showMessageDialog(null,"ERROR ID PLAN", "ERROR", JOptionPane.ERROR_MESSAGE);
-					  this.setNull(1, Types.TINYINT);	
-			        	
+					  this.setNull(1, Types.TINYINT);				        	
 			        }
-			        else {
-			        	JOptionPane.showMessageDialog(null,form.getItem("Id_plan"), "ERROR", JOptionPane.ERROR_MESSAGE);
-						  
-			        	this.setParameter(1,(form.getItem("Id_plan")));
-			        	
-			        }
-				
+			        else {  
+			        	this.setParameter(1,(form.getItem("Id_plan")));			        	
+			        }				
 		        ResultSet result1 = this.getStatement().executeQuery();
-		
-		        result1.next();
-		        	
+		        result1.next(); 	
 		        	while(result1.getRow() > 0)
-		        	{	
-			            
+		        	{	 
 			        	Datos.setMonto_Adeudado(result1.getInt("Monto_Adeudado"));
 			        	result1.next();
-		        	}
-		        	     
+		        	} 	     
 				this.disconnect();
 				
 				
 		        this.connect();
-				
 				this.setProcedure("dbo.Obtener_DATOS_PLAN (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		
 			       if(form.getItem("Id_plan").isEmpty()) {
 					  JOptionPane.showMessageDialog(null,"ERROR ID PLAN", "ERROR", JOptionPane.ERROR_MESSAGE);
 					  this.setNull(1, Types.TINYINT);	
-			        	
 			        }
 			        else {
 			        	this.setParameter(1,(form.getItem("Id_plan")));
 			        }
-				
-		        ResultSet result2 = this.getStatement().executeQuery();
-		
-		        result2.next();
-		        	
+		        ResultSet result2 = this.getStatement().executeQuery();		
+		        result2.next();		        	
 		        	while(result2.getRow() > 0)
-		        	{	
-			            
+		        	{			            
 			        	Datos.setNombre_Auto(result2.getString("Nombre_Auto"));
 			        	Datos.setTipo_Modelo(result2.getString("Tipo_modelo"));
 			        	Datos.setNombre(result2.getString("Nombre"));
 			        	Datos.setFecha_actualizada(result2.getString("Fecha_actualizacion"));
 			        	result2.next();
-		        	}
-		        	     
-				this.disconnect();
-		
+		        	}		        	     
+				this.disconnect();		
     	}
-		return  Datos;
-    	
-		
+		return  Datos;	
 	}
-
 	@Override
 	public boolean valid(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub

@@ -11,7 +11,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title><fmt:message key="titulo" bundle="${etq}" /></title>
 	<link type="text/css" rel="stylesheet" href="/util/StyleSheet.do/load=page,messages,gobierno,nuevo_usuario,estado_cuenta" />
-	<script type="text/javascript" src="/util/Javascript.do/load=jquery,jquery.i18n.properties,utils,gobierno,"></script>
+	<script type="text/javascript" src="/util/Javascript.do/load=jquery,jquery.i18n.properties,utils,gobierno,jspdf.min,jspdf.debug"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 	<script type="text/javascript">
 	jUtils.changeLang("etiquetas_js", "${lang}");
 	</script>
