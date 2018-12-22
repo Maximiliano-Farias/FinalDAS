@@ -1,0 +1,57 @@
+@CHARSET "ISO-8859-1";
+
+
+#DatosPlanes, #SorteoAnterior,#Cuentas,#Consesionarias,#NuevoSorteo,#DatosPersonales,#Estadisticas{
+border: none;
+background: #008040;
+color: #f2f2f2;
+padding: 10px;
+font-size: 20px;
+border-radius: 5px;
+border: 20px;
+margin: 40px;
+position: relative;
+box-sizing: border-box;
+transition: all 500ms ease;
+width: 235px;
+height: 230px;
+text-align:center;
+}
+
+#DatosPlanes:hover, #SorteoAnterior:hover,#Cuentas:hover,#Consesionarias:hover,#NuevoSorteo:hover,#DatosPersonales:hover,#Estadisticas:hover {
+background: #004080;
+color: #ffffff;
+transition       : 0.5s cubic-bezier(.7,.24,0.26,1.52);
+padding-left:6px;
+font-size: 23px;
+text-decoration:underline;
+}
+
+
+
+#estadisticas-img{
+	height :150px;
+	width : 200px;
+	margin: 3px;
+}
+
+#estadisticas_tle{
+	margin-left:22px;
+	color: white;
+}
+
+#sorteo_anterior_tle,#sorteo_tle,#datos_personales_tle,#concesionaria_tle,#cuentas_tle{
+	color: white;	
+	text-align: center;
+}
+
+#sorteo_anterior_tle:hover,#sorteo_tle:hover,#datos_personales_tle:hover,#concesionaria_tle:hover,#cuentas_tle:hover{
+	text-decoration:underline;
+}
+
+
+#sorteo_anterior-img,#sorteo-img,#personal-img,#concesionaria-img,#cuentas-img{
+	height :130px;
+	width : 130px;
+	margin-top: 10px;
+}

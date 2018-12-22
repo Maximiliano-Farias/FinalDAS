@@ -51,7 +51,7 @@
 		</tfoot>
 		</table>
 		</div>
-		<input type="button" id="imprimir_estado" name="imprimir_estado" Onclick="jGobierno.imprimirPDFEstado()" value ="<fmt:message key="Imprimir" bundle="${etq}" />" /> 
+		<input type="button" class= "btn btn-primary" id="imprimir_estado" name="imprimir_estado" Onclick="jGobierno.imprimirPDFEstado()" value ="<fmt:message key="Imprimir" bundle="${etq}" />" /> 
     </c:otherwise>
 </c:choose>
 

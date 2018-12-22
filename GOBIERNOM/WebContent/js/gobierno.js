@@ -1,5 +1,6 @@
 var jGobierno = {
-	
+		
+		
 		salir: function() {
 			document.cookie ="perfil=; path=/";	
 			document.cookie ="dni=; path=/";
@@ -11,7 +12,6 @@ var jGobierno = {
         	jUtils.showing("contrasena");
         	jUtils.hiding("salir");
         	jUtils.hiding("Logueado");
-        	jUtils.showing("entrar");
         	location.href="http://localhost:8080/"
 		},
 		
@@ -47,7 +47,7 @@ var jGobierno = {
 	                else {
 		            	
 	                	jUtils.hiding("message");
-		            	jUtils.hiding("entrar");
+		            	jUtils.hiding("entrar-img");
 		            	jUtils.hiding("Verificar");
 		            	jUtils.hiding("imagen");
 		            	jUtils.hiding("us");

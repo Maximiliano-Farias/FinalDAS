@@ -5,10 +5,27 @@
 
 <table>
 <tr>
-<td><input type="button" id="Estadisticas" name="Estadisticas" Onclick="jGobierno.Estadisticas()" value ="<fmt:message key="Estadisticas" bundle="${etq}" />" /></td>
-<td><input type="button" id="SorteoAnterior" name="SorteoAnterior" Onclick="jGobierno.SorteoAnterior()" value ="<fmt:message key="SorteoAnterior" bundle="${etq}" />" /></td> 
-<td><input type="button" id="NuevoSorteo" name="NuevoSorteo" Onclick="jGobierno.Sorteos_Pendientes()" value ="<fmt:message key="NuevoSorteo" bundle="${etq}" />" /></td>
+<td>
+	<div id="Estadisticas"  Onclick="jGobierno.Estadisticas()"  >
+		<label id="estadisticas_tle"><fmt:message key="Estadisticas" bundle="${etq}" /></label>
+		<input type="image" id="estadisticas-img" name="estadisticas-img"  src="/img/estadisticas-icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
+    </div>
+</td>
+<td>
+	<div id="SorteoAnterior"  Onclick="jGobierno.SorteoAnterior()"> 
+		<label id="sorteo_anterior_tle"><fmt:message key="SorteoAnterior" bundle="${etq}" /> </label>
+		<input type="image" id="sorteo_anterior-img" name="sorteo_anterior-img"  src="/img/sorteo_ant_icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
+	</div>
+</td> 
+<td><div  id="NuevoSorteo"  Onclick="jGobierno.Sorteos_Pendientes()"> 
+<label id="sorteo_tle"><fmt:message key="NuevoSorteo" bundle="${etq}" /> </label>
+<input type="image" id="sorteo-img" name="sorteo-img"  src="/img/sorteo_icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
+</div>
+</td>
+
+
 <td rowspan="2"id="UltimoSorteo"><div id="datos_pantalla"> <h2 id="titulo_datos"><fmt:message key="UltimoSorteo" bundle="${etq}"/></h2>
+
 <c:choose>
 	<c:when test="${requestScope.ganador.getFecha_Sorteo() != 'Error'}">		
 	   <h3><label><fmt:message key="Fecha" bundle="${etq}" /></label> <var id='Fecha' >${ganador.getFecha_Sorteo()} </var></h3>
@@ -24,9 +41,24 @@
 </div></td>
 </tr>
 <tr>
-<td><input type="button" id="DatosPersonales" name="DatosPersonales" Onclick="jGobierno.DatosPersonales()" value ="<fmt:message key="DatosPersonales" bundle="${etq}" />" /></td>
-<td><input type="button" id="Consesionarias" name="Consesionarias" Onclick="jGobierno.Concesionarias()" value ="<fmt:message key="consesionaria" bundle="${etq}" />" /></td>
-<td><input type="button" id="Cuentas" name="Cuentas" Onclick="jGobierno.EstadoCuenta()" value ="<fmt:message key="Cuentas" bundle="${etq}" />" />  </td>
+<td>
+	<div id="DatosPersonales"  Onclick="jGobierno.DatosPersonales()"  >
+		<label id="datos_personales_tle"><fmt:message key="DatosPersonales" bundle="${etq}" /></label>
+		<input type="image" id="personal-img" name="personal-img"  src="/img/personal-icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
+    </div>
+</td>
+<td>
+	<div id="Consesionarias"  Onclick="jGobierno.Consesionarias()"  >
+		<label id="concesionaria_tle"><fmt:message key="consesionaria" bundle="${etq}" /></label>
+		<input type="image" id="concesionaria-img" name="concesionaria-img"  src="/img/concesionaria-icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
+    </div>
+</td>
+<td>
+	<div id="Cuentas"  Onclick="jGobierno.EstadoCuenta()"  >
+		<label id="cuentas_tle"><fmt:message key="Cuentas" bundle="${etq}" /></label>
+		<input type="image" id="cuentas-img" name="cuentas-img"  src="/img/estado-icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
+    </div>
+</td>
 
 </tr>
 </table>

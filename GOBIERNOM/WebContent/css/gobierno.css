@@ -73,6 +73,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 
 .fr {
 	float: right;
+	margin-right:10px;
 }
 
 #imagen {
@@ -101,25 +102,6 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	position:absolute;
 	repeat: no-repeat;
 	
-}
-
-
-
-
-#DatosPlanes, #SorteoAnterior,#Cuentas,#Consesionarias,#NuevoSorteo,#DatosPersonales,#Estadisticas{
-border: none;
-background: #008040;
-color: #f2f2f2;
-padding: 10px;
-font-size: 20px;
-border-radius: 5px;
-border: 20px;
-margin: 40px;
-position: relative;
-box-sizing: border-box;
-transition: all 500ms ease;
-width: 220px;
-height: 220px;
 }
 
 #UltimoSorteo{
@@ -170,16 +152,6 @@ h2{
     text-decoration: underline;
     
 }
-
-
-#DatosPlanes:hover, #SorteoAnterior:hover,#Cuentas:hover,#Consesionarias:hover,#NuevoSorteo:hover,#DatosPersonales:hover,#Estadisticas:hover {
-background: #004080;
-color: #ffffff;
-transition       : 0.5s cubic-bezier(.7,.24,0.26,1.52);
-padding-left:6px;
-font-size: 23px;
-}
-
 
 
 #UltimoSorteo label{
@@ -519,6 +491,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	font-weight: bold;
 	text-decoration: underline;
 	padding:10px;
+	
 }
 
 
@@ -781,4 +754,19 @@ letter-spacing: 2px;
     text-decoration: underline;
 }
 
+
+#salir-img,#entrar-img{
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	margin-bottom: 3px;
+}
+
+#salir-img:hover,#entrar-img:hover{
+	width: 30px;
+}
+
+#usuario{
+	margin-top:4px;
+}
 
