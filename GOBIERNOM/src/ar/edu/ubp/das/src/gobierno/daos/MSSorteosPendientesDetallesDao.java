@@ -78,6 +78,7 @@ public class MSSorteosPendientesDetallesDao extends DaoImpl {
 	        	detalles.setEstado(result.getString("Estado"));
         	}
       
+        detalles.setPermiso(form.getItem("permiso"));
 		this.disconnect();
 		return  detalles;
     	

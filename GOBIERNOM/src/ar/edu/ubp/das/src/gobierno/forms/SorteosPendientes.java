@@ -8,9 +8,10 @@ public class SorteosPendientes extends DynaActionForm {
 	private String    Fecha;
 	private String    Descripcion;
 	private String    Estado;
+	private String    Permiso;
 	
-	
-   
+
+
 	public String getEstado() {
 		return Estado;
 	}
@@ -61,7 +62,18 @@ public class SorteosPendientes extends DynaActionForm {
 		Descripcion = descripcion;
 	}
 
-	
+
+	   
+	public String getPermiso() {
+		return Permiso;
+	}
+
+
+
+	public void setPermiso(String permiso) {
+		Permiso = permiso;
+	}
+
 
 
 }

@@ -303,12 +303,14 @@ var jGobierno = {
 			
 			Sorteo_Pendiente_Elegido: function() {
 		        jUtils.executing("resultados");
+		        var id_sorteo = $("select[name=Sorteo_Pendiente_Elegido]").val();
+		        var permiso = $('#perfil').val();
 		        jUtils.hiding("message");
 		        $.ajax({
 		            url: "/gobierno/SorteosPendientesDetallesAction.do",
 		            type: "post",
 		            dataType: "html",
-		            data: $.param($("select[name=Sorteo_Pendiente_Elegido]", $("#form"))),
+		            data: $.param({"Sorteo_Pendiente_Elegido":id_sorteo,"permiso":permiso}),
 		            error: function(hr){
 		            	alert("error");
 		                jUtils.hiding("result");
@@ -317,18 +319,6 @@ var jGobierno = {
 		            },
 		            success: function(html) {
 		            	jUtils.showing("resultados", html);
-		            	var x = document.cookie.split("perfil=")[1];
-		            	var y = x.split(";")[0];
-		            	if (y == 'admin')
-		                {
-		            		document.getElementById("Sortear").style.visibility="hidden";
-		            		document.getElementById("fecha_sorteo_nuevo").disabled = true;
-		            		document.getElementById("Estado_sorteo_nuevo").disabled = true;
-		            		document.getElementById("descripcion_sorteo_nuevo").disabled = true;
-		            		document.getElementById("guardar_sorteo").style.visibility="hidden";
-		            		document.getElementById("titulo2").style.visibility="hidden";
-		            		document.getElementById("sorteos_nuevo").style.visibility="hidden";
-		                  }
 		            }
 		        });		
 			},
@@ -525,7 +515,7 @@ var jGobierno = {
 			    var printDoc = new jsPDF('p', 'pt');
 			    printDoc.setFontType('bold');
 			    printDoc.text( 230, 50,document.getElementById('var').innerHTML);
-			    printDoc.line(220,52,420,52);
+			    printDoc.line(1,52,2000,52);
 			    printDoc.setFontType('normal');
 			    printDoc.text( 60, 70,"PLAN: "+document.getElementById('var1').innerHTML);
 			    printDoc.line(60,72,105,72);
@@ -540,7 +530,23 @@ var jGobierno = {
                 printDoc.fromHTML($('#Facturas_detalles').get(0), 80, 180);
 			    printDoc.autoPrint();
 			    printDoc.output("dataurlnewwindow");
-			    }
+			    },
+			    
+			    
+			 ImprimirEstaisticas: function(){
+
+				    var printDoc = new jsPDF('p', 'pt');
+				    printDoc.setFontType('bold');
+				    printDoc.text( 230, 50,document.getElementById('estadisticas_titulo').innerHTML);
+				    printDoc.line(1,52,2000,52);
+				    printDoc.setFontType('normal');
+				    printDoc.fromHTML($('#estdisticas_concesionaria').get(0), 100, 70);
+				    printDoc.fromHTML($('#autos_vendidos').get(0), 100, 160);
+				    printDoc.fromHTML($('#autos_vendidos').get(0), 100, 160);
+				    printDoc.fromHTML($('#estadisticas_planes').get(0), 100, 420);
+				    printDoc.autoPrint();
+				    printDoc.output("dataurlnewwindow");
+			 }
 
 			
 			

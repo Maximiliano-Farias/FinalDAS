@@ -26,19 +26,20 @@
 
 <td rowspan="2"id="UltimoSorteo"><div id="datos_pantalla"> <h2 id="titulo_datos"><fmt:message key="UltimoSorteo" bundle="${etq}"/></h2>
 
-<c:choose>
-	<c:when test="${requestScope.ganador.getFecha_Sorteo() != 'Error'}">		
-	   <h3><label><fmt:message key="Fecha" bundle="${etq}" /></label> <var id='Fecha' >${ganador.getFecha_Sorteo()} </var></h3>
-	   <h3><label><fmt:message key="Ganador" bundle="${etq}" /></label> <var id='Ganador' >${ganador.getGanador()} </var></h3>
-	   <h3><label><fmt:message key="Descripcion" bundle="${etq}" /></label> <var id='Descripcion' >${ganador.getDescripcion()} </var></h3>
-	   <h3><label><fmt:message key="Estado" bundle="${etq}" /></label> <var id='Estado' >${ganador.getEstado()} </var></h3>
-	   <h3><label><fmt:message key="Nombre_Auto" bundle="${etq}" />:</label> <var id='Nombre_Auto' >${ganador.getNombre_Auto()} </var></h3>
-	   <h3><label><fmt:message key="Marca_Auto" bundle="${etq}" /></label> <var id='Marca_Auto' >${ganador.getMarca()} </var></h3>
-	   <h3><label><fmt:message key="Tipo_Modelo" bundle="${etq}" />:</label> <var id='Tipo_Modelo' >${ganador.getTipo_Modelo()} </var></h3>
-	   <h3><label><fmt:message key="Consesionaria" bundle="${etq}" /></label> <var id='Consesionaria' >${ganador.getConsesionaria()} </var></h3>	   
-	</c:when>		
-</c:choose>
-</div></td>
+	<c:choose>
+		<c:when test="${requestScope.ganador.getFecha_Sorteo() != 'Error'}">		
+		   <h3><label><fmt:message key="Fecha" bundle="${etq}" /></label> <var id='Fecha' >${ganador.getFecha_Sorteo()} </var></h3>
+		   <h3><label><fmt:message key="Ganador" bundle="${etq}" /></label> <var id='Ganador' >${ganador.getGanador()} </var></h3>
+		   <h3><label><fmt:message key="Descripcion" bundle="${etq}" /></label> <var id='Descripcion' >${ganador.getDescripcion()} </var></h3>
+		   <h3><label><fmt:message key="Estado" bundle="${etq}" /></label> <var id='Estado' >${ganador.getEstado()} </var></h3>
+		   <h3><label><fmt:message key="Nombre_Auto" bundle="${etq}" />:</label> <var id='Nombre_Auto' >${ganador.getNombre_Auto()} </var></h3>
+		   <h3><label><fmt:message key="Marca_Auto" bundle="${etq}" /></label> <var id='Marca_Auto' >${ganador.getMarca()} </var></h3>
+		   <h3><label><fmt:message key="Tipo_Modelo" bundle="${etq}" />:</label> <var id='Tipo_Modelo' >${ganador.getTipo_Modelo()} </var></h3>
+		   <h3><label><fmt:message key="Consesionaria" bundle="${etq}" /></label> <var id='Consesionaria' >${ganador.getConsesionaria()} </var></h3>	   
+		</c:when>		
+	</c:choose>
+</div>
+</td>
 </tr>
 <tr>
 <td>

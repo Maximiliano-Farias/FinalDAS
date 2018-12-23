@@ -20,7 +20,7 @@
 	font-size:15px;
 }
 
-#boton_buscador:hover, #imprimir_estado:hover{
+#boton_buscador:hover{
 	background-color: #008040;
 	text-decoration:underline;
 }
@@ -32,10 +32,11 @@
 }
 
 #imprimir_estado{
-	margin-left:45%;
+	margin-left:49%;
 	margin-top:2%;
-	font-size:25px;
 	margin-bottom: 2%;
+	width: 40px;
+	height: 40px;
 }
 
 #Facturas_detalles{
@@ -44,7 +45,9 @@
 	margin-left :32%;
 	margin-bottom: 0%;
 
+
 }
+
 
 
 

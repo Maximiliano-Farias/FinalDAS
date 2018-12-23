@@ -17,11 +17,9 @@ html, body, input {
 	clear: both;	
 }
 
-
 fieldset {
 	border-color: #004080;
-	background-color: #e0e0e0;
-	
+	background-color: #e0e0e0;	
 }
 
 label{
@@ -104,35 +102,6 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	
 }
 
-#UltimoSorteo{
-    background-color: rgba(197, 197, 223, 0.7);
-	height: 100%;
-	width: 100%;
-	border: 20px;
-	color: black;
-	margin-top:1px;	
-	vertical-align: top;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    align: center;
-	
-}
-
-#UltimoSorteo:hover{
-    background-color: rgba(197, 197, 223, 1);
-	height: 100%;
-	width: 100%;
-	border: 20px;
-	color: black;
-	margin-top:1px;	
-	vertical-align: top;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    align: center;
-	
-}
 
 #datos_pantalla{
 	margin-top:21%;
@@ -220,7 +189,7 @@ h2{
 
 
 #estdisticas_concesionaria,#estadisticas_planes,#autos_vendidos {
-	 background-color: rgba(197, 197, 223, 0.5);
+	 background-color: rgba(140, 192, 134, 0.3);
 }
 
 #Detalle_concesionarias
@@ -276,12 +245,13 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	float: right;
 	float: top;	
 	height :170px;
-	width : 120px;
+	width : 150px;
 	margin-right:70px;
+	margin-top:9%;
 }
 
 #autos_vendidos{
-	margin-left:14%;
+	margin-left:12%;
 }
 
 
@@ -324,7 +294,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 }
 
 #estdisticas_concesionaria:hover,#estadisticas_planes:hover,#autos_vendidos:hover {
-	 background-color: rgba(197, 197, 223, 0.8);
+	 background-color: rgba(140, 192, 134, 0.7);
 }
  
 #elegir_sorteo, #elegir_concesionaria{
@@ -424,7 +394,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 
 #titulo2{
 	width : 100px;
-	margin-left:46%;
+	margin-left:37%;
 	margin-top: 70px;
 }
 
@@ -440,7 +410,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 
 
 
-#concesionaria_nueva,#sorteos_nuevo{
+#concesionaria_nueva{
 	
 	margin-left:130px;
 	width : 1000px;
@@ -475,10 +445,16 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	font-weight: bold;
 }
 
-#sorteos_detalles_nuevos{
-	margin-left:21%;
-	width : 830px;
+#sorteos_detalles_nuevos,#sorteos_nuevo{
+	margin-left:3%;
+	width : 100%;
 	font-weight: bold;
+	font-size:20px;
+	margin-top: 30px;
+}
+
+#sorteos_nuevo{
+	margin-left:0%;
 }
 
 #crear_sorteo_nuevo{
@@ -548,16 +524,7 @@ letter-spacing: 2px;
 	text-decoration: underline;
 }
 
-#TITULO_DATOS{
-
-	letter-spacing: 2px;
-	font-size:23px;
-    padding:15px;
-	text-decoration: underline;
-	text-align: center;
-	margin-left: 35%;
-	font-weight: bold;
-}	
+	
 
 #Sortear{
 	
@@ -566,7 +533,7 @@ letter-spacing: 2px;
 	height: 65px;
 	font-size:23px;
 	text-align: center;
-	margin-left: 32%;
+	margin-left: 22%;
 	letter-spacing: 2px;
 	margin-top: 5%;
 	font-weight: bold;
@@ -742,6 +709,7 @@ letter-spacing: 2px;
 
 #estdisticas_concesionaria{
 	margin-left:15px;
+	margin-top: 8%;
 }
 
 
@@ -769,4 +737,20 @@ letter-spacing: 2px;
 #usuario{
 	margin-top:4px;
 }
+
+#estadisticas-icon{
+	width: 40px;
+	height: 40px;
+}
+
+#estadisticas_titulo{
+	margin-left:72%;
+}
+
+#estadisticas-pdf {
+    height: 40px;
+    width: 40px;
+    margin: 3px;
+}    
+
 

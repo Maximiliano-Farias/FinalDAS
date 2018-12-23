@@ -4,11 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <input type="button" id="volver" name="volver" Onclick="jGobierno.Opciones()" value ="<fmt:message key="Volver" bundle="${etq}" />" /> 
-
-<h1 id=estadisticas_titulo><fmt:message key="Estadisticas" bundle="${etq}" /></h1>
+<table>
+	<tr>
+		<td><h1 id=estadisticas_titulo><fmt:message key="Estadisticas" bundle="${etq}" /></h1></td>
+		<td><input type="image" id="estadisticas-pdf" name="estadisticas-pdf"  src="/img/pdf_icon.png" title=<fmt:message key="Imprimir" bundle="${etq}"/> onclick="jGobierno.ImprimirEstaisticas()"/></td>
+	</tr>
+</table>
 
 <div id=estdisticas_concesionaria>
-
 <h1 id=estadisticas_conc><fmt:message key="Consesionaria" bundle="${etq}" /></h1>
 <table>
 <tr>
