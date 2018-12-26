@@ -51,7 +51,7 @@
 		</tfoot>
 		</table>
 		</div>
-		<input type="image" id="imprimir_estado" name="imprimir_estado"  src="/img/pdf_icon.png" title=<fmt:message key="Imprimir" bundle="${etq}"/> onclick="jGobierno.imprimirPDFEstado()"/>
+		<input type="image" id="imprimir_estado" name="imprimir_estado"  src="/img/pdf_icon.png" title=<fmt:message key="Imprimir" bundle="${etq}"/> onclick="jPdf.imprimirPDFEstado()"/>
     </c:otherwise>
 </c:choose>
 

@@ -7,7 +7,7 @@
 <table>
 	<tr>
 		<td><h1 id=estadisticas_titulo><fmt:message key="Estadisticas" bundle="${etq}" /></h1></td>
-		<td><input type="image" id="estadisticas-pdf" name="estadisticas-pdf"  src="/img/pdf_icon.png" title=<fmt:message key="Imprimir" bundle="${etq}"/> onclick="jGobierno.ImprimirEstaisticas()"/></td>
+		<td><input type="image" id="estadisticas-pdf" name="estadisticas-pdf"  src="/img/pdf_icon.png" title=<fmt:message key="Imprimir" bundle="${etq}"/> onclick="jPdf.ImprimirEstaisticas()"/></td>
 	</tr>
 </table>
 

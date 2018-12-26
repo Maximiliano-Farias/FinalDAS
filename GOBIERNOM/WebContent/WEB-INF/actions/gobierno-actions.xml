@@ -67,6 +67,9 @@
         <action path="/BuscarEstadoAction.do" type="BuscarEstadoAction">
             <forward name="success" path="/gobierno/resultado_planes.jsp"/>
         </action>
+        <action path="/EstadoUsuarioAction.do" type="EstadoUsuarioAction">
+            <forward name="success" path="/gobierno/estado_usuario.jsp"/>
+        </action>
         
         
         

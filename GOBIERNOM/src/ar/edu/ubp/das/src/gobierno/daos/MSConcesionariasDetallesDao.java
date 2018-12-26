@@ -51,16 +51,15 @@ public class MSConcesionariasDetallesDao extends DaoImpl {
 		ConcesionariasDetalles detalles;
 		detalles=null;
 		this.connect();
-		
+
 		this.setProcedure("dbo.Detalles_Concesionaria (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-	       if(form.getItem("Concesionaria_Elegida").isEmpty()) {
+	       if(form.getItem("elegida").isEmpty()) {
 			  JOptionPane.showMessageDialog(null,"Error al obtener Concesionaria elegida", "ERROR", JOptionPane.ERROR_MESSAGE);
-			  this.setNull(1, Types.TINYINT);	
-	        	
+			  this.setNull(1, Types.TINYINT);		        	
 	        }
 	        else {
-	        	this.setParameter(1,(form.getItem("Concesionaria_Elegida")));
+	        	this.setParameter(1,(form.getItem("elegida")));
 	        	
 	        }
 		

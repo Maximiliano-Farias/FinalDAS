@@ -6,18 +6,18 @@
 <table>
 <tr>
 <td>
-	<div id="Estadisticas"  Onclick="jGobierno.Estadisticas()"  >
+	<div id="Estadisticas"  Onclick="jOpciones.Estadisticas()"  >
 		<label id="estadisticas_tle"><fmt:message key="Estadisticas" bundle="${etq}" /></label>
 		<input type="image" id="estadisticas-img" name="estadisticas-img"  src="/img/estadisticas-icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
     </div>
 </td>
 <td>
-	<div id="SorteoAnterior"  Onclick="jGobierno.SorteoAnterior()"> 
+	<div id="SorteoAnterior"  Onclick="jOpciones.SorteoAnterior()"> 
 		<label id="sorteo_anterior_tle"><fmt:message key="SorteoAnterior" bundle="${etq}" /> </label>
 		<input type="image" id="sorteo_anterior-img" name="sorteo_anterior-img"  src="/img/sorteo_ant_icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
 	</div>
 </td> 
-<td><div  id="NuevoSorteo"  Onclick="jGobierno.Sorteos_Pendientes()"> 
+<td><div  id="NuevoSorteo"  Onclick="jOpciones.Sorteos_Pendientes()"> 
 <label id="sorteo_tle"><fmt:message key="NuevoSorteo" bundle="${etq}" /> </label>
 <input type="image" id="sorteo-img" name="sorteo-img"  src="/img/sorteo_icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
 </div>
@@ -43,19 +43,19 @@
 </tr>
 <tr>
 <td>
-	<div id="DatosPersonales"  Onclick="jGobierno.DatosPersonales()"  >
+	<div id="DatosPersonales"  Onclick="jOpciones.DatosPersonales()"  >
 		<label id="datos_personales_tle"><fmt:message key="DatosPersonales" bundle="${etq}" /></label>
 		<input type="image" id="personal-img" name="personal-img"  src="/img/personal-icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
     </div>
 </td>
 <td>
-	<div id="Consesionarias"  Onclick="jGobierno.Consesionarias()"  >
+	<div id="Consesionarias"  Onclick="jOpciones.Concesionarias()"  >
 		<label id="concesionaria_tle"><fmt:message key="consesionaria" bundle="${etq}" /></label>
 		<input type="image" id="concesionaria-img" name="concesionaria-img"  src="/img/concesionaria-icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
     </div>
 </td>
 <td>
-	<div id="Cuentas"  Onclick="jGobierno.EstadoCuenta()"  >
+	<div id="Cuentas"  Onclick="jOpciones.EstadoCuenta()"  >
 		<label id="cuentas_tle"><fmt:message key="Cuentas" bundle="${etq}" /></label>
 		<input type="image" id="cuentas-img" name="cuentas-img"  src="/img/estado-icon.png" title=<fmt:message key="Buscar" bundle="${etq}"/>  />
     </div>

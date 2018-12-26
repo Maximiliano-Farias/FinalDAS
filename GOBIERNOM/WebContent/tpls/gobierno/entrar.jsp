@@ -18,7 +18,12 @@
 	    <div id="nuevo_igreso_datos">
 	       <table>
 	       	<tr>
-			  <td> <fmt:message key="NUEVO_USUARIO" bundle="${etq}" /></td><td><input type="text" id="nuevo_usuario"name="nuevo_usuario" size="25"/></td>
+			  <td> <fmt:message key="NUEVO_USUARIO" bundle="${etq}" /></td><td><input type="text" id="nuevo_usuario"name="nuevo_usuario" size="25" onblur="jGobierno.Validar()"/></td>
+			   <td>
+				   <div id="estado_usuario">
+				   	<input type="image" id="cruz-img" name="cruz-img"  src="/img/cruz-icon.png" title=<fmt:message key="EN_USO" bundle="${etq}"/>  />
+				   </div>
+			   </td>
 			</tr> 
 			<tr>
 			  <td><fmt:message key="NUEVA_CONTRASENA1" bundle="${etq}" /></td><td><input type="password" id="nueva_contrasena_1"name="nueva_contrasena_1" size="25"/></td>
@@ -44,10 +49,6 @@
 	   <input type="hidden" id="perfil"name="perfil" value='${usuario.getPermiso()}'/>
 	   <input type="hidden" id="dni"name="dni" value='${usuario.getDni()}'/>
 	   <input type="hidden" id="Id_plan"name="Id_plan" value='${usuario.getId_Plan()}'/>
-	 
-	   
-       
-
      </c:when>
 </c:choose>
     

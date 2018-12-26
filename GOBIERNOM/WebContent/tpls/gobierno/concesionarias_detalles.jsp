@@ -10,32 +10,35 @@
 <div id="concesionarias_detalles">
 
 <table >
-<tr>
-<td>ID:</td><td><input type="text" id="id_concesionaria" name="id_concesionaria" value="${detalles.getId_concesionaria()}" readonly="readonly" size="12"/></td>
-<td><input type="text" id="nombre_concesionaria" name="nombre_concesionaria" value="${detalles.getNombre()}"  size="25"/></td>
-<td>
-<c:choose>
-    <c:when test="${detalles.getHabilitado() == 1}">
-        <select id="Habilitado" name="Habilitado">
-        <option value="1"><fmt:message key="Habilitada" bundle="${etq}"/></option>
-        <option value="0"><fmt:message key="Deshabilitada" bundle="${etq}"/></option>
-        </select>
-        <br />
-    </c:when>    
-    <c:otherwise>
-        <select id="Habilitado" name="Habilitado">
-        <option value="0"><fmt:message key="Deshabilitada" bundle="${etq}"/></option>
-        <option value="1"><fmt:message key="Habilitada" bundle="${etq}"/></option>
-        </select>
-        <br />
-    </c:otherwise>
-</c:choose>
-</td>
-<td><input type="text" id="direccion_concesionaria" name="direccion_concesionaria" value="${detalles.getDireccion()}" size="40" /></td>
-<td><fmt:message key="Telefono" bundle="${etq}"/></td><td><input type="text" id="telefono_concesionaria" name="telefono_concesionaria" value="${detalles.getTelefono()}" size="15"/></td>
-<td><fmt:message key="Ultima_Actualizacion" bundle="${etq}"/></td><td><input type="text" id="fecha_concesionaria" name="fecha_concesionaria" value="${detalles.getFecha_actualizacion()}" readonly="readonly" size="25"/></td>
-<td><input type="image" id="guardar_concesionaria" name="guardar_concesionaria" onclick="jGobierno.Guardar_Concesionaria()" src="/img/guardar.jpg" title=<fmt:message key="Guardar" bundle="${etq}"/>  /></td>
-</tr>
+	<tr>
+		<td>ID:</td><td><input type="text" id="id_concesionaria" name="id_concesionaria" value="${detalles.getId_concesionaria()}" readonly="readonly" size="40"/></td>
+		<td><fmt:message key="NOMBRE" bundle="${etq}"/></td><td><input type="text" id="nombre_concesionaria" name="nombre_concesionaria" value="${detalles.getNombre()}"  size="25"/></td>
+		<td><fmt:message key="Estado" bundle="${etq}"/></td>
+		<td>
+		<c:choose>
+		    <c:when test="${detalles.getHabilitado() == 1}">
+		        <select id="Habilitado" name="Habilitado">
+		        <option value="1"><fmt:message key="Habilitada" bundle="${etq}"/></option>
+		        <option value="0"><fmt:message key="Deshabilitada" bundle="${etq}"/></option>
+		        </select>
+		        <br />
+		    </c:when>    
+		    <c:otherwise>
+		        <select id="Habilitado" name="Habilitado">
+		        <option value="0"><fmt:message key="Deshabilitada" bundle="${etq}"/></option>
+		        <option value="1"><fmt:message key="Habilitada" bundle="${etq}"/></option>
+		        </select>
+		        <br />
+		    </c:otherwise>
+		</c:choose>
+		</td>
+		<td rowspan="2"><input type="image" id="guardar_concesionaria" name="guardar_concesionaria" onclick="jGobierno.Guardar_Concesionaria()" src="/img/guardar.jpg" title=<fmt:message key="Guardar" bundle="${etq}"/>  /></td>
+	</tr>
+	<tr>
+		<td>DIR:</td><td><input type="text" id="direccion_concesionaria" name="direccion_concesionaria" value="${detalles.getDireccion()}" size="40" /></td>
+		<td><fmt:message key="Telefono" bundle="${etq}"/></td><td><input type="text" id="telefono_concesionaria" name="telefono_concesionaria" value="${detalles.getTelefono()}" size="25"/></td>
+		<td><fmt:message key="Ultima_Actualizacion" bundle="${etq}"/></td><td><input type="text" id="fecha_concesionaria" name="fecha_concesionaria" value="${detalles.getFecha_actualizacion()}" readonly="readonly" size="15"/></td>
+	</tr>
 </table>
 </div>
 

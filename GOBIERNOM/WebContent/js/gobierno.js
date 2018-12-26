@@ -112,47 +112,7 @@ var jGobierno = {
 	        });		
 		},
 		
-		Estadisticas: function() {
-            $.ajax({
-	            url: "/gobierno/EstadisticasAction.do",
-	            type: "post",
-	            dataType: "html",
-	            error: function(hr){
-	            	alert("error");
-	                jUtils.hiding("result");
-	                jUtils.showing("message", hr.responseText);
-	            },
-	            success: function(html) {
-	            	jUtils.showing("cabecera", '');
-	            	jUtils.showing("resultados", html);
-	            	  
-	            }
-	        });	
-			
-		},
 		
-		
-	
-	   SorteoAnterior: function() {
-        jUtils.executing("cabecera");
-        jUtils.hiding("message");
-        $.ajax({
-            url: "/gobierno/SorteosCabeceraAction.do",
-            type: "post",
-            dataType: "html",
-            error: function(hr){
-                jUtils.hiding("result");
-                jUtils.showing("message", hr.responseText);
-            },
-            success: function(html) {
-            	jUtils.showing("resultados", '');
-                jUtils.showing("cabecera", html);
-                jGobierno.Elegido();
-            }
-        });		
-	},
-	
-
 	Elegido: function() {
         jUtils.executing("resultados");
         jUtils.hiding("message");
@@ -183,34 +143,17 @@ var jGobierno = {
 	},
 	
 	
-	   Concesionarias: function() {
-	        jUtils.executing("cabecera");
-	        jUtils.hiding("message");
-	        $.ajax({
-	            url: "/gobierno/ConcesionariasCabeceraAction.do",
-	            type: "post",
-	            dataType: "html",
-	            error: function(hr){
-	                jUtils.hiding("result");
-	                jUtils.showing("message", hr.responseText);
-	            },
-	            success: function(html) {
-	            	jUtils.showing("resultados", '');
-	                jUtils.showing("cabecera", html);
-	                jGobierno.Elegida();
-	            }
-	        });		
-		},
-		
 		
 		Elegida: function() {
+	        var elegida = $("select[name=Concesionaria_Elegida]").val();
+	        var permiso = $('#perfil').val();
 	        jUtils.executing("resultados");
 	        jUtils.hiding("message");
 	        $.ajax({
 	            url: "/gobierno/ConcesionariasDetallesAction.do",
 	            type: "post",
 	            dataType: "html",
-	            data: $.param($("select[name=Concesionaria_Elegida]", $("#form"))),
+	            data: $.param({"elegida":elegida,"permiso":permiso}),
 	            error: function(hr){
 	            	alert("error");
 	                jUtils.hiding("result");
@@ -218,21 +161,6 @@ var jGobierno = {
 	            },
 	            success: function(html) {
 	            	jUtils.showing("resultados", html);
-	            	var x = document.cookie.split("perfil=")[1];
-	            	var y = x.split(";")[0];
-	            	if (y == 'admin')
-	                {
-	            		document.getElementById("Habilitado").disabled = true;
-	            		document.getElementById("direccion_concesionaria").disabled = true;
-	            		document.getElementById("nombre_concesionaria").disabled = true;
-	            		document.getElementById("telefono_concesionaria").disabled = true;
-	            		document.getElementById("nombre_concesionaria").disabled = true;
-	            		document.getElementById("guardar_concesionaria").style.visibility="hidden";
-	            		document.getElementById("titulo2").style.visibility="hidden";
-	            		document.getElementById("concesionaria_nueva").style.visibility="hidden";
-	            		
-	                }
-	 
 	            }
 	        });		
 		},
@@ -280,27 +208,6 @@ var jGobierno = {
 	        });
 		},
 		
-		 Sorteos_Pendientes: function() {
-		        jUtils.executing("cabecera");
-		        jUtils.hiding("message");
-		        $.ajax({
-		            url: "/gobierno/SorteosPendientesCabeceraAction.do",
-		            type: "post",
-		            dataType: "html",
-		            error: function(hr){
-		                jUtils.hiding("result");
-		                jUtils.showing("message", hr.responseText);
-		            },
-		            success: function(html) {
-		            	jUtils.showing("resultados", '');
-		                jUtils.showing("cabecera", html);
-		                jGobierno.Sorteo_Pendiente_Elegido();
-		                
-		            }
-		        });		
-			},
-			
-			
 			Sorteo_Pendiente_Elegido: function() {
 		        jUtils.executing("resultados");
 		        var id_sorteo = $("select[name=Sorteo_Pendiente_Elegido]").val();
@@ -372,87 +279,22 @@ var jGobierno = {
 		            
 		        });
 			},
-			
-			
-			   DatosPersonales: function() {
-			        jUtils.executing("cabecera");
-			        jUtils.hiding("message");
-			        $.ajax({
-			            url: "/gobierno/UsuarioDetallesAction.do",
-			            type: "post",
-			            dataType: "html",
-			            data: $.param($("input[name=Id_plan]", $("#form"))),  
-			            error: function(hr){
-			                jUtils.hiding("result");
-			                jUtils.showing("message", hr.responseText);
-			            },
-			            success: function(html) {
-			            	jUtils.showing("resultados", '');
-			                jUtils.showing("cabecera", html);
-			                
-			            }
-			        });		
-				},
-				
 				
 
 			ActualizarDatosPersonales: function() {
-					  
 				        $.ajax({
 				            url: "/gobierno/ActualizarUsuarioAction.do",
 				            type: "post",
 				            dataType: "html",
 				            data: $.param($("input[name=Id_plan], input[name=Direccion_Usuario],input[name=Mail_Usuario],input[name=Telefono_Usuario]", $("#form"))),
 				            error: function(hr){
-				            	jGobierno.DatosPersonales();
-				            	
+				            	jOpciones.DatosPersonales();	
 				            },
 				            success: function(html) {
-				            	ALERT("ERROR");
-				                
+				            	ALERT("ERROR");  
 				            }
 				        });		
 					},
-		    
-					
-		      EstadoCuenta: function() {
-		    	  var Id_plan = $('#Id_plan').val();
-		    	  var permiso = $('#perfil').val();
-		    	            jUtils.executing("resultados");
-					        jUtils.hiding("message");
-					        $.ajax({
-					            url: "/gobierno/EstadoCuentaAction.do",
-					            type: "post",
-					            dataType: "html",
-					            data: $.param({"Id_plan":Id_plan,"permiso":permiso}), 
-					            error: function(hr){
-					                jUtils.hiding("result");
-					                jUtils.showing("message", hr.responseText);
-					            },
-					            success: function(html) {  	
-					                jUtils.showing("resultados", html);
-					                
-					            }
-					        });		
-						},
-						
-			    Sucursales: function() {
-		        jUtils.executing("resultados");
-		        jUtils.hiding("message");
-		        $.ajax({
-		            url: "/gobierno/ConcesionariasHabilitadasAction.do",
-		            type: "post",
-		            dataType: "html", 
-		            error: function(hr){
-		                jUtils.hiding("result");
-		                jUtils.showing("message", hr.responseText);
-		            },
-		            success: function(html) {  	
-		                jUtils.showing("resultados", html);
-		                
-		            }
-		        });		
-			   },
 			
 			CrearUsuario: function(){
 		        jUtils.executing("resultados");
@@ -462,7 +304,7 @@ var jGobierno = {
 		        var nueva_contrasena_1 = $('#nueva_contrasena_1').val();
 		        var nueva_contrasena_2 = $('#nueva_contrasena_2').val();
 		        var iguales = 0;
-		        if ($("#nueva_contrasena_2").val()== $("#nueva_contrasena_1").val())
+		        if ($("#nueva_contrasena_2").val()== $("#nueva_contrasena_1").val() &&$("#nueva_contrasena_2").val()!="" )
 		        	{
 		        	iguales=1;
 		        	}
@@ -486,7 +328,6 @@ var jGobierno = {
 			  },
 			
 			Busca_Plan: function(plan){
-					
     	            jUtils.executing("plan_buscado");
 			        jUtils.hiding("message");
 			        $.ajax({
@@ -510,43 +351,33 @@ var jGobierno = {
 		        jUtils.showing("main");
 			},
 			
-				
-			imprimirPDFEstado: function()  {
-			    var printDoc = new jsPDF('p', 'pt');
-			    printDoc.setFontType('bold');
-			    printDoc.text( 230, 50,document.getElementById('var').innerHTML);
-			    printDoc.line(1,52,2000,52);
-			    printDoc.setFontType('normal');
-			    printDoc.text( 60, 70,"PLAN: "+document.getElementById('var1').innerHTML);
-			    printDoc.line(60,72,105,72);
-			    printDoc.text( 60, 90,document.getElementById('nomb').innerHTML+" "+document.getElementById('nombr').innerHTML);
-			    printDoc.line(60,92,105,92);
-			    printDoc.text( 60, 110,document.getElementById('mod').innerHTML+" "+document.getElementById('mode').innerHTML);
-			    printDoc.line(60,112,130,112);
-			    printDoc.text( 60, 130,document.getElementById('conc').innerHTML+" "+document.getElementById('conce').innerHTML);
-			    printDoc.line(60,132,195,132);
-                printDoc.text( 60, 150,document.getElementById('fec').innerHTML+" "+document.getElementById('fech').innerHTML);
-                printDoc.line(60,152,190,152);
-                printDoc.fromHTML($('#Facturas_detalles').get(0), 80, 180);
-			    printDoc.autoPrint();
-			    printDoc.output("dataurlnewwindow");
-			    },
 			    
-			    
-			 ImprimirEstaisticas: function(){
-
-				    var printDoc = new jsPDF('p', 'pt');
-				    printDoc.setFontType('bold');
-				    printDoc.text( 230, 50,document.getElementById('estadisticas_titulo').innerHTML);
-				    printDoc.line(1,52,2000,52);
-				    printDoc.setFontType('normal');
-				    printDoc.fromHTML($('#estdisticas_concesionaria').get(0), 100, 70);
-				    printDoc.fromHTML($('#autos_vendidos').get(0), 100, 160);
-				    printDoc.fromHTML($('#autos_vendidos').get(0), 100, 160);
-				    printDoc.fromHTML($('#estadisticas_planes').get(0), 100, 420);
-				    printDoc.autoPrint();
-				    printDoc.output("dataurlnewwindow");
-			 }
+			 Validar: function (){
+	 	            jUtils.executing("estado_usuario");
+	 	            var usuario = $('#nuevo_usuario').val();
+	 	            alert(usuario);
+			        jUtils.hiding("message");
+			        $.ajax({
+			            url: "/gobierno/EstadoUsuarioAction.do",
+			            type: "post",
+			            dataType: "html",
+			            data: $.param({"usuario":usuario}),
+			            error: function(hr){
+			                jUtils.hiding("result");
+			                jUtils.showing("message", hr.responseText);
+			            },
+			            success: function(html) {  	
+			                jUtils.showing("estado_usuario", html);
+			                if (document.getElementById('cruz-img')==null)
+			                {
+			                	document.getElementById('crear_usuario').style.display='inline';
+			                }
+			                else{
+			                	document.getElementById('crear_usuario').style.display='none';
+			                }
+			            }
+			        });	
+				 }
 
 			
 			

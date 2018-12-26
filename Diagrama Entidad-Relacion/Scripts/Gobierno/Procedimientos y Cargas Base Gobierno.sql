@@ -1389,6 +1389,16 @@ OR Apellido like '%'+@texto+'%'
 OR P.Identificador like '%'+@texto+'%'
 
 
+//***********************************VALIDAR USUARIO **********************************/
+
+create Procedure Valida_Usuario(
+@usuario varchar(20)
+)
+AS
+select Existe=CASE WHEN SUM(1) IS NULL THEN 0 ELSE 1 END
+from Personas_Usuarios
+where Nombre_usuario = @usuario
+
 
 
 
