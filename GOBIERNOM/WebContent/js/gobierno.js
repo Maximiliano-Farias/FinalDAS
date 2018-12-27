@@ -174,12 +174,13 @@ var jGobierno = {
 	            dataType: "html",
 	            data: $.param($("input[name=id_concesionaria],input[name=nombre_concesionaria],select[name=Habilitado],input[name=direccion_concesionaria],input[name=telefono_concesionaria]", $("#form"))),
 	            error: function(hr){
-	            	alert("ACTUALIZADA CORRECTAMENTE");
+	            	jGobierno.Elegida();
 	            },
 	            success: function(html) {
 	            	jUtils.showing("cabecera", '');
 	            	jUtils.showing("resultados", '');
-	                jUtils.showing("cabecera", html);    
+	                jUtils.showing("cabecera", html);  
+	                
 	            }
 	            
 	        });
@@ -193,10 +194,10 @@ var jGobierno = {
 	            url: "/gobierno/CrearConcesionariaAction.do",
 	            type: "post",
 	            dataType: "html",
-	            data: $.param($("input[name=nombre_concesionaria_nueva],select[name=Habilitado_nueva],input[name=direccion_concesionaria_nueva],input[name=telefono_concesionaria_nueva]", $("#form"))),
+	            data: $.param($("input[name=nombre_concesionaria_nueva],input[name=id_concesionaria_nueva],select[name=Habilitado_nueva],input[name=direccion_concesionaria_nueva],input[name=telefono_concesionaria_nueva]", $("#form"))),
 	            error: function(hr){
 	            	alert("OK");
-	            	jGobierno.Concesionarias();
+	            	jOpciones.Concesionarias();
 	            },
 	            success: function(html) {
 	            	jUtils.showing("cabecera", '');
@@ -355,7 +356,6 @@ var jGobierno = {
 			 Validar: function (){
 	 	            jUtils.executing("estado_usuario");
 	 	            var usuario = $('#nuevo_usuario').val();
-	 	            alert(usuario);
 			        jUtils.hiding("message");
 			        $.ajax({
 			            url: "/gobierno/EstadoUsuarioAction.do",

@@ -320,7 +320,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	font-size:15px;
 }
 
-#sorteos_detalles,#concesionarias_detalles,#Estado_detalles, #Facturas_detalles{
+#sorteos_detalles,#concesionarias_detalles,#Estado_detalles, #Facturas_detalles,#concesionaria_nueva{
 	font-family: Arial, sans-serif;
 	font-size:15px;
 	letter-spacing: 2px;
@@ -371,7 +371,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	
 }
 
-#concesionarias_detalles table {
+#concesionarias_detalles table,#concesionaria_nueva table {
 	margin-top:20px;
 	margin-botton:20px;
 	
@@ -381,7 +381,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	font-weight: bold;
 	letter-spacing: 0px;
 	margin-top: 30px;
-	margin-left: 15%;
+	margin-left: 13%;
 }
 
 #guardar_sorteo{
@@ -410,8 +410,8 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 
 #titulo2{
 	width : 100px;
-	margin-left:37%;
-	margin-top: 70px;
+	margin-left:45%;
+	margin-top: 35px;
 }
 
 #concesionarias_detalles ,#concesionaria_nueva,#sorteos_detalles{
@@ -422,12 +422,8 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	
 }
 
-
-
-
-
 #concesionaria_nueva{
-	
+	margin-top: 0px;
 	margin-left:130px;
 	width : 1000px;
 	vertical-align: center;
@@ -549,7 +545,7 @@ letter-spacing: 2px;
 	height: 65px;
 	font-size:23px;
 	text-align: center;
-	margin-left: 22%;
+	margin-left: 28%;
 	letter-spacing: 2px;
 	margin-top: 5%;
 	font-weight: bold;
@@ -561,8 +557,6 @@ letter-spacing: 2px;
 	
 	float:left;
 	text-align: center;
-	margin-left: 32%;
-    margin-top: 5%;
 	letter-spacing: 2px;
 	background-color: #008000;
 	transition       : 0.7s cubic-bezier(.7,.24,0.26,1.52);
@@ -774,4 +768,36 @@ letter-spacing: 2px;
     width: 40px;
 }   
 
+#concesionarias_detalles input,#concesionaria_nueva input {
+	margin-right: 20px;	
+}
 
+#concesionaria_nueva input {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+#concesionaria_nueva{
+	margin-left:25%;
+}
+
+#estado_nueva{
+	margin-left:30%;
+}
+
+#crear_concesionaria{
+	font-size:30px;
+	width: 300px;
+	height: 50px;
+	margin-left: 25%;
+	margin-top: 40px;
+	font-weight: bold;
+}
+
+#crear_concesionaria:hover{
+	font-size:32px;
+	text-decoration:underline;
+	background-color: #008040;
+
+
+}

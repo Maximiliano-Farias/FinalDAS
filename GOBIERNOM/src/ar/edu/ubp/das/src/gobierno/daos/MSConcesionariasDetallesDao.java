@@ -79,7 +79,7 @@ public class MSConcesionariasDetallesDao extends DaoImpl {
 	        	detalles.setId_concesionaria(result.getString("id_concesionaria"));
         	}
         	
-               
+        detalles.setPermiso(form.getItem("permiso"));   
 		this.disconnect();
 		return  detalles;
     	

@@ -10,7 +10,17 @@ public class ConcesionariasDetalles extends DynaActionForm {
 	private String    Telefono;
 	private String    Fecha_actualizacion;
 	private String    Id_concesionaria;
+	private String    Permiso;
+	
    
+	public String getPermiso() {
+		return Permiso;
+	}
+
+	public void setPermiso(String permiso) {
+		Permiso = permiso;
+	}
+
 	public String getId_concesionaria() {
 		return Id_concesionaria;
 	}
