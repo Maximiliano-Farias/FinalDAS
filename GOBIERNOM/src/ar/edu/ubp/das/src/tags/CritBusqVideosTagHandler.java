@@ -42,8 +42,9 @@ public class CritBusqVideosTagHandler extends SimpleTagSupport {
             	 out.println("<label for=\"us\" id=\"us\">" + bundle.getString("usuario") + " </label><input type=\"text\" name=\"usuario\" id=\"usuario\" text=\"\" value=\"\" maxlength=\"30\" size=\"20\" />");
                  out.println("<label for=\"con\"id=\"con\">" + bundle.getString("contrasena") + "</label><input type=\"password\" name=\"contrasena\" id=\"contrasena\" text=\"\"  value=\"\" maxlength=\"30\" size=\"20\" />");
                  out.println("<label for=\"datos\"></label>");
-            
+                 
             out.println("<input type=\"image\" id=\'entrar-img\'name=\'entrar-img\'src='/img/entrar-icon.png' title=\"" + bundle.getString("entrar") + "\" onclick=\"" + this.onClick1 + "\"/>");
+            out.println("<label for=\"soy_nuevo\" id=\"soy_nuevo\" Onclick= \"jGobierno.soyNuevo()\">"+ bundle.getString("soy_nuevo") +"</label>");
             out.println("<span class=\"fr\"><a href=\"/gobierno/Content.do/lang=es\"><fmt:message key=\"espanol\"/>" + bundle.getString("espanol") + "</a> <a href=\"/gobierno/Content.do/lang=en\"><fmt:message key=\"ingles\" />"+ bundle.getString("ingles") + "</a></span>");
         
         }

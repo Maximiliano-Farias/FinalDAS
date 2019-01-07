@@ -801,3 +801,20 @@ letter-spacing: 2px;
 
 
 }
+
+#soy_nuevo{
+	margin-left:15px;
+}
+
+#soy_nuevo:hover{
+	margin-left:15px;
+	text-decoration:underline;
+	font-weight: bold;
+}
+
+#imagen_publicitaria{
+	
+	width: 100%;
+	height: 100%;
+	
+}

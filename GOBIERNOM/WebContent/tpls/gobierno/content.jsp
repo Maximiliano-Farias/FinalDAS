@@ -29,14 +29,9 @@
 			</div>
 			<div id="cabecera">
             </div>
-             <div id="resultados"> 
-             <h1 id='titulo4' ><fmt:message key="BIENVENIDA" bundle="${etq}" /></h1>  
-             <div id="descripcion_ingreso"><fmt:message key="DESCRIPCION" bundle="${etq}" /> </div> 
-             
-             <div id="paso1"><fmt:message key="PASO1" bundle="${etq}" /> </div>    
-             <div id="paso2"><fmt:message key="PASO2" bundle="${etq}" /> </div>     
-              <div id="Sucursal"><input type="button" id="Sucursales" name="Sucursales" Onclick="jOpciones.Sucursales()" value ="<fmt:message key="Sucursales" bundle="${etq}" />" /> </div>  
-               
+             <div id="resultados">
+
+            <input type="image" id="imagen_publicitaria" alt="prueba" src="/img/fiat.jpg"/>
              </div>
             </form> 
 	        </div>

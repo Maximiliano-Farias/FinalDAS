@@ -377,7 +377,28 @@ var jGobierno = {
 			                }
 			            }
 			        });	
-				 }
+				 },
+				 
+				 
+		   soyNuevo:function(){
+    	            jUtils.executing("resultados");
+			        jUtils.hiding("message");
+			        $.ajax({
+			            url: "/gobierno/SoyNuevoAction.do",
+			            type: "post",
+			            dataType: "html",
+			            data: $.param({}), 
+			            error: function(hr){
+			                jUtils.hiding("result");
+			                jUtils.showing("message", hr.responseText);
+			            },
+			            success: function(html) {  	
+			                jUtils.showing("resultados", html);
+			                
+			            }
+			        });		
+				
+		   }
 
 			
 			
