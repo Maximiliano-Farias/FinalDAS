@@ -30,14 +30,10 @@
 			<div id="cabecera">
             </div>
              <div id="resultados">
-
-            <input type="image" id="imagen_publicitaria" alt="prueba" src="/img/fiat.jpg"/>
+            <img id="imagen_publicitaria" src="/img/fiat.jpg"/>
              </div>
             </form> 
 	        </div>
-	        
-	       	
-      
      </div>  
      
 </body>

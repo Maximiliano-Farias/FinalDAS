@@ -1,6 +1,5 @@
 var jGobierno = {
-		
-		
+	
 		salir: function() {
 			document.cookie ="perfil=; path=/";	
 			document.cookie ="dni=; path=/";
@@ -12,12 +11,13 @@ var jGobierno = {
         	jUtils.showing("contrasena");
         	jUtils.hiding("salir");
         	jUtils.hiding("Logueado");
-        	location.href="http://localhost:8080/"
+        	location.href="http://localhost:8080/";
 		},
 		
 
 		entrar: function() {
 	        jUtils.executing("result");
+	        jUtils.showing("contrasena");
 	        jUtils.hiding("message");
 	        document.cookie ="perfil=; path=/";
 	        document.cookie ="dni=; path=/";
@@ -42,7 +42,7 @@ var jGobierno = {
 	            	   document.getElementById('us').style.Color = '#ff0000';
 	                   document.getElementById('con').style.Color = '#ff0000';
 	            		jUtils.showing("cabecera", '');
-	                	document.getElementById('usuario').focus()
+	                	document.getElementById('usuario').focus();
 	                }
 	                else {
 		            	
@@ -55,6 +55,7 @@ var jGobierno = {
 		            	jUtils.hiding("usuario");
 		            	jUtils.hiding("contrasena");
 		            	jUtils.hiding("result");
+		            	jUtils.hiding("soy_nuevo");
 		            	jUtils.showing("Logueado", html);
 		            	jUtils.showing("salir");
 		            	document.cookie ="perfil="+ document.getElementById('perfil').value+";path=/";
@@ -67,7 +68,7 @@ var jGobierno = {
 	            }
 	        });		
 		},
-		
+	
 		Buscando: function(){
 		        var texto = $('#buscador_plan').val();
 				 jUtils.executing("buscando");
@@ -396,11 +397,33 @@ var jGobierno = {
 			                jUtils.showing("resultados", html);
 			                
 			            }
-			        });		
-				
-		   }
+			        });						
+		   },
+		   
+		    rotarImagenes:function()
+		    {
+			    var imagenes=new Array(
+				        ['../img/maipu.jpg'],
+				        ['../img/publicidad_esp.jpg'],
+				        ['../img/up.jpg'],
+				        ['../img/fiat.jpg'],
+				        ['../img/onix.jpg'],
+				        ['../img/tiguan.jpg']
+				    );
 
-			
-			
+		        var index=Math.floor((Math.random()*imagenes.length));
+		        document.getElementById("imagen_publicitaria").src=imagenes[index][0];
+		        
+		    },
+		 
+		    onload:function()
+		    {
+		    	jGobierno.rotarImagenes();	
+		    	setInterval("jGobierno.rotarImagenes()",3000);
+		    }		
 		
 };
+
+$( document ).ready(function() {
+    jGobierno.onload();
+});
