@@ -833,9 +833,9 @@ go
 
 --**********************OBTENER ULTIMO SORTEO**********************
 
-alter PROCEDURE Ultimo_Sorteo
+create PROCEDURE Ultimo_Sorteo
 AS
-select TOP 1 S.Fecha_sorteo,S.Descripcion,Estado = case when S.Estado = 'F' then 'FINALIZADO' WHEN S.Estado = 'N' then 'NO NOTIFICADO'  WHEN S.Estado = 'P'then 'PROGRAMADO' WHEN S.Estado = 'E'then 'CON ERROR' END,Ganador = P.Apellido +', '+P.Nombre,Nombre_Auto,C.Nombre AS Consesionaria,M.Nombre AS Marca,SD.Tipo_Modelo
+select TOP 1 Fecha_sorteo=convert(varchar(10), S.Fecha_sorteo, 103),S.Descripcion,Estado = case when S.Estado = 'F' then 'FINALIZADO' WHEN S.Estado = 'N' then 'NO NOTIFICADO'  WHEN S.Estado = 'P'then 'PROGRAMADO' WHEN S.Estado = 'E'then 'CON ERROR' END,Ganador = P.Apellido +', '+P.Nombre,Nombre_Auto,C.Nombre AS Consesionaria,M.Nombre AS Marca,SD.Tipo_Modelo
 from Sorteo_detalles SD JOIN Personas P
 ON P.id_persona = SD.id_persona
 JOIN Concesionaria C
@@ -872,10 +872,10 @@ group by Nombre_Auto,Tipo_modelo,M.Nombre
 GO
 /********************PROCEDIMIENTO PARA SORTEOS ANTERIORES**************/
 
-create PROCEDURE Detalle_Sorteo
+alter PROCEDURE Detalle_Sorteo
 (@nro_sorteo  Integer)
 AS
-select  Fecha_sorteo,S.Descripcion,Estado,ISNULL(C.Nombre,'-') AS Concesionaria,ISNULL(SD.Nombre_Auto,'-')AS Nombre_Auto,ISNULL(SD.Tipo_Modelo,'-')As Tipo_Modelo,ISNULL(CONVERT(VARCHAR,SD.Fecha_notificacion,120),'-')As Fecha_Notificacion,ISNULL(P.Nombre+' '+P.Apellido,'-')AS Ganador,ISNULL(ES.Descripcion,'-')AS Error
+select  Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),S.Descripcion,Estado,ISNULL(C.Nombre,'-') AS Concesionaria,ISNULL(SD.Nombre_Auto,'-')AS Nombre_Auto,ISNULL(SD.Tipo_Modelo,'-')As Tipo_Modelo,ISNULL(convert(varchar(10), Fecha_notificacion, 103),'-')As Fecha_Notificacion,ISNULL(P.Nombre+' '+P.Apellido,'-')AS Ganador,ISNULL(ES.Descripcion,'-')AS Error
 from Sorteos S
 FULL JOIN Sorteo_detalles SD
 ON S.nro_sorteo = SD.nro_sorteo
@@ -891,7 +891,7 @@ go
 /*******************OBTENER SORTEO PARA CABECERA********************************/
 create procedure Obtener_Sorteos
 AS
-select nro_sorteo,Fecha=CONVERT(DATE,Fecha_sorteo),Descripcion
+select nro_sorteo,Fecha=convert(varchar(10), Fecha_sorteo, 103),Descripcion
 from Sorteos
 where Estado <> 'P'
 order by Fecha_sorteo DESC
@@ -910,12 +910,12 @@ go
 
 
 /*******************PROCEDIMIENTO PARA DATOS DE  LA CONCESIONARIA**************/
-alter procedure Detalles_Concesionaria
+create procedure Detalles_Concesionaria
 (
     @id_concesionaria varchar(10)
 )
 AS
-select TOP 1 C.Nombre,C.id_concesionaria,Habilitado,Direccion,Telefono,Fecha_actualizacion
+select TOP 1 C.Nombre,C.id_concesionaria,Habilitado,Direccion,Telefono,Fecha_actualizacion=convert(varchar(10), Fecha_actualizacion, 103)
 from Concesionaria C  LEFT JOIN concesionarias_actualizaciones CA
 ON C.id_concesionaria = CA.id_concesionaria
 where C.id_concesionaria = @id_concesionaria
@@ -929,7 +929,7 @@ EXEC Insertar_Sorteo '2018-10-05', 'SORTEO PENDIENTE','P'
 go
 create procedure SORTEOS_PENDIENTES
 AS
-select *
+select nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado
 from Sorteos
 where Estado IN ('P','A')
 order by Fecha_sorteo DESC
@@ -943,7 +943,7 @@ go
 create procedure SORTEOS_PENDIENTES_DETALLES
 (@nro_sorteo integer)
 AS
-select nro_sorteo,Fecha_sorteo = Fecha_sorteo, Descripcion,Estado
+select nro_sorteo,Fecha_sorteo = convert(varchar(10), Fecha_sorteo, 103), Descripcion,Estado
 from Sorteos
 where Estado IN ('P','A')
 AND nro_sorteo = @nro_sorteo
@@ -1401,6 +1401,15 @@ where Nombre_usuario = @usuario
 
 
 
+//******************************OBTIENE SORTEO PARA HACER****************************************/
+
+create procedure A_Sortear
+AS
+select top 1 nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado
+from Sorteos
+where Estado = 'P'
+order by Fecha_sorteo ASC
+go
 
 
 

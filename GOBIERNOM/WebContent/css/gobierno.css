@@ -822,3 +822,54 @@ letter-spacing: 2px;
 #idiomas{
 	margin-top:6px;
 }
+
+#cruz,#tilde {
+    height: 30px;
+    width: 30px;
+}   
+
+#condiciones_sorteo table td{
+  border-top:10%;
+   border: 1px solid black;
+   border-collapse: collapse;
+   padding: 7px;
+   font-size: 15pt;
+   color: #000;
+   text-align: center;
+   margin-left:5px;
+}
+
+#condiciones_sorteo{
+	margin-left:35%;
+}
+
+#cabecera_sorteo table td{
+	border: 0px solid black;
+	text-decoration:bold;	
+	padding: 7px;
+    font-size: 15pt;    
+}
+
+#cabecera_sorteo {
+	margin-left:25%;
+}
+
+#titulo_sorteo{
+    margin-top:10px;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+	text-align:center;
+	width : 250px;
+}
+
+.subrayado{
+	text-decoration:underline;
+}
+
+#progreso_sorteo{
+	margin-left: 34%;
+	width: 30%;
+	height: 30px;
+	margin-top: 30px;
+}

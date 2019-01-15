@@ -242,11 +242,11 @@ var jGobierno = {
 		            dataType: "html",
 		            data: $.param($("input[name=fecha_sorteo_nuevo],input[name=id_sorteo_nuevo],select[name=Estado_sorteo_nuevo],input[name=descripcion_sorteo_nuevo]", $("#form"))),
 		            error: function(hr){
-		            	alert("OK");
-		            	jGobierno. Sorteos_Pendientes();
+		            	alert("OK!");
+		            	jOpciones.Sorteos_Pendientes();
 		            },
 		            success: function(html) {
-		            	alert("PASA");
+		            	alert("ERROR");
 		            	jUtils.showing("cabecera", '');
 		            	jUtils.showing("resultados", '');
 		                jUtils.showing("cabecera", html);    
@@ -271,7 +271,7 @@ var jGobierno = {
 		            		alert("ERROR");
 		            		}
 		            	else{
-		            	jGobierno.Sorteos_Pendientes();  
+		            	jOpciones.Sorteos_Pendientes();  
 		            	    }
 		            },
 		            success: function(html) {	  	
@@ -399,6 +399,31 @@ var jGobierno = {
 			            }
 			        });						
 		   },
+		   
+		   Sortear: function (){
+			   alert("pasa a sortear");
+	            jUtils.executing("resultados");
+		        jUtils.hiding("message");
+		        $.ajax({
+		            url: "/gobierno/SortearAction.do",
+		            type: "post",
+		            dataType: "html",
+		            data: $.param({}),
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("resultados", hr.responseText);
+		            },
+		            success: function(html) {  	
+		                jUtils.showing("resultados", html);		               
+		            }
+		        });	
+			 },
+			 
+			 Incrementar_Barra:function(){
+				 alert("pasa");
+				 var barra=document.getElementById('progreso_sorteo');
+				 barra.value+=5;
+			 },
 		   
 		    rotarImagenes:function()
 		    {

@@ -73,6 +73,9 @@
         <action path="/SoyNuevoAction.do" type="SoyNuevoAction">
             <forward name="success" path="/gobierno/soy_nuevo.jsp"/>
         </action>
+        <action path="/SortearAction.do" type="SortearAction">
+            <forward name="success" path="/gobierno/sortear.jsp"/>
+        </action>
         
         
         

@@ -21,7 +21,7 @@
 <td><var >${estadisticas.getCantidad_Concesionarias_Activas()} </var></td><td><var >${estadisticas.getCantidad_Concesionarias_No_Activas()} </var></td><td><var >${estadisticas.getTotal_Concesionarias()} </var></td>
 </tr>
 </table>
-<input type="button" id="Detalle_concesionarias" name="Detalle_concesionarias" Onclick="jGobierno.Concesionarias()" value ="<fmt:message key="Detalle_concesionarias" bundle="${etq}" />" /> 
+<input type="button" id="Detalle_concesionarias" name="Detalle_concesionarias" Onclick="jOpciones.Concesionarias()" value ="<fmt:message key="Detalle_concesionarias" bundle="${etq}" />" /> 
 </div>
 
 <div id=autos_vendidos>
