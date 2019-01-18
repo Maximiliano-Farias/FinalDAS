@@ -76,7 +76,12 @@
         <action path="/SortearAction.do" type="SortearAction">
             <forward name="success" path="/gobierno/sortear.jsp"/>
         </action>
-        
+        <action path="/ConcesionariasActualizadasAction.do" type="ConcesionariasActualizadasAction">
+            <forward name="success" path="/gobierno/sortear_concesionarias.jsp"/>
+        </action>       
+        <action path="/UltimoGanadorAction.do" type="UltimoGanadorAction">
+            <forward name="success" path="/gobierno/sortear_ultimo_ganador.jsp"/>
+        </action>  
         
         
     </action-mappings>

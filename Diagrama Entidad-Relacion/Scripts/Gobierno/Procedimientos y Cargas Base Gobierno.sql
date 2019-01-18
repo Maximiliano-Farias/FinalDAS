@@ -458,7 +458,7 @@ GO
 
 --***********************************CONCESIONARIAS_ACTUALLIZACIONES***********
 
-alter Procedure Insertar_Concesionaria_Actualizacion
+create Procedure Insertar_Concesionaria_Actualizacion
 (
     @id_concesionaria  varchar(10),
     @Fecha_actualizacion  date
@@ -475,6 +475,19 @@ VALUES  ( @id_concesionaria , -- id_concesionaria - int
         )
 
 GO
+
+
+create Procedure Borrar_actualizacion_concesionaria
+(
+    @id_concesionaria  varchar(10)
+)
+AS
+delete from concesionarias_actualizaciones
+        where id_concesionaria =@id_concesionaria 
+GO
+
+
+
 
 --********************************MARCAS************************************
 
@@ -1365,7 +1378,7 @@ where id_persona = @id_persona
 AND Identificador = @Identificador
 group by id_persona,Identificador
 
-
+go
 
 CREATE PROCEDURE EXISTE_USUARIO(
 @Identificador Varchar(20)
@@ -1375,7 +1388,9 @@ from Personas_Usuarios
 where Identificador = @Identificador
 group by Identificador
 
-//**********************************BUSCADOR DE PLANES PARA ADMIN******************//
+go
+
+--**********************************BUSCADOR DE PLANES PARA ADMIN******************
 create Procedure Buscador_Planes(
 @texto varchar(30)
 )
@@ -1388,8 +1403,9 @@ OR Nombre like '%'+@texto+'%'
 OR Apellido like '%'+@texto+'%'
 OR P.Identificador like '%'+@texto+'%'
 
+go
 
-//***********************************VALIDAR USUARIO **********************************/
+--***********************************VALIDAR USUARIO **********************************/
 
 create Procedure Valida_Usuario(
 @usuario varchar(20)
@@ -1399,9 +1415,9 @@ select Existe=CASE WHEN SUM(1) IS NULL THEN 0 ELSE 1 END
 from Personas_Usuarios
 where Nombre_usuario = @usuario
 
+go
 
-
-//******************************OBTIENE SORTEO PARA HACER****************************************/
+--******************************OBTIENE SORTEO PARA HACER****************************************/
 
 create procedure A_Sortear
 AS
@@ -1412,6 +1428,75 @@ order by Fecha_sorteo ASC
 go
 
 
+-- *****************************VER SI EL SORTEO ES EL DIA ACTUAL*************************************/
+
+CREATE PROCEDURE En_Fecha
+AS
+	select top 1 HOY =case when CONVERT(varchar(10), Fecha_sorteo, 103) = CONVERT(varchar(10), GETDATE(), 103) THEN 'SI' ELSE 'NO' END 
+	from Sorteos
+	where Estado = 'P'
+	order by Fecha_sorteo ASC
+GO
+
+
+/****************************CONCESIONARIAS CON MENOS DE 15 DIAS ACTUALIZADAS************************************/
+
+Create PROCEDURE concesionarias_en_condiciones
+AS
+	select CO.id_concesionaria,actualizada = case when ISNULL (DATEDIFF(day, CA.Fecha_actualizacion,GETDATE()),100) <=15 Then 'SI' ELSE 'NO' END
+	from concesionarias_actualizaciones CA
+	FULL JOIN Concesionaria CO
+	ON CO.id_concesionaria = CA.id_concesionaria
+	WHERE Habilitado = 1
+go
+
+/*****************************VERIFICA QUE EL ULTIMO GANADOR TENGA TODO PAGO*************************************/
+
+create PROCEDURE ULTIMO_GANADOR 
+AS
+	SELECT actualizada= case when COUNT(*)> 0 then 'NO'ELSE 'SI' END
+	FROM Facturas F1
+	WHERE Identificador IN (
+							SELECT TOP 1 Identificador
+							FROM Sorteo_detalles SD
+							order by nro_sorteo DESC
+							)
+	AND ESTADO = '0'
+GO
+
+
+--******************************PROCEDIMIENTO DE LOS PARTICIPANTES PARA EL SORTEO***************************************
+
+CREATE PROCEDURE Planes_Sorteo
+AS
+		select PD.Identificador,P.Apellido,P.Nombre,PD.Nombre_Auto,PD.Tipo_modelo
+		from Planes_detalles PD 
+		JOIN Personas P
+		ON PD.id_persona = P.id_persona
+		WHERE PD.Identificador NOT IN (
+									  select Identificador-- YA NO SEA UN GANADOR ANTERIOR
+									  from Sorteo_detalles
+								   )
+
+		AND PD.Identificador NOT IN  (
+									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA DE HOY
+									  from Facturas FA
+									  where Fecha < GETDATE()
+									  AND Estado = 0
+									  GROUP BY Identificador
+								   )
+ GO                          
+
+--************************************************************************************************************
+
+
+
+exec concesionarias_en_condiciones
+
+
+select *
+update  concesionarias_actualizaciones
+set Fecha_actualizacion = '2019-01-16'
 
 
 

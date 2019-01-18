@@ -419,10 +419,63 @@ var jGobierno = {
 		        });	
 			 },
 			 
+			 Verificar_Concesionarias: function (){
+			        jUtils.hiding("message");
+			        $.ajax({
+			            url: "/gobierno/ConcesionariasActualizadasAction.do",
+			            type: "post",
+			            dataType: "html",
+			            data: $.param({}),
+			            error: function(hr){
+			                jUtils.hiding("result");
+			                jUtils.showing("resultados", hr.responseText);
+			            },
+			            success: function(html) {  	
+			                jUtils.showing("sortear_concesionarias", html);	
+			                if(document.getElementById('error_concesionarias').value == "SI")
+			                	{
+			                		alert("ERROR");
+			                	}
+			                else
+			                	{
+				                	jGobierno.Incrementar_Barra();
+				                	setTimeout(jGobierno.Verificar_Ganador(), 2000)
+			                	
+			                	}
+			            }
+			        });	
+				 },
+				 
+				 Verificar_Ganador: function (){
+				        jUtils.hiding("message");
+				        $.ajax({
+				            url: "/gobierno/UltimoGanadorAction.do",
+				            type: "post",
+				            dataType: "html",
+				            data: $.param({}),
+				            error: function(hr){
+				                jUtils.hiding("result");
+				                jUtils.showing("resultados", hr.responseText);
+				            },
+				            success: function(html) {  	
+				                jUtils.showing("sortear_ultimo_ganador", html);	
+				                if(document.getElementById('error_ganador').value == "SI")
+				                	{
+				                		alert("ERROR");
+				                	}
+				                else
+				                	{
+					                	jGobierno.Incrementar_Barra();
+					                	alert("SI")
+				                	
+				                	}
+				            }
+				        });	
+					 },
+			 
 			 Incrementar_Barra:function(){
-				 alert("pasa");
 				 var barra=document.getElementById('progreso_sorteo');
-				 barra.value+=5;
+				 barra.value+=20;
 			 },
 		   
 		    rotarImagenes:function()
