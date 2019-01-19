@@ -873,3 +873,29 @@ letter-spacing: 2px;
 	height: 30px;
 	margin-top: 30px;
 }
+
+#sortear,#ver_ganador,#ver_error{
+	background-color: #0000a0;
+	width: 150px;
+	height: 40px;	
+	font-size:15px;
+}
+
+#sortear:hover,#ver_ganador:hover,#ver_error:hover{
+	background-color: #000040;
+	text-decoration:underline;		
+	text-decoration:bold;
+}
+
+#botones_sorteo{
+	margin-left: 45%;
+	margin-top: 1%;
+}
+
+#titulo_sorteo{
+margin-left:40%;
+}
+
+#en_fecha{
+	text-align: center;
+}

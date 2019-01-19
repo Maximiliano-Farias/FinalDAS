@@ -9,8 +9,9 @@
 <div id="cabecera_sorteo">
 	<table >
 		<tr>
-			<td class="subrayado">NRO:</td><td>${detalles.getNro_sorteo()}</td><td class="subrayado"><fmt:message key="Fecha" bundle="${etq}"/></td><td>${detalles.getFecha()}</td><td class="subrayado"><fmt:message key="Descripcion" bundle="${etq}"/></td><td>${detalles.getDescripcion()}</td>
+			<td class="subrayado">NRO:</td><td>${detalles.getNro_sorteo()}</td><td class="subrayado"><fmt:message key="Fecha" bundle="${etq}"/></td><td><div id="fecha" >${detalles.getFecha()}</div></td><td class="subrayado"><fmt:message key="Descripcion" bundle="${etq}"/></td><td>${detalles.getDescripcion()}</td>
 		</tr>
+		<tr><td colspan="6"><div id="en_fecha"></div></td></tr>
 	</table>
 </div>
 <div id="condiciones_sorteo">
@@ -29,13 +30,13 @@
 </div>
 
 <div class="contenedor">
-<progress id="progreso_sorteo" value="0" max="100"></progress>
-<input type="button" id="sortear" value="SORTEAR" onclick="jGobierno.Verificar_Concesionarias()" />
+	<progress id="progreso_sorteo" value="0" max="100"></progress>
 </div>
 
-<div class="resultados">
-<input type="button" id="ver_ganador" value="ver ganador" disabled />
-<input type="button" id="ver_error" value="ver sorteo" disabled />
+<div id="botones_sorteo">
+	<input type="button" id="sortear" value="SORTEAR" onclick="jGobierno.Verificar_Concesionarias()" />
+	<input type="button" id="ver_ganador" value=<fmt:message key="Gana" bundle="${etq}"/> onclick="jPdf.ImprimirGanador()" />
+	<input type="button" id="ver_error" value="ERROR" />
 </div>
 
 

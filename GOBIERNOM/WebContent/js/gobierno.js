@@ -401,7 +401,6 @@ var jGobierno = {
 		   },
 		   
 		   Sortear: function (){
-			   alert("pasa a sortear");
 	            jUtils.executing("resultados");
 		        jUtils.hiding("message");
 		        $.ajax({
@@ -414,10 +413,32 @@ var jGobierno = {
 		                jUtils.showing("resultados", hr.responseText);
 		            },
 		            success: function(html) {  	
-		                jUtils.showing("resultados", html);		               
+		                jUtils.showing("resultados", html);
+				        jUtils.hiding("ver_ganador");
+				        jUtils.hiding("ver_error");
+				        jUtils.hiding("seleccion_sorteo_nuevo");
+				        jGobierno.En_Fecha();
 		            }
 		        });	
 			 },
+			 
+			 En_Fecha:function(){
+				 jUtils.hiding("message");
+			        $.ajax({
+			            url: "/gobierno/EnFechaAction.do",
+			            type: "post",
+			            dataType: "html",
+			            data: $.param({}),
+			            error: function(hr){
+			                jUtils.hiding("result");
+			                jUtils.showing("resultados", hr.responseText);
+			            },
+			            success: function(html) {  	
+			                jUtils.showing("en_fecha", html);	
+			               
+			            }
+			        });	
+				 },
 			 
 			 Verificar_Concesionarias: function (){
 			        jUtils.hiding("message");
@@ -434,12 +455,13 @@ var jGobierno = {
 			                jUtils.showing("sortear_concesionarias", html);	
 			                if(document.getElementById('error_concesionarias').value == "SI")
 			                	{
+			                	jUtils.showing("ver_error");
 			                		alert("ERROR");
 			                	}
 			                else
 			                	{
 				                	jGobierno.Incrementar_Barra();
-				                	setTimeout(jGobierno.Verificar_Ganador(), 2000)
+				                	window.setTimeout(jGobierno.Verificar_Ganador(), 3000);
 			                	
 			                	}
 			            }
@@ -461,17 +483,76 @@ var jGobierno = {
 				                jUtils.showing("sortear_ultimo_ganador", html);	
 				                if(document.getElementById('error_ganador').value == "SI")
 				                	{
+				                	    jUtils.showing("ver_error");
 				                		alert("ERROR");
 				                	}
 				                else
 				                	{
 					                	jGobierno.Incrementar_Barra();
-					                	alert("SI")
-				                	
+					                	window.setTimeout(jGobierno.Verificar_Participantes(), 3000);
+					                				                	
 				                	}
 				            }
 				        });	
 					 },
+					 
+					 Verificar_Participantes: function (){
+					        jUtils.hiding("message");
+					        $.ajax({
+					            url: "/gobierno/ParticipantesSorteoAction.do",
+					            type: "post",
+					            dataType: "html",
+					            data: $.param({}),
+					            error: function(hr){
+					                jUtils.hiding("result");
+					                jUtils.showing("resultados", hr.responseText);
+					            },
+					            success: function(html) {  	
+					                jUtils.showing("sortear_participantes", html);	
+					                if(document.getElementById('error_participantes').value == "SI")
+					                	{
+					                	    jUtils.showing("ver_error");
+					                		alert("ERROR");
+					                	}
+					                else
+					                	{
+						                	jGobierno.Incrementar_Barra();
+						                	window.setTimeout(jGobierno.Obtener_Ganador(), 3000);
+					                	
+					                	}
+					            }
+					        });	
+						 },
+						 
+						 Obtener_Ganador: function (){
+						        jUtils.hiding("message");
+						        var fecha = document.getElementById('fecha').innerHTML;
+						        $.ajax({
+						            url: "/gobierno/GanadorSorteoAction.do",
+						            type: "post",
+						            dataType: "html",
+						            data: $.param({"fecha":fecha}),
+						            error: function(hr){
+						                jUtils.hiding("result");
+						                jUtils.showing("resultados", hr.responseText);
+						            },
+						            success: function(html) {  	
+						                jUtils.showing("sortear_ganador", html);	
+						                if(document.getElementById('error_ganador').value == "SI")
+						                	{
+						                	    jUtils.showing("ver_error");
+						                		alert("ERROR");
+						                	}
+						                else
+						                	{
+							                	jGobierno.Incrementar_Barra();
+							                	jUtils.showing("ver_ganador");
+							                	jUtils.hiding("sortear");
+						                	
+						                	}
+						            }
+						        });	
+							 },
 			 
 			 Incrementar_Barra:function(){
 				 var barra=document.getElementById('progreso_sorteo');

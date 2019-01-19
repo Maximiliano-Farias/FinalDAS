@@ -82,6 +82,16 @@
         <action path="/UltimoGanadorAction.do" type="UltimoGanadorAction">
             <forward name="success" path="/gobierno/sortear_ultimo_ganador.jsp"/>
         </action>  
+         <action path="/ParticipantesSorteoAction.do" type="ParticipantesSorteoAction">
+            <forward name="success" path="/gobierno/sortear_participantes.jsp"/>
+        </action>  
+        <action path="/GanadorSorteoAction.do" type="GanadorSorteoAction">
+            <forward name="success" path="/gobierno/sortear_ganador_sorteo.jsp"/>
+        </action>  
+        <action path="/EnFechaAction.do" type="EnFechaAction">
+            <forward name="success" path="/gobierno/en_fecha.jsp"/>
+        </action> 
+        
         
         
     </action-mappings>

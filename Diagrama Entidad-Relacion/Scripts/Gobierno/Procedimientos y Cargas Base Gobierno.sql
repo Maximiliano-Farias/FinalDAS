@@ -1419,12 +1419,13 @@ go
 
 --******************************OBTIENE SORTEO PARA HACER****************************************/
 
-create procedure A_Sortear
+CREATE procedure A_Sortear
 AS
-select top 1 nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado
+select TOP 1 nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado
 from Sorteos
 where Estado = 'P'
-order by Fecha_sorteo ASC
+AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
+order by Fecha_sorteo DESC
 go
 
 
@@ -1435,6 +1436,7 @@ AS
 	select top 1 HOY =case when CONVERT(varchar(10), Fecha_sorteo, 103) = CONVERT(varchar(10), GETDATE(), 103) THEN 'SI' ELSE 'NO' END 
 	from Sorteos
 	where Estado = 'P'
+	AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
 	order by Fecha_sorteo ASC
 GO
 
@@ -1487,19 +1489,34 @@ AS
 								   )
  GO                          
 
---************************************************************************************************************
+--******************************** OBTENER EL GANADOR DE MANERA ALEATORIA *****************************************
 
+create procedure Ganador_Sorteo 
+AS
+		select TOP 1 PD.Identificador,Ganador = P.Apellido +' ' +P.Nombre,PD.Nombre_Auto,PD.Tipo_modelo,C.Nombre,C.Email,P.Mail,P.Telefono,P.Direccion As Direccion_Ganador,C.Direccion As Direccion_Concesionaria
+		from Planes_detalles PD 
+		JOIN Personas P
+		ON PD.id_persona = P.id_persona
+		JOIN Concesionaria C
+		ON C.id_concesionaria = PD.id_concesionaria
+		WHERE PD.Identificador NOT IN (
+									  select Identificador-- YA NO SEA UN GANADOR ANTERIOR
+									  from Sorteo_detalles
+								   )
 
+		AND PD.Identificador NOT IN  (
+									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA DE HOY
+									  from Facturas FA
+									  where Fecha < GETDATE()
+									  AND Estado = 0
+									  GROUP BY Identificador
+								   )
+		ORDER BY NEWID()
 
-exec concesionarias_en_condiciones
+--********************************************************************
 
-
-select *
-update  concesionarias_actualizaciones
-set Fecha_actualizacion = '2019-01-16'
-
-
-
+exec En_Fecha
+exec A_Sortear
 
 
 
