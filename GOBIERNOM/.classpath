@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tomcat-el-api-7.0.91.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tomcat-jsp-api-7.0.91.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tomcat-servlet-api-7.0.91.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.mail-1.6.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -29,17 +29,13 @@
 	</table>
 </div>
 
+
 <div class="contenedor">
 	<progress id="progreso_sorteo" value="0" max="100"></progress>
 </div>
 
 <div id="botones_sorteo">
-	<input type="button" id="sortear" value="SORTEAR" onclick="jGobierno.Verificar_Concesionarias()" />
+	<input type="button" id="sortear" value="SORTEAR" onclick="jSorteo.Verificar_Concesionarias()" />
 	<input type="button" id="ver_ganador" value=<fmt:message key="Gana" bundle="${etq}"/> onclick="jPdf.ImprimirGanador()" />
 	<input type="button" id="ver_error" value="ERROR" />
 </div>
-
-
-
-
-

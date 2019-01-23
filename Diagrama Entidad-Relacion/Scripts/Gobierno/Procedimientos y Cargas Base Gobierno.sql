@@ -885,7 +885,7 @@ group by Nombre_Auto,Tipo_modelo,M.Nombre
 GO
 /********************PROCEDIMIENTO PARA SORTEOS ANTERIORES**************/
 
-alter PROCEDURE Detalle_Sorteo
+create PROCEDURE Detalle_Sorteo
 (@nro_sorteo  Integer)
 AS
 select  Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),S.Descripcion,Estado,ISNULL(C.Nombre,'-') AS Concesionaria,ISNULL(SD.Nombre_Auto,'-')AS Nombre_Auto,ISNULL(SD.Tipo_Modelo,'-')As Tipo_Modelo,ISNULL(convert(varchar(10), Fecha_notificacion, 103),'-')As Fecha_Notificacion,ISNULL(P.Nombre+' '+P.Apellido,'-')AS Ganador,ISNULL(ES.Descripcion,'-')AS Error
@@ -1318,9 +1318,9 @@ GO
 
 /************************************DATOS CONCESIONARIAS ****************************/
 
-alter procedure Obtener_Concesionarias_habilitadas
+create procedure Obtener_Concesionarias_habilitadas
 AS
-select Nombre, Direccion,Telefono
+select Nombre, Direccion,Telefono,Email
 from concesionaria
 where habilitado = 1
 order by Nombre ASC
@@ -1515,12 +1515,11 @@ AS
 
 --********************************************************************
 
-exec En_Fecha
-exec A_Sortear
+select *
 
 
 
-
+exec Obtener_Concesionarias_habilitadas
 
 
 

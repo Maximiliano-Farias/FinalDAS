@@ -25,7 +25,7 @@ var jGobierno = {
 	            url: "/gobierno/Buscar.do",
 	            type: "post",
 	            dataType: "html",
-	            data: $.param($("input[name=usuario],input[name=contrasena]", $("#form"))),
+	            data: $.param($("input[name=usuario],input[name=contrasena]")),
 	            error: function(hr){
 	            	alert("error");
 	                jUtils.hiding("result");
@@ -121,7 +121,7 @@ var jGobierno = {
             url: "/gobierno/SorteosDetallesAction.do",
             type: "post",
             dataType: "html",
-            data: $.param($("select[name=Sorteo_Elegido]", $("#form"))),
+            data: $.param($("select[name=Sorteo_Elegido]")),
             error: function(hr){
             	alert("error");
                 jUtils.hiding("result");
@@ -442,6 +442,7 @@ var jGobierno = {
 			 
 			 Verificar_Concesionarias: function (){
 			        jUtils.hiding("message");
+			        jUtils.hiding("sortear");
 			        $.ajax({
 			            url: "/gobierno/ConcesionariasActualizadasAction.do",
 			            type: "post",
@@ -546,13 +547,53 @@ var jGobierno = {
 						                else
 						                	{
 							                	jGobierno.Incrementar_Barra();
-							                	jUtils.showing("ver_ganador");
-							                	jUtils.hiding("sortear");
-						                	
+							                	jGobierno.Notificar_Ganador();
+							                	
 						                	}
 						            }
 						        });	
 							 },
+							 
+							 Notificar_Ganador: function (){
+								 
+								    var fecha = document.getElementById('fecha_sorteo').value.split(":")[1];								    
+								    var ganador = document.getElementById('ganador_sorteo').value.split(":")[1];								    
+								    var identificador = document.getElementById('identificador_sorteo').value.split(":")[1];								    
+								    var auto =document.getElementById('nombre_auto_sorteo').value.split(":")[1];								   
+								    var modelo= document.getElementById('tipo_modelo_sorteo').value.split(":")[1];   
+								    var email_ganador= document.getElementById('email_ganador_sorteo').value.split(":")[1];								    								    
+								    var concesionaria = document.getElementById('concesionaria_sorteo').value.split(":")[1];   
+								    var email_concesionaria =document.getElementById('email_concesionaria_sorteo').value.split(":")[1];								    
+								    var direccion_concesionaria = document.getElementById('direccion_concesionaria_sorteo').value.split(":")[1];
+							        jUtils.hiding("message");
+							        $.ajax({
+							            url: "/gobierno/NotificarGanadorAction.do",
+							            type: "post",
+							            dataType: "html",
+							            data: $.param({"fecha":fecha,"ganador":ganador,"identificcador":identificador,"auto":auto,"modelo":modelo,"email_ganador":email_ganador,"concesionaria":concesionaria,"email_concesionaria":email_concesionaria,"direccion_concesionaria":direccion_concesionaria}),
+							            error: function(hr){
+							                jUtils.hiding("result");
+							                jUtils.showing("resultados", hr.responseText);
+							            },
+							            success: function(html) {  	
+							                jUtils.showing("sortear_notificado", html);	
+							                alert(document.getElementById('error_notificacion').value);
+							                if(document.getElementById('error_notificacion').value == "SI")
+							                	{
+							                	    jUtils.showing("ver_error");
+							                		alert("ERROR");
+							                	}
+							                else
+							                	{
+								                	jGobierno.Incrementar_Barra();
+								                	jUtils.showing("ver_ganador");
+								                	jUtils.hiding("sortear");
+							                	
+							                	}
+							            }
+							        });	
+								 },
+							 		 
 			 
 			 Incrementar_Barra:function(){
 				 var barra=document.getElementById('progreso_sorteo');

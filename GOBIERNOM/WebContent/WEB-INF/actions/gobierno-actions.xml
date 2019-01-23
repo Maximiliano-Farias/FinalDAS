@@ -91,6 +91,9 @@
         <action path="/EnFechaAction.do" type="EnFechaAction">
             <forward name="success" path="/gobierno/en_fecha.jsp"/>
         </action> 
+        <action path="/NotificarGanadorAction.do" type="NotificarGanadorAction">
+            <forward name="success" path="/gobierno/sortear_notificacion.jsp"/>
+        </action> 
         
         
         
