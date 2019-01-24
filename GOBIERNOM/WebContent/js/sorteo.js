@@ -59,12 +59,12 @@ var jSorteo = {
 	                if(document.getElementById('error_concesionarias').value == "SI")
 	                	{
 	                	    jUtils.showing("ver_error");
-	                		jSorteo.Guardar_Error("actualizacion");
+	                		jSorteo.Guardar_Error("error_actualizacion");
 	                	}
 	                else
 	                	{
 		                	jSorteo.Incrementar_Barra();
-		                	window.setTimeout(jSorteo.Verificar_Ganador(), 3000);
+		                	jSorteo.Verificar_Ganador();
 	                	
 	                	}
 	            }
@@ -92,7 +92,7 @@ var jSorteo = {
 		                else
 		                	{
 			                	jSorteo.Incrementar_Barra();
-			                	window.setTimeout(jSorteo.Verificar_Participantes(), 3000);
+			                	jSorteo.Verificar_Participantes();
 			                				                	
 		                	}
 		            }
@@ -120,7 +120,7 @@ var jSorteo = {
 	                else
 	                	{
 		                	jSorteo.Incrementar_Barra();
-		                	window.setTimeout(jSorteo.Obtener_Ganador(), 3000);
+		                	jSorteo.Obtener_Ganador();
 	                	}
 	            }
 	        });	
@@ -148,14 +148,14 @@ var jSorteo = {
 	                else
 	                	{
 		                	jSorteo.Incrementar_Barra();
-		                	jSorteo.Notificar_Ganador();	
+		                	jUtils.showing("ver_ganador");
+		                	jSorteo.Notificar_Ganador();
 	                	}
 	            }
 	        });	
 		 },
 		 
 		 Notificar_Ganador: function (){
-			 
 			    var fecha = document.getElementById('fecha_sorteo').value.split(":")[1];								    
 			    var ganador = document.getElementById('ganador_sorteo').value.split(":")[1];								    
 			    var identificador = document.getElementById('identificador_sorteo').value.split(":")[1];								    
@@ -177,49 +177,91 @@ var jSorteo = {
 		            },
 		            success: function(html) {  	
 		                jUtils.showing("sortear_notificado", html);	
+		      	        jSorteo.Guardar_Ganador();
 		                if(document.getElementById('error_notificacion').value == "SI")
 		                	{
 		                	    jUtils.showing("ver_error");
-		                	    jSorteo.Guardar_Error("notificacion");
+		                	    jSorteo.Guardar_Error("notificacion_error");
 		                	}
 		                else
 		                	{
 			                	jSorteo.Incrementar_Barra();
-			                	jUtils.showing("ver_ganador");
-			                	jUtils.hiding("sortear");
-			                	
-			                	}
+			                	jSorteo.Guardar_Notificacion();
+			                }
 			            }
 			        });	
 				 },		
 					 
-	/* Guardar_Error: function (tipo){
+	 Guardar_Error: function (tipo){
 	        jUtils.hiding("message");
-	        var fecha = document.getElementById('fecha').innerHTML;
 	        $.ajax({
-	            url: "/gobierno/GanadorSorteoAction.do",
+	            url: "/gobierno/GuardarErrorAction.do",
 	            type: "post",
 	            dataType: "html",
-	            data: $.param({"tipo":tipo}),
+	            data: $.param({"error":tipo}),
 	            error: function(hr){
 	                jUtils.hiding("result");
 	                jUtils.showing("resultados", hr.responseText);
 	            },
 	            success: function(html) {  	
-	                jUtils.showing("sortear_ganador", html);	
-	                if(document.getElementById('error_ganador').value == "SI")
+	                jUtils.showing("informe_resultado", html);	
+	                if(document.getElementById('error_guardado').value == "SI")
 	                	{
 	                	    jUtils.showing("ver_error");
 	                		alert("ERROR");
 	                	}
-	                else
-	                	{
-		                	jSorteo.Incrementar_Barra();
-		                	jSorteo.Notificar_Ganador();	
-	                	}
+
 	            }
 	        });	
-		 },*/
+		 },
+		 
+		 Guardar_Ganador:function(){
+			 jUtils.hiding("message");
+			 var identificador = document.getElementById('identificador_sorteo').value.split(":")[1];
+		        $.ajax({
+		            url: "/gobierno/GuardarGanadorAction.do",
+		            type: "post",
+		            dataType: "html",
+		            data: $.param({"ganador":identificador}),
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("resultados", hr.responseText);
+		            },
+		            success: function(html) {  	
+		                jUtils.showing("informe_resultado", html);	
+		                if(document.getElementById('error_guardado_ganador').value == "SI")
+		                	{
+		                	    jUtils.showing("ver_error");
+		                		alert("ERROR");
+		                	}
+
+		            }
+		        });	
+			 },
+			 
+			 Guardar_Notificacion:function(){
+				 jUtils.hiding("message");
+				 var identificador = document.getElementById('identificador_sorteo').value.split(":")[1];
+			        $.ajax({
+			            url: "/gobierno/GuardarNotificacionAction.do",
+			            type: "post",
+			            dataType: "html",
+			            data: $.param({"ganador":identificador}),
+			            error: function(hr){
+			                jUtils.hiding("result");
+			                jUtils.showing("resultados", hr.responseText);
+			            },
+			            success: function(html) {  	
+			                jUtils.showing("informe_resultado", html);	
+			                if(document.getElementById('error_guardado_notificacion').value == "SI")
+			                	{
+			                	    jUtils.showing("ver_error");
+			                		alert("ERROR");
+			                	}
+
+			            }
+			        });	
+				 },
  
 	 Incrementar_Barra:function(){
 		 var barra=document.getElementById('progreso_sorteo');

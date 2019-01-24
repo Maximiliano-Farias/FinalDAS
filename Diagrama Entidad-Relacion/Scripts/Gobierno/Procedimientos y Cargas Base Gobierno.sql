@@ -323,33 +323,46 @@ GO
 
 -------------------------------------------------------------------------------------
 
-CREATE PROCEDURE Set_Estado_Sorteo
+create PROCEDURE Set_Estado_Sorteo
 (
-   @Fecha_Sorteo  DATETIME,
    @Estado  char(1)
 )
 AS
 
 UPDATE dbo.Sorteos
 SET Estado = @Estado
-WHERE Fecha_sorteo = @Fecha_Sorteo
+WHERE Fecha_sorteo = (select TOP 1 Fecha_sorteo
+						from Sorteos
+						where Estado = 'P'
+						AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
+						order by Fecha_sorteo DESC)
+AND nro_sorteo = (select TOP 1 nro_sorteo
+						from Sorteos
+						where Estado = 'P'
+						AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
+						order by Fecha_sorteo DESC)
+
 GO
 
 
 --****************************************ERRORES SORTEO**************************--
 
 
-CREATE PROCEDURE Insertar_Error_Sorteo
+create PROCEDURE Insertar_Error_Sorteo
 (
-    @nro_sorteo INT,
     @Descripcion varchar(50)
 )
 AS
 
 INSERT INTO dbo.Errores_Sorteos
         ( nro_sorteo, Descripcion )
-VALUES  ( @nro_sorteo, -- nro_sorteo - int
-          @Descripcion  -- Descripcion - varchar(50)
+VALUES  (  
+(
+select TOP 1 nro_sorteo
+from Sorteos
+where Estado = 'P'
+AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
+order by Fecha_sorteo DESC), @Descripcion  -- Descripcion - varchar(50)
           )
 GO
 
@@ -1513,13 +1526,43 @@ AS
 								   )
 		ORDER BY NEWID()
 
---********************************************************************
+--******************************** INSERTAR GANADOR DEL SORTEO********************
+create procedure Insertar_resultado (
 
-select *
+@identificador VARCHAR(20)
+)
+AS
+insert into Sorteo_detalles
+select nro_sorteo=(select TOP 1 nro_sorteo
+					from Sorteos
+					where Estado = 'P'
+					AND Fecha_sorteo >= (dateadd(day,-1,GETDATE()) )
+					order by Fecha_sorteo DESC),
+	    id_persona,Identificador,id_concesionaria,Nombre_Auto,'N',nro_marca AS Nro_Marca,Tipo_modelo,GETDATE()
+from Planes_detalles 
+where Identificador = @identificador
+
+--*********************************INSERTAR NOTIFICACION*************************************
+
+create procedure Set_Notificado(
+@identificador varchar(29)
+)
+AS
+update Sorteo_detalles
+set Notificado = 'S'
+where Identificador = @identificador
+
+--********************************************************************************************
 
 
 
-exec Obtener_Concesionarias_habilitadas
+
+
+
+
+
+
+
 
 
 

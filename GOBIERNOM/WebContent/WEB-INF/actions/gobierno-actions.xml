@@ -94,6 +94,16 @@
         <action path="/NotificarGanadorAction.do" type="NotificarGanadorAction">
             <forward name="success" path="/gobierno/sortear_notificacion.jsp"/>
         </action> 
+        <action path="/GuardarErrorAction.do" type="GuardarErrorAction">
+            <forward name="success" path="/gobierno/guardar_error.jsp"/>
+        </action> 
+        <action path="/GuardarGanadorAction.do" type="GuardarGanadorAction">
+            <forward name="success" path="/gobierno/guardar_ganador.jsp"/>
+        </action> 
+        <action path="/GuardarNotificacionAction.do" type="GuardarNotificacionAction">
+            <forward name="success" path="/gobierno/guardar_notificacion_ganador.jsp"/>
+        </action> 
+        
         
         
         

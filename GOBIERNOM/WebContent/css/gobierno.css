@@ -893,9 +893,16 @@ letter-spacing: 2px;
 }
 
 #titulo_sorteo{
-margin-left:40%;
+	margin-left:40%;
 }
 
 #en_fecha{
 	text-align: center;
 }
+
+#informe_resultado{
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+}
+
