@@ -131,7 +131,7 @@ public class MSNotificarGanadorDao extends DaoImpl {
 			Session session = Session.getInstance(properties,
 	                new javax.mail.Authenticator() {
 	                    protected PasswordAuthentication getPasswordAuthentication() {
-	                        return new PasswordAuthentication("mail","contrasena");
+	                        return new PasswordAuthentication("finaldas2019@gmail.com","finaldas");
 	                    }
 	                });
 

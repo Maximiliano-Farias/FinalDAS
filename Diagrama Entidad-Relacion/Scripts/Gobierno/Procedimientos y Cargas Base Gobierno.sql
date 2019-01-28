@@ -98,6 +98,10 @@ create Procedure Insertar_Persona
  @Identificador varchar(20)
 )
 as
+if not exists (select id_persona from Personas where id_persona = @id_persona)
+
+ begin
+ 
 INSERT INTO dbo.Personas
         ( id_persona ,
           Nombre ,
@@ -117,6 +121,8 @@ VALUES  ( @id_persona , -- id_persona - int
           @Telefono,  -- Telefono - varchar(18)
 		  @Identificador
         )
+
+END
 GO
 
 EXEC dbo.Insertar_Persona @id_persona = 37525605, -- int
@@ -128,8 +134,6 @@ EXEC dbo.Insertar_Persona @id_persona = 37525605, -- int
     @Telefono = '03571-15415853', -- varchar(18)
 	@Identificador = 'A1A1A1A1A12'
 go
-
-
 
 
 
@@ -409,7 +413,7 @@ GO
 
 create Procedure Insertar_Actualizaciones
 (
-  @fecha_actualizacion  date,
+  
   @Completado  char(1),
   @id_concesionaria  varchar(10)
 )
@@ -420,7 +424,7 @@ INSERT INTO dbo.Actualizaciones
           Completado ,
           id_concesionaria
         )
-VALUES  ( @fecha_actualizacion , -- fecha_actualizacion - datetime
+VALUES  ( GETDATE() , -- fecha_actualizacion - datetime
           @Completado , -- Completado - char(1)
           @id_concesionaria  -- id_concesionaria - int
         )
@@ -473,8 +477,7 @@ GO
 
 create Procedure Insertar_Concesionaria_Actualizacion
 (
-    @id_concesionaria  varchar(10),
-    @Fecha_actualizacion  date
+    @id_concesionaria  varchar(10)
 )
 AS
 
@@ -484,7 +487,7 @@ INSERT INTO dbo.concesionarias_actualizaciones
           Fecha_actualizacion
         )
 VALUES  ( @id_concesionaria , -- id_concesionaria - int
-          @Fecha_actualizacion  -- Fecha_actualizacion - datetime
+          GETDATE()  -- Fecha_actualizacion - datetime
         )
 
 GO
@@ -726,7 +729,7 @@ go
 --*******************************PLANES DETALLES***********************************
 
 
-CREATE Procedure Insertar_Planes
+create Procedure Insertar_Planes
 (   @Identificador  varchar(20),
     @id_concesionaria  varchar(10),
 	@id_persona integer ,
@@ -735,6 +738,8 @@ CREATE Procedure Insertar_Planes
 	@Tipo_modelo  varchar(20)
 )
 AS
+if NOT exists (select Identificador from Planes_detalles where Identificador = @identificador)
+ begin 
 
 INSERT INTO dbo.Planes_detalles
         ( Identificador,
@@ -752,13 +757,13 @@ VALUES  (
           @nro_marca,  -- nro_marca - int
 		  @Tipo_modelo
         )
-       
+  end     
 GO
 
 
 --******************************************FACTURAS****************************
 
-CREATE Procedure Insertar_Facturas
+create Procedure Insertar_Facturas
 (    @nro_factura INT,
      @Estado char(1),
      @Monto  money,
@@ -766,7 +771,8 @@ CREATE Procedure Insertar_Facturas
      @Fecha  DATE
 )
 AS
-
+if not exists (select nro_factura from Facturas where nro_factura = @nro_factura)
+ begin
 INSERT INTO dbo.Facturas
         ( nro_factura ,
           Estado ,
@@ -780,6 +786,7 @@ VALUES  ( @nro_factura , -- nro_factura - int
           @Identificador, --  Varchar(20)
           @Fecha  -- Fecha - datetime
         )
+END
 GO
 --******************************************ITEMS FACTURA***************************
 
@@ -1333,7 +1340,7 @@ GO
 
 create procedure Obtener_Concesionarias_habilitadas
 AS
-select Nombre, Direccion,Telefono,Email
+select Nombre, Direccion,Telefono,Email,direccion_url,Metodo,Servicio,id_concesionaria
 from concesionaria
 where habilitado = 1
 order by Nombre ASC
@@ -1552,8 +1559,30 @@ update Sorteo_detalles
 set Notificado = 'S'
 where Identificador = @identificador
 
---********************************************************************************************
+--***********************************LIMPIAR FACTURAS***********************************
 
+CREATE procedure Limpiar_Facturas(
+
+@id_concesionaria varchar(10)
+)
+AS
+delete from Facturas
+where Identificador IN(
+
+select Identificador
+from Planes_detalles
+where id_concesionaria = @id_concesionaria
+)
+
+--**********************************BORRAR Actualizacion*******************************
+
+create procedure Borrar_Actualizacion(
+@id_concesionaria varchar(20)
+)
+AS
+delete from Actualizaciones
+where id_concesionaria =@id_concesionaria
+GO
 
 
 

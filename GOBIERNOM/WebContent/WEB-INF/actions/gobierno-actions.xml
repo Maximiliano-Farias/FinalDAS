@@ -103,6 +103,9 @@
         <action path="/GuardarNotificacionAction.do" type="GuardarNotificacionAction">
             <forward name="success" path="/gobierno/guardar_notificacion_ganador.jsp"/>
         </action> 
+        <action path="/ConsumirConcesionariasAction.do" type="ConsumirConcesionariasAction">
+            <forward name="success" path="/gobierno/consumir_concesionarias.jsp"/>
+        </action> 
         
         
         

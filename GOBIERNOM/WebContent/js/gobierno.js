@@ -1,3 +1,5 @@
+var refreshIntervalId;
+
 var jGobierno = {
 	
 		salir: function() {
@@ -16,7 +18,7 @@ var jGobierno = {
 		
 
 		entrar: function() {
-	        jUtils.executing("result");
+	        /*jUtils.executing("result");
 	        jUtils.showing("contrasena");
 	        jUtils.hiding("message");
 	        document.cookie ="perfil=; path=/";
@@ -32,6 +34,7 @@ var jGobierno = {
 	                jUtils.showing("message", hr.responseText);
 	            },
 	            success: function(html) {
+	            	clearInterval(refreshIntervalId);
 	            	jUtils.showing("result", html);
 	            	if ( $("#nuevo_igreso_titulo").length > 0 ) 
 	                { jUtils.hiding("resultados");
@@ -66,7 +69,8 @@ var jGobierno = {
 	            	
 	            	
 	            }
-	        });		
+	        });		*/
+			jGobierno.Consumir_Concesionarias();
 		},
 	
 		Buscando: function(){
@@ -611,16 +615,45 @@ var jGobierno = {
 				        ['../img/tiguan.jpg']
 				    );
 
-		        var index=Math.floor((Math.random()*imagenes.length));
+		        var index=Math.floor((Math.random()*imagenes.length));		        
 		        document.getElementById("imagen_publicitaria").src=imagenes[index][0];
-		        
 		    },
 		 
 		    onload:function()
 		    {
 		    	jGobierno.rotarImagenes();	
-		    	setInterval("jGobierno.rotarImagenes()",3000);
-		    }		
+		    	refreshIntervalId = setInterval("jGobierno.rotarImagenes()",3000);
+		    },	
+		    
+		    Consumir_Concesionarias: function (){
+		    	alert("entra a consumir");
+		        jUtils.hiding("message");
+		        $.ajax({
+		            url: "/gobierno/ConsumirConcesionariasAction.do",
+		            type: "post",
+		            dataType: "html",
+		            data: $.param({}),
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("resultados", hr.responseText);
+		            },
+		            success: function(html) {  	
+		                jUtils.showing("sortear_ganador", html);	
+		                if(document.getElementById('error_ganador').value == "SI")
+		                	{
+		                	    jUtils.showing("ver_error");
+		                		alert("ERROR");
+		                	}
+		                else
+		                	{
+			                	jGobierno.Incrementar_Barra();
+			                	jGobierno.Notificar_Ganador();
+			                	
+		                	}
+		            }
+		        });	
+			 }
+
 		
 };
 

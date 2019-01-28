@@ -158,7 +158,7 @@ var jSorteo = {
 		 Notificar_Ganador: function (){
 			    var fecha = document.getElementById('fecha_sorteo').value.split(":")[1];								    
 			    var ganador = document.getElementById('ganador_sorteo').value.split(":")[1];								    
-			    var identificador = document.getElementById('identificador_sorteo').value.split(":")[1];								    
+			    var identificador = document.getElementById('identificador_sorteo').value.split(":")[1];
 			    var auto =document.getElementById('nombre_auto_sorteo').value.split(":")[1];								   
 			    var modelo= document.getElementById('tipo_modelo_sorteo').value.split(":")[1];   
 			    var email_ganador= document.getElementById('email_ganador_sorteo').value.split(":")[1];								    								    
@@ -170,7 +170,7 @@ var jSorteo = {
 		            url: "/gobierno/NotificarGanadorAction.do",
 		            type: "post",
 		            dataType: "html",
-		            data: $.param({"fecha":fecha,"ganador":ganador,"identificcador":identificador,"auto":auto,"modelo":modelo,"email_ganador":email_ganador,"concesionaria":concesionaria,"email_concesionaria":email_concesionaria,"direccion_concesionaria":direccion_concesionaria}),
+		            data: $.param({"fecha":fecha,"ganador":ganador,"identificador":identificador,"auto":auto,"modelo":modelo,"email_ganador":email_ganador,"concesionaria":concesionaria,"email_concesionaria":email_concesionaria,"direccion_concesionaria":direccion_concesionaria}),
 		            error: function(hr){
 		                jUtils.hiding("result");
 		                jUtils.showing("resultados", hr.responseText);

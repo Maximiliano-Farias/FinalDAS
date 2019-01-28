@@ -24,7 +24,6 @@ DROP TABLE Concesionarias
 */
 
 
-
 CREATE TABLE Concesionaria
 (
 	id_concesionaria  varchar(10) ,
@@ -33,6 +32,9 @@ CREATE TABLE Concesionaria
 	Direccion  varchar(40) NOT NULL ,
 	Telefono  varchar(40) NOT NULL ,
 	Email  varchar(40) NOT NULL ,
+	Servicio varchar (20) NOT NULL,
+	direccion_url varchar(50) NOT NULL,
+	Metodo varchar(20) NOT NULL
 	CONSTRAINT  PK_id_concesionarias PRIMARY KEY (id_concesionaria  ASC)
 )
 go
