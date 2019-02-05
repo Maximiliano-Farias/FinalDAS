@@ -7,6 +7,7 @@ public class PersonasBean {
 	private String nombre;
 	private String apellido;
 	private String direccion;
+	private String identificador;
 	private String mail;
 	private int nro_identificador;
 	private String telefono;
@@ -19,6 +20,16 @@ public class PersonasBean {
 
 	public void setId_persona(int id_persona) {
 		this.id_persona = id_persona;
+	}
+
+
+	public String getIdentificador() {
+		return identificador;
+	}
+
+
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
 	}
 
 

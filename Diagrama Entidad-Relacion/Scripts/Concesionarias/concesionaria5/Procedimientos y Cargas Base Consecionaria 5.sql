@@ -641,8 +641,9 @@ GO
 
 create procedure datos_personas
 AS
-select  *
-from personas
+select  P.*,PD.Identificador
+from personas P JOIN Planes_detalles PD
+ON P.id_persona = PD.id_persona 
 GO
 
 --****************************ACTUALIZAR  GANADOR*********************

@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Concesionaria", namespace = "http://action.das.ubp.edu.ar/")
 
 public class Concesionaria {
-
+	 
 
 }
 

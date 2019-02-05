@@ -105,6 +105,7 @@ public class ConcesionariaDaoImpl implements DaoConcesionaria {
             	persona.setMail(result.getString("Mail"));
             	persona.setNro_identificador(result.getInt("nro_identificador"));
             	persona.setTelefono(result.getString("Telefono"));
+            	persona.setIdentificador(result.getString("Identificador"));
 
             	personas.add(persona);
             	result.next();

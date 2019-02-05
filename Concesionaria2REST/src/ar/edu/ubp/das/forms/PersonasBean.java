@@ -10,7 +10,16 @@ public class PersonasBean {
 	private String Mail;
 	private int nro_identificador;
 	private String Telefono;
+	private String Identificador;
 	
+	public String getIdentificador() {
+		return Identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		Identificador = identificador;
+	}
+
 	public int getId_persona() {
 		return id_persona;
 	}

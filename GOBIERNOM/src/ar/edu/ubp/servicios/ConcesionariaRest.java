@@ -19,7 +19,6 @@ public class ConcesionariaRest {
 	
 	
 public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo )throws SQLException{
-	 JOptionPane.showMessageDialog(null,direccion_url + Metodo, "ERROR", JOptionPane.ERROR_MESSAGE);
 	String resultado;	  
     URI uri = URI.create(direccion_url + Metodo); 
     HttpPost req = new HttpPost();
@@ -50,21 +49,20 @@ public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo )thro
 		// TODO Auto-generated catch block
 		resultado= e.toString();
 	}	
-    JOptionPane.showMessageDialog(null,"esta es la respuesta: "+restResp, "ERROR", JOptionPane.ERROR_MESSAGE);
     if(responseStatus.getStatusCode() != 200) {
     	throw new RuntimeException(restResp);
     }
     if (!restResp.equals(null))
     {
-    Gson gson = new Gson();
-	concesionaria = gson.fromJson(restResp,ConcesionariaBean.class);
-	JOptionPane.showMessageDialog(null,"nombre conce: "+concesionaria.getNombre()+" id_concesionaria: "+concesionaria.getId_concesionaria()+" direccion: "+concesionaria.getDireccion()+" telefono: "+concesionaria.getTelefono(), "ERROR", JOptionPane.ERROR_MESSAGE);
-    }
+	    Gson gson = new Gson();
+		concesionaria = gson.fromJson(restResp,ConcesionariaBean.class);
+	}
     if (!resultado.equals("OK"))
     {
     	concesionaria.setNombre("ERROR");
     }  	
-    JOptionPane.showMessageDialog(null,concesionaria, "ERROR", JOptionPane.ERROR_MESSAGE);
+  
+    
     return concesionaria;
     
     	

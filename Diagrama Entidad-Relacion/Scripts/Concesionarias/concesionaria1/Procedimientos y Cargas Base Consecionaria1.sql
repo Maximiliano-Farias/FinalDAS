@@ -62,7 +62,6 @@ EXEC dbo.Insertar_Concesionaria
 go
 
 --********************************PERSONA*******************************************--
-
 create Procedure Insertar_Persona
 (
  @id_persona  INT,
@@ -71,7 +70,8 @@ create Procedure Insertar_Persona
  @Direccion varchar(40),
  @Mail varchar(40),
  @nro_identificador INT,
- @Telefono  varchar(18)
+ @Telefono  varchar(18),
+ @Identificador  varchar(20)
 )
 as
 INSERT INTO dbo.Personas
@@ -81,7 +81,8 @@ INSERT INTO dbo.Personas
           Direccion ,
           Mail ,
           nro_identificador ,
-          Telefono
+          Telefono,
+		  Identificador
         )
 VALUES  ( @id_persona , -- id_persona - int
           @Nombre , -- Nombre - varchar(40)
@@ -89,10 +90,10 @@ VALUES  ( @id_persona , -- id_persona - int
           @Direccion , -- Direccion - varchar(40)
           @Mail , -- Mail - varchar(40)
           @nro_identificador, -- nro_identificador - int
-          @Telefono  -- Telefono - varchar(18)
-        )
+          @Telefono,  -- Telefono - varchar(18)
+          @Identificador       
+ 		)
 GO
-
 
 EXEC dbo.Insertar_Persona @id_persona = 13461983, -- int
     @Nombre = 'Eduardo Martin', -- varchar(40)
@@ -556,8 +557,9 @@ GO
 
 create procedure datos_personas
 AS
-select  *
-from personas
+select  P.*,PD.Identificador
+from personas P JOIN Planes_detalles PD
+ON P.id_persona = PD.id_persona 
 GO
 
 --****************************ACTUALIZAR  GANADOR*********************
