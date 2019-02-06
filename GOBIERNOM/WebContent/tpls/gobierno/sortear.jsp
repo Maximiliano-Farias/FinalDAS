@@ -20,6 +20,7 @@
 			<tr><td colspan="2"><fmt:message key="Condiciones" bundle="${etq}"/></td></tr>
 		</thead>
 		<tbody>
+		    <tr><td><fmt:message key="Concesionarias_consumo" bundle="${etq}"/></td><td><div id="consumir_concesionarias"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
 			<tr><td><fmt:message key="Concesionarias_actualizadas" bundle="${etq}"/></td><td><div id="sortear_concesionarias"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
 			<tr><td><fmt:message key="Ultimo_ganador" bundle="${etq}"/></td><td><div id="sortear_ultimo_ganador"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
 			<tr><td><fmt:message key="Participantes" bundle="${etq}"/></td><td><div id="sortear_participantes"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
@@ -38,7 +39,7 @@
 </div>
 
 <div id="botones_sorteo">
-	<input type="button" id="sortear" value="SORTEAR" onclick="jSorteo.Verificar_Concesionarias()" />
+	<input type="button" id="sortear" value="SORTEAR" onclick="jSorteo.Consumir_Concesionarias()" />
 	<input type="button" id="ver_ganador" value=<fmt:message key="Gana" bundle="${etq}"/> onclick="jPdf.ImprimirGanador()" />
 	<input type="button" id="ver_error" value="ERROR" onClick="jOpciones.SorteoAnterior()" />
 </div>

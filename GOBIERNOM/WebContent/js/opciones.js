@@ -18,9 +18,7 @@ var jOpciones = {
 	        });	
 			
 		},
-		
-		
-	
+
 	   SorteoAnterior: function() {
         jUtils.executing("cabecera");
         jUtils.hiding("message");
@@ -83,11 +81,12 @@ var jOpciones = {
 			 DatosPersonales: function() {
 			        jUtils.executing("cabecera");
 			        jUtils.hiding("message");
+			        var Id_plan = $('#Id_plan').val();
 			        $.ajax({
 			            url: "/gobierno/UsuarioDetallesAction.do",
 			            type: "post",
 			            dataType: "html",
-			            data: $.param($("input[name=Id_plan]", $("#form"))),  
+			            data: $.param({"Id_plan":Id_plan}),  
 			            error: function(hr){
 			                jUtils.hiding("result");
 			                jUtils.showing("message", hr.responseText);

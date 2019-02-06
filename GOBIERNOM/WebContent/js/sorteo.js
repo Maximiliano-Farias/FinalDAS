@@ -1,7 +1,5 @@
 var jSorteo = {
-	
-		
-		   
+	   
    Sortear: function (){
         jUtils.executing("resultados");
         jUtils.hiding("message");
@@ -41,10 +39,40 @@ var jSorteo = {
 	            }
 	        });	
 		 },
-	 
+		 
+		 
+		 Consumir_Concesionarias: function (){
+			    jUtils.hiding("sortear");
+			    jSorteo.Incrementar_Barra(3);
+		        jUtils.hiding("message");
+		        $.ajax({
+		            url: "/gobierno/ConsumirConcesionariasAction.do",
+		            type: "post",
+		            dataType: "html",
+		            data: $.param({}),
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("resultados", hr.responseText);
+		            },
+		            success: function(html) {  	
+		                jUtils.showing("consumir_concesionarias", html);	
+		                if(document.getElementById('error_consumo').value == "SI")
+		                	{
+		                	    jUtils.showing("ver_error");
+		                	    jSorteo.Guardar_Error("error_actualizacion");
+		                		alert("ERROR");
+		                	}
+		                else
+		                	{
+		                	jSorteo.Incrementar_Barra(7);
+			                jSorteo.Verificar_Concesionarias();		
+		                	}
+		            }
+		        });	
+			 },
+
 	 Verificar_Concesionarias: function (){
 	        jUtils.hiding("message");
-	        jUtils.hiding("sortear");
 	        $.ajax({
 	            url: "/gobierno/ConcesionariasActualizadasAction.do",
 	            type: "post",
@@ -63,7 +91,7 @@ var jSorteo = {
 	                	}
 	                else
 	                	{
-		                	jSorteo.Incrementar_Barra();
+		                	jSorteo.Incrementar_Barra(10);
 		                	jSorteo.Verificar_Ganador();
 	                	
 	                	}
@@ -91,7 +119,7 @@ var jSorteo = {
 		                	}
 		                else
 		                	{
-			                	jSorteo.Incrementar_Barra();
+			                	jSorteo.Incrementar_Barra(20);
 			                	jSorteo.Verificar_Participantes();
 			                				                	
 		                	}
@@ -119,7 +147,7 @@ var jSorteo = {
 	                	}
 	                else
 	                	{
-		                	jSorteo.Incrementar_Barra();
+		                	jSorteo.Incrementar_Barra(20);
 		                	jSorteo.Obtener_Ganador();
 	                	}
 	            }
@@ -147,7 +175,7 @@ var jSorteo = {
 	                	}
 	                else
 	                	{
-		                	jSorteo.Incrementar_Barra();
+		                	jSorteo.Incrementar_Barra(20);
 		                	jUtils.showing("ver_ganador");
 		                	jSorteo.Notificar_Ganador();
 	                	}
@@ -185,7 +213,7 @@ var jSorteo = {
 		                	}
 		                else
 		                	{
-			                	jSorteo.Incrementar_Barra();
+			                	jSorteo.Incrementar_Barra(20);
 			                	jSorteo.Guardar_Notificacion();
 			                }
 			            }
@@ -263,9 +291,9 @@ var jSorteo = {
 			        });	
 				 },
  
-	 Incrementar_Barra:function(){
+	 Incrementar_Barra:function( incremento){
 		 var barra=document.getElementById('progreso_sorteo');
-		 barra.value+=20;
+		 barra.value+=incremento;
 	 },		   
 		   
 };

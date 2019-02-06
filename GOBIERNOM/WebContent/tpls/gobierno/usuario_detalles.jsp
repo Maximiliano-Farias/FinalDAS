@@ -20,7 +20,7 @@
 </tr>
 
 <tr>
-<td>D.N.I :</td><td> <input type="text" id="Dni_Usuario" name="Dni_Usuario" value="${detalles.getDni()}"  readonly="readonly" size="30"/></td>
+<td>D.N.I :</td><td> <input type="text" id="Dni_Usuario" name="Dni_Usuario" value="${detalles.getDni()}"  readonly="readonly" size="30" readonly="readonly" /></td>
 <td><fmt:message key="Telefono" bundle="${etq}"/></td><td><input type="text" id="Telefono_Usuario" name="Telefono_Usuario" value="${detalles.getTelefono()}"  size="30"/></td>
 </tr>
 <tr>

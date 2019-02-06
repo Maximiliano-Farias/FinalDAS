@@ -3,7 +3,9 @@ package ar.edu.ubp.das.src.gobierno.daos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+
 import javax.swing.JOptionPane;
+
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.beans.*;
@@ -45,7 +47,8 @@ public class MSConsumirConcesionariasDao extends DaoImpl {
     	String direccion_url;
     	String Metodo;
     	String Servicio;
-    	String Resultado="OK";
+    	String Resultado="SI";
+		respuesta.setRespuesta(Resultado);
     	String id_concesionaria="";
     	
     
@@ -57,10 +60,9 @@ public class MSConsumirConcesionariasDao extends DaoImpl {
 
         result.next();
         	
-        	while(result.getRow() > 0 && Resultado.equals("OK"))
+        	while(result.getRow() > 0 && Resultado.equals("SI"))
         	{	
         		ConcesionariaBean RespuestaConcesionaria = new ConcesionariaBean();
-        		JOptionPane.showMessageDialog(null,"Va a actualizar: "+result.getString("id_concesionaria"), "ERROR", JOptionPane.ERROR_MESSAGE);
         		Metodo =  result.getString("Metodo");
         	    direccion_url= result.getString("direccion_url");
         	    Servicio = result.getString("Servicio");
@@ -80,8 +82,8 @@ public class MSConsumirConcesionariasDao extends DaoImpl {
 	    	    	ConcesionariaAxis2 concesionariaaxis = new ConcesionariaAxis2();
 	    	    	RespuestaConcesionaria = concesionariaaxis.Cargar_Datos(direccion_url,Metodo);    	
 	        	}
-	    	
-		    	if (Resultado.equals("OK") && !RespuestaConcesionaria.getNombre().equals("ERROR"))
+	    	   
+		    	if (Resultado.equals("SI") && !RespuestaConcesionaria.getNombre().equals("ERROR"))
 		    	{
 		    		LinkedList<PersonasBean> personas = new LinkedList<PersonasBean>();
 		    		LinkedList<FacturasBean> facturas = new LinkedList<FacturasBean>();
@@ -128,6 +130,7 @@ public class MSConsumirConcesionariasDao extends DaoImpl {
 	       	    		
 	   	    		for(FacturasBean f : facturas)
 		    		{   this.connect();
+		    		
 	    	    		this.setProcedure("dbo.Insertar_Facturas (?, ?, ?, ? ,? )", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	    	    	    this.setParameter(1,f.getNro_factura());
 	    	    	    this.setParameter(2,f.getEstado());
@@ -167,7 +170,7 @@ public class MSConsumirConcesionariasDao extends DaoImpl {
 	   	    		
 		    	}
 		    	else{
-		    		Resultado="ERROR";
+		    		respuesta.setRespuesta("ERROR");
 		    	}
 	    	
 	    	
@@ -175,9 +178,6 @@ public class MSConsumirConcesionariasDao extends DaoImpl {
     
         	}
         	
-               
-		this.disconnect();
-
         return respuesta;
 		
 	}

@@ -12,7 +12,7 @@
 	    	<table >
 			<tr>
 				<td>NRO: <input type="text" id="id_sorteo_nuevo" name="id_sorteo_nuevo" value="${detalles.getNro_sorteo()}" readonly="readonly" size="2"/></td>
-		    	<td><fmt:message key="Fecha" bundle="${etq}"/><input type="text" id="fecha_sorteo_nuevo" name="fecha_sorteo_nuevo" value="${detalles.getFecha()}"  size="25"maxlength="10"/></td>
+		    	<td><fmt:message key="Fecha" bundle="${etq}"/><input type="text" id="fecha_sorteo_nuevo" name="fecha_sorteo_nuevo" value="${detalles.getFecha()}"  size="25"maxlength="10" readonly="readonly"/></td>
 				    <td>
 				    <c2:choose>
 				    <c2:when test="${detalles.getEstado() == 'P'}">
@@ -37,7 +37,7 @@
 				<div id="sorteos_nuevo">
 				<table >
 				<tr>
-				<td><fmt:message key="Fecha" bundle="${etq}"/> YYYY-MM-DD<input type="text" id="fecha_sorteo_crear" name="fecha_sorteo_crear" value="" maxlength="10" size="25"/></td>
+				<td><fmt:message key="Fecha" bundle="${etq}"/> DD/MM/AAAA<input type="text" id="fecha_sorteo_crear" name="fecha_sorteo_crear" value="" maxlength="10" size="25"/></td>
 				<td>
 				        <select id="Estado_sorteo_crear" name="Estado_sorteo_crear">
 				        <option value="P"><fmt:message key="PENDIENTE" bundle="${etq}"/></option>

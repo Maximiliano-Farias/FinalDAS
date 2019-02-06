@@ -4,5 +4,6 @@ import ar.edu.ubp.das.forms.ConcesionariaBean;
 public interface DaoConcesionaria {
 	
 	public ConcesionariaBean Concesionaria() throws Exception;
+	
 
 }

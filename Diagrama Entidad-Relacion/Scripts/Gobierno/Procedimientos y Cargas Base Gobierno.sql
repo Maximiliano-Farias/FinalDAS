@@ -771,7 +771,7 @@ create Procedure Insertar_Facturas
      @Fecha  DATE
 )
 AS
-if not exists (select nro_factura from Facturas where nro_factura = @nro_factura)
+if not exists (select nro_factura from Facturas where nro_factura = @nro_factura AND identificador=@Identificador)
  begin
 INSERT INTO dbo.Facturas
         ( nro_factura ,
@@ -919,6 +919,7 @@ ON p.id_persona = SD.id_persona
 FULL JOIN Concesionaria C
 ON C.id_concesionaria =SD.Id_Consesionaria
 WHERE S.nro_sorteo = @nro_sorteo
+
 
 go
 /*******************OBTENER SORTEO PARA CABECERA********************************/
@@ -1289,7 +1290,7 @@ create procedure Obtener_Estado_Cuenta
 @Identificador varchar(20)
 )
 AS
-select F.nro_factura, Estado = case when F.Estado = '0' then 'ADEUDADO' when F.Estado = '1' then 'PAGADA'END, F.Fecha,F.Monto
+select F.nro_factura, Estado = case when F.Estado = '0' then 'ADEUDADO' when F.Estado = '1' then 'PAGADA'END, convert(varchar(10), F.Fecha, 103)AS Fecha,F.Monto
 from Planes_detalles PD  JOIN Facturas F
 ON PD.Identificador = F.Identificador
 JOIN Personas P
@@ -1325,7 +1326,7 @@ create procedure Obtener_DATOS_PLAN
 AS
 
 
-select TOP 1 Nombre_Auto,Tipo_modelo,C.Nombre,c.id_concesionaria,CA.Fecha_actualizacion
+select TOP 1 Nombre_Auto,Tipo_modelo,C.Nombre,c.id_concesionaria,convert(varchar(10),CA.Fecha_actualizacion, 103)AS  Fecha_actualizacion
 from planes_detalles PD
 JOIN CONCESIONARIA C
 ON C.id_concesionaria = PD.id_concesionaria
@@ -1583,6 +1584,22 @@ AS
 delete from Actualizaciones
 where id_concesionaria =@id_concesionaria
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

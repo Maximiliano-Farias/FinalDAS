@@ -12,7 +12,7 @@ import ar.edu.ubp.das.forms.PersonasBean;
 import ar.edu.ubp.das.forms.PlanesBean;
 import ar.edu.ubp.das.interfac.DaoConcesionaria;
 
-public class ConcesionariaDaoImpl implements DaoConcesionaria {
+public class GanadorDao implements DaoConcesionaria {
 
 	@Override
 	public ConcesionariaBean Concesionaria() throws Exception {
@@ -116,7 +116,5 @@ public class ConcesionariaDaoImpl implements DaoConcesionaria {
 
               return concesionaria;
 	}
-	
-	
 
 }

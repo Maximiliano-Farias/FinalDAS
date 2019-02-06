@@ -18,7 +18,7 @@ var jGobierno = {
 		
 
 		entrar: function() {
-	        /*jUtils.executing("result");
+	        jUtils.executing("result");
 	        jUtils.showing("contrasena");
 	        jUtils.hiding("message");
 	        document.cookie ="perfil=; path=/";
@@ -69,8 +69,8 @@ var jGobierno = {
 	            	
 	            	
 	            }
-	        });		*/
-			jGobierno.Consumir_Concesionarias();
+	        });		
+			
 		},
 	
 		Buscando: function(){
@@ -171,13 +171,18 @@ var jGobierno = {
 		},
 		
 		Guardar_Concesionaria: function() {
-	        jUtils.executing("message");
+			var id_concesionaria = $('#id_concesionaria').val();
+			var nombre_concesionaria = $('#nombre_concesionaria').val();
+			var Habilitado = $('#Habilitado').val();
+			var direccion_concesionaria = $('#direccion_concesionaria').val();
+			var telefono_concesionaria = $('#telefono_concesionaria').val();
+			jUtils.executing("message");
 	        jUtils.hiding("message");
 	        $.ajax({
 	            url: "/gobierno/GuardarConcesionariaAction.do",
 	            type: "post",
 	            dataType: "html",
-	            data: $.param($("input[name=id_concesionaria],input[name=nombre_concesionaria],select[name=Habilitado],input[name=direccion_concesionaria],input[name=telefono_concesionaria]", $("#form"))),
+	            data: $.param({"id_concesionaria":id_concesionaria,"nombre_concesionaria":nombre_concesionaria,"Habilitado":Habilitado,"direccion_concesionaria":direccion_concesionaria,"telefono_concesionaria":telefono_concesionaria}),
 	            error: function(hr){
 	            	jGobierno.Elegida();
 	            },
@@ -238,13 +243,17 @@ var jGobierno = {
 			
 			
 			Guardar_Sorteo: function() {
-		        jUtils.executing("message");
+				var fecha_sorteo_nuevo=  $('#fecha_sorteo_nuevo').val();
+				var id_sorteo_nuevo=  $('#id_sorteo_nuevo').val();
+				var Estado_sorteo_nuevo=  $('#Estado_sorteo_nuevo').val();
+				var descripcion_sorteo_nuevo=  $('#descripcion_sorteo_nuevo').val();
+				jUtils.executing("message");
 		        jUtils.hiding("message");
 		        $.ajax({
 		            url: "/gobierno/GuardarSorteoAction.do",
 		            type: "post",
 		            dataType: "html",
-		            data: $.param($("input[name=fecha_sorteo_nuevo],input[name=id_sorteo_nuevo],select[name=Estado_sorteo_nuevo],input[name=descripcion_sorteo_nuevo]", $("#form"))),
+		            data: $.param({"fecha_sorteo_nuevo":fecha_sorteo_nuevo,"id_sorteo_nuevo":id_sorteo_nuevo,"Estado_sorteo_nuevo":Estado_sorteo_nuevo,"descripcion_sorteo_nuevo":descripcion_sorteo_nuevo}),
 		            error: function(hr){
 		            	alert("OK!");
 		            	jOpciones.Sorteos_Pendientes();
@@ -260,13 +269,16 @@ var jGobierno = {
 			},
 			
 			Crear_Sorteo: function() {
+				var fecha_sorteo_crear=  $('#fecha_sorteo_crear').val();
+				var Estado_sorteo_crear=  $('#Estado_sorteo_crear').val();
+				var descripcion_sorteo_crear=  $('#descripcion_sorteo_crear').val();
 		        jUtils.executing("message");
 		        jUtils.hiding("message");
 		        $.ajax({
 		            url: "/gobierno/CrearSorteoAction.do",
 		            type: "post",
 		            dataType: "html",
-		            data: $.param($("input[name=fecha_sorteo_crear],select[name=Estado_sorteo_crear],input[name=descripcion_sorteo_crear]", $("#form"))),
+		            data: $.param({"fecha_sorteo_crear":fecha_sorteo_crear,"Estado_sorteo_crear":Estado_sorteo_crear,"descripcion_sorteo_crear":descripcion_sorteo_crear}),
 		            error: function(hr){
 		            	var x1 = $("#fecha_sorteo_crear").val().split("-")[1];
 		            	var x2 = $("#fecha_sorteo_crear").val().split("-")[2];
@@ -288,11 +300,15 @@ var jGobierno = {
 				
 
 			ActualizarDatosPersonales: function() {
+			        	var Id_plan = $('#Id_plan').val();
+			        	var Direccion = $('#Direccion_Usuario').val();
+			        	var Mail = $('#Mail_Usuario').val();
+			        	var Telefono = $('#Telefono_Usuario').val();
 				        $.ajax({
 				            url: "/gobierno/ActualizarUsuarioAction.do",
 				            type: "post",
 				            dataType: "html",
-				            data: $.param($("input[name=Id_plan], input[name=Direccion_Usuario],input[name=Mail_Usuario],input[name=Telefono_Usuario]", $("#form"))),
+				            data: $.param({"Id_plan":Id_plan,"Direccion":Direccion,"Mail":Mail,"Telefono":Telefono}),
 				            error: function(hr){
 				            	jOpciones.DatosPersonales();	
 				            },
@@ -623,38 +639,9 @@ var jGobierno = {
 		    {
 		    	jGobierno.rotarImagenes();	
 		    	refreshIntervalId = setInterval("jGobierno.rotarImagenes()",3000);
-		    },	
+		    }
 		    
-		    Consumir_Concesionarias: function (){
-		    	alert("entra a consumir");
-		        jUtils.hiding("message");
-		        $.ajax({
-		            url: "/gobierno/ConsumirConcesionariasAction.do",
-		            type: "post",
-		            dataType: "html",
-		            data: $.param({}),
-		            error: function(hr){
-		                jUtils.hiding("result");
-		                jUtils.showing("resultados", hr.responseText);
-		            },
-		            success: function(html) {  	
-		                jUtils.showing("sortear_ganador", html);	
-		                if(document.getElementById('error_ganador').value == "SI")
-		                	{
-		                	    jUtils.showing("ver_error");
-		                		alert("ERROR");
-		                	}
-		                else
-		                	{
-			                	jGobierno.Incrementar_Barra();
-			                	jGobierno.Notificar_Ganador();
-			                	
-		                	}
-		            }
-		        });	
-			 }
-
-		
+		   	
 };
 
 $( document ).ready(function() {
