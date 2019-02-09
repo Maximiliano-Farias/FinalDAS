@@ -6,6 +6,7 @@ import java.sql.Types;
 import javax.swing.JOptionPane;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 import ar.edu.ubp.das.src.gobierno.forms.ConcesionariasDetalles;
 
 
@@ -75,6 +76,12 @@ public class MSActualizarUsuarioDao extends DaoImpl {
 	public boolean valid(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String insert(ConcesionariaBean respuestaConcesionaria) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

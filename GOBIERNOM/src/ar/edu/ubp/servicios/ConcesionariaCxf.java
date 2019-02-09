@@ -11,7 +11,7 @@ import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 public class ConcesionariaCxf  {
 
 
-	public ConcesionariaBean Cargar_Datos(String url, String Metodo) {
+	public ConcesionariaBean Cargar_Datos(String url, String Metodo, String Id_concesionaria) {
 	
 		JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
 		Client client = dcf.createClient(url);
@@ -24,6 +24,7 @@ public class ConcesionariaCxf  {
 		}
 		catch (Exception e) {
 			concesionaria.setNombre("ERROR");
+			concesionaria.setId_concesionaria(Id_concesionaria);
 			System.out.println( e.getMessage() );
 			e.printStackTrace();
 		}

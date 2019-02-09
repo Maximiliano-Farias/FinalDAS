@@ -416,12 +416,14 @@ GO
 --******************************************FACTURAS****************************
 
 
-CREATE Procedure Insertar_Facturas
+
+create Procedure Insertar_Facturas
 (    @nro_factura INT,
      @Estado char(1),
      @Monto  money,
      @Identificador varchar(20),
-     @Fecha  DATE
+     @Fecha  DATE,
+	 @Cobro  DATE
 )
 AS
 
@@ -430,15 +432,18 @@ INSERT INTO dbo.Facturas
           Estado ,
           Monto ,
           Identificador ,
-          Fecha 
+          Fecha,
+		  Cobro 
         )
 VALUES  ( @nro_factura , -- nro_factura - int
           @Estado , -- Estado - char(1)
           @Monto , -- Monto - money
           @Identificador, --  Varchar(20)
-          @Fecha  -- Fecha - datetime
+          @Fecha,  -- Fecha - datetime
+		  @Cobro
         )
 GO
+
 
 
 

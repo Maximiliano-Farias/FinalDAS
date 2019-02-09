@@ -195,5 +195,10 @@ public abstract class DaoImpl implements Dao {
     public Date getDateParam(int paramIndex) throws SQLException {
     	return this.statement.getDate(paramIndex);
     }
+
+	public void insert(DynaActionForm form) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

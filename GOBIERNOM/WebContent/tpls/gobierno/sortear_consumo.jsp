@@ -6,10 +6,10 @@
 
 <c:choose>
 
-	<c:when test="${requestScope.respuesta.getRespuesta() == 'SI'}">
+	<c:when test="${requestScope.respuesta == 'SI'}">
 		<img id="cruz" src="/img/tilde-icon.png"/><input type="hidden" id="error_consumo" value="NO" />
 	</c:when>
-	<c:when test="${requestScope.respuesta.getRespuesta() != 'SI'}">
+	<c:when test="${requestScope.respuesta != 'SI'}">
 		<img id="cruz" src="/img/cruz-icon.png"/><input type="hidden" id="error_consumo" value="SI" />
 	</c:when>
 	

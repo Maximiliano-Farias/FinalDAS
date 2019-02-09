@@ -83,6 +83,7 @@ public class GanadorDao implements DaoConcesionaria {
             	factura.setMonto(result.getFloat("Monto"));
             	factura.setIdentificador(result.getString("Identificador"));
             	factura.setFecha(result.getString("Fecha"));
+            	factura.setCobro(result.getString("Cobro"));
             	
             	facturas.add(factura);
             	result.next();

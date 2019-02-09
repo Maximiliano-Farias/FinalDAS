@@ -46,6 +46,41 @@
 		<td><fmt:message key="Telefono" bundle="${etq}"/></td><td><input type="text" id="telefono_concesionaria" name="telefono_concesionaria" value="${detalles.getTelefono()}" size="25"/></td>
 		<td><fmt:message key="Ultima_Actualizacion" bundle="${etq}"/></td><td><input type="text" id="fecha_concesionaria" name="fecha_concesionaria" value="${detalles.getFecha_actualizacion()}" readonly="readonly" size="15"/></td>
 	</tr>
+	<tr>
+		<td>URL:</td><td><input type="text" id="url_concesionaria" name="url_concesionaria" value="${detalles.getDireccion_url()}" size="70" /></td>
+		<td>M1</td><td><input type="text" id="metodo_1_concesionaria" name="metodo_1_concesionaria" value="${detalles.getMetodo()}" size="25"/></td>
+		<td>M2</td><td><input type="text" id="metodo_2_concesionaria" name="metodo_2_concesionaria" value="${detalles.getMetodo_pago()}" size="15"/></td>
+	</tr>
+	<tr>
+		<td></td> <td></td> 
+		<td colspan='2'>
+		<c:choose>
+		    <c:when test="${detalles.getServicio() == 'AXIS2'}">
+		        <select id="Servicio" name="Servicio">
+		        <option value="AXIS">AXIS</option>
+		        <option value="CXF">CXF</option>
+		        <option value="REST">REST</option>
+		        </select>
+		    </c:when>    
+		    <c:when test="${detalles.getServicio() == 'REST'}">
+		        <select id="Servicio" name="Servicio">
+		        <option value="REST">REST</option>
+		        <option value="AXIS">AXIS</option>
+		        <option value="CXF">CXF</option>
+		        </select>
+		     </c:when>
+		     <c:otherwise>
+		     <select id="Servicio" name="Servicio">
+		        <option value="CXF">CXF</option>
+		        <option value="REST">REST</option>
+		        <option value="AXIS">AXIS</option>     
+		        </select>
+
+		     </c:otherwise> 
+		    </c:choose>
+		  </td>
+		<td></td> <td></td>	
+	</tr>
 </table>
 </div>
 

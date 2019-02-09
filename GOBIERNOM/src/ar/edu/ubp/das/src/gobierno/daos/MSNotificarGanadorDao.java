@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 import ar.edu.ubp.das.src.gobierno.forms.RespuestaForm;
 
 public class MSNotificarGanadorDao extends DaoImpl {
@@ -147,6 +148,12 @@ public class MSNotificarGanadorDao extends DaoImpl {
 			return false;
 		}
 		
+	}
+
+	@Override
+	public String insert(ConcesionariaBean respuestaConcesionaria) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}			
 }
 

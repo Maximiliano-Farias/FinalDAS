@@ -176,13 +176,17 @@ var jGobierno = {
 			var Habilitado = $('#Habilitado').val();
 			var direccion_concesionaria = $('#direccion_concesionaria').val();
 			var telefono_concesionaria = $('#telefono_concesionaria').val();
+			var url_concesionaria = $('#url_concesionaria').val();
+			var metodo_1_concesionaria = $('#metodo_1_concesionaria').val();
+			var metodo_2_concesionaria = $('#metodo_2_concesionaria').val();
+			var Servicio =	$('#Servicio').val();
 			jUtils.executing("message");
 	        jUtils.hiding("message");
 	        $.ajax({
 	            url: "/gobierno/GuardarConcesionariaAction.do",
 	            type: "post",
 	            dataType: "html",
-	            data: $.param({"id_concesionaria":id_concesionaria,"nombre_concesionaria":nombre_concesionaria,"Habilitado":Habilitado,"direccion_concesionaria":direccion_concesionaria,"telefono_concesionaria":telefono_concesionaria}),
+	            data: $.param({"id_concesionaria":id_concesionaria,"nombre_concesionaria":nombre_concesionaria,"Habilitado":Habilitado,"direccion_concesionaria":direccion_concesionaria,"telefono_concesionaria":telefono_concesionaria,"url_concesionaria":url_concesionaria,"metodo_1_concesionaria":metodo_1_concesionaria,"metodo_2_concesionaria":metodo_2_concesionaria,"Servicio":Servicio}),
 	            error: function(hr){
 	            	jGobierno.Elegida();
 	            },

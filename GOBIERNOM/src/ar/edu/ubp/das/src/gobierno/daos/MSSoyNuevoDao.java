@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 import ar.edu.ubp.das.src.gobierno.forms.AutoForm;
 import ar.edu.ubp.das.src.gobierno.forms.ConcesionariasCabecera;
 import ar.edu.ubp.das.src.gobierno.forms.ConcesionariasDetalles;
@@ -58,6 +59,12 @@ public class MSSoyNuevoDao extends DaoImpl {
         respuesta = new RespuestaForm();
         respuesta.setRespuesta("OK");
 	    return respuesta;
+	}
+
+	@Override
+	public String insert(ConcesionariaBean respuestaConcesionaria) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

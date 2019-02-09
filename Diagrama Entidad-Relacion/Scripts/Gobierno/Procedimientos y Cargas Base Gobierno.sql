@@ -49,18 +49,22 @@ VALUES  ( @id_concesionaria,
 GO
 --------------------------------------------------------------------------------------
 
-create Procedure Update_Concesionaria
+alter Procedure Update_Concesionaria
 (
  @id_concesionaria varchar(40),
  @Nombre VARCHAR(30),
  @Habilitado VARCHAR(1),
  @Direccion VARCHAR(50),
- @Telefono VARCHAR(20)
+ @Telefono VARCHAR(20),
+ @Direccion_url VARCHAR(80),
+ @Metodo VARCHAR(20),
+ @Metodo_pago VARCHAR(20),
+ @Servicio varchar(10)
 )
 
 as
 UPDATE dbo.Concesionaria
-SET Habilitado = @Habilitado,Nombre=@Nombre,Direccion = @Direccion,Telefono=@Telefono
+SET Habilitado = @Habilitado,Nombre=@Nombre,Direccion = @Direccion,Telefono=@Telefono,direccion_url=@Direccion_url,Metodo = @Metodo, Metodo_pago =@Metodo_pago,Servicio=@Servicio
 WHERE id_concesionaria = @id_concesionaria
 GO
 
@@ -768,25 +772,29 @@ create Procedure Insertar_Facturas
      @Estado char(1),
      @Monto  money,
      @Identificador varchar(20),
-     @Fecha  DATE
+     @Fecha  DATE,
+	 @Cobro  DATE
 )
 AS
-if not exists (select nro_factura from Facturas where nro_factura = @nro_factura AND identificador=@Identificador)
- begin
+
 INSERT INTO dbo.Facturas
         ( nro_factura ,
           Estado ,
           Monto ,
           Identificador ,
-          Fecha 
+          Fecha,
+		  Cobro 
         )
 VALUES  ( @nro_factura , -- nro_factura - int
           @Estado , -- Estado - char(1)
           @Monto , -- Monto - money
           @Identificador, --  Varchar(20)
-          @Fecha  -- Fecha - datetime
+          @Fecha,  -- Fecha - datetime
+		  @Cobro
         )
-END
+
+
+
 GO
 --******************************************ITEMS FACTURA***************************
 
@@ -902,6 +910,7 @@ select TOP 10 M.Nombre,Nombre_Auto,Tipo_modelo,COUNT(*) AS Cantidad
 from Planes_detalles PD JOIN Marcas M
 ON M.nro_marca = PD.nro_marca
 group by Nombre_Auto,Tipo_modelo,M.Nombre
+order by COUNT(*) DESC
 GO
 /********************PROCEDIMIENTO PARA SORTEOS ANTERIORES**************/
 
@@ -949,7 +958,7 @@ create procedure Detalles_Concesionaria
     @id_concesionaria varchar(10)
 )
 AS
-select TOP 1 C.Nombre,C.id_concesionaria,Habilitado,Direccion,Telefono,Fecha_actualizacion=convert(varchar(10), Fecha_actualizacion, 103)
+select TOP 1 C.Nombre,C.id_concesionaria,Habilitado,Direccion,Telefono,Fecha_actualizacion=convert(varchar(10), Fecha_actualizacion, 103),Metodo,direccion_url,Metodo_pago,Servicio
 from Concesionaria C  LEFT JOIN concesionarias_actualizaciones CA
 ON C.id_concesionaria = CA.id_concesionaria
 where C.id_concesionaria = @id_concesionaria
@@ -959,7 +968,7 @@ go
 
 /*******************CREAR OBTENER SORTEOS PENDIENTES *************/
 
-EXEC Insertar_Sorteo '2018-10-05', 'SORTEO PENDIENTE','P'
+EXEC Insertar_Sorteo '2019-10-03', 'SORTEO MARZO','P'
 go
 create procedure SORTEOS_PENDIENTES
 AS
@@ -1290,13 +1299,13 @@ create procedure Obtener_Estado_Cuenta
 @Identificador varchar(20)
 )
 AS
-select F.nro_factura, Estado = case when F.Estado = '0' then 'ADEUDADO' when F.Estado = '1' then 'PAGADA'END, convert(varchar(10), F.Fecha, 103)AS Fecha,F.Monto
+select F.nro_factura, Estado = case when F.Estado = '0' then 'ADEUDADO' when F.Estado = '1' then 'PAGADA'END, convert(varchar(10), F.Fecha, 103)AS Fecha,F.Monto,case when F.Cobro IS NULL then '-' when F.Cobro IS NOT NULL then  convert(varchar(10), F.Cobro, 103) END AS Cobro
 from Planes_detalles PD  JOIN Facturas F
 ON PD.Identificador = F.Identificador
 JOIN Personas P
 ON P.id_persona = PD.id_persona
 where P.Identificador = @Identificador
-ORDER BY FECHA ASC
+ORDER BY F.Fecha DESC
 
 GO
 
@@ -1584,6 +1593,11 @@ AS
 delete from Actualizaciones
 where id_concesionaria =@id_concesionaria
 GO
+
+
+--*************************************************************************************
+
+
 
 
 

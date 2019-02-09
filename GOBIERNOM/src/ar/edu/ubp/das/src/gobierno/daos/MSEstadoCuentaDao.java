@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 import ar.edu.ubp.das.src.gobierno.forms.AutoForm;
 import ar.edu.ubp.das.src.gobierno.forms.EstadisticasForm;
 import ar.edu.ubp.das.src.gobierno.forms.EstadoCuentaForm;
@@ -76,6 +77,7 @@ public class MSEstadoCuentaDao extends DaoImpl {
 			        	Factura.setEstado(result.getString("Estado"));
 			        	Factura.setFecha(result.getString("Fecha"));
 			        	Factura.setMonto(result.getInt("Monto"));
+			        	Factura.setCobro(result.getString("Cobro"));
 			        	Facturas.add(Factura);
 			        	result.next();
 		        	}     
@@ -127,6 +129,12 @@ public class MSEstadoCuentaDao extends DaoImpl {
 	public boolean valid(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String insert(ConcesionariaBean respuestaConcesionaria) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

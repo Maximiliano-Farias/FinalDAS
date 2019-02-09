@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 import ar.edu.ubp.das.src.gobierno.forms.AutoForm;
 import ar.edu.ubp.das.src.gobierno.forms.ConcesionariasCabecera;
 import ar.edu.ubp.das.src.gobierno.forms.ConcesionariasDetalles;
@@ -23,8 +24,7 @@ public class MSCrearSorteoDao extends DaoImpl {
 	@Override
 	public DynaActionForm make(ResultSet result) throws SQLException {
 		// TODO Auto-generated method stub
-		 JOptionPane.showMessageDialog(null,"PASA 1", "ERROR", JOptionPane.ERROR_MESSAGE);
-		  
+		
     	return null;
 	}
 
@@ -32,22 +32,18 @@ public class MSCrearSorteoDao extends DaoImpl {
 	public void insert(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		 JOptionPane.showMessageDialog(null,"PASA 2", "ERROR", JOptionPane.ERROR_MESSAGE);
-    	
 	}
 
 	@Override
 	public void update(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null,"PASA3", "ERROR", JOptionPane.ERROR_MESSAGE);
 		
 	}
 
 	@Override
 	public void delete(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
-		 JOptionPane.showMessageDialog(null,"PASA 4", "ERROR", JOptionPane.ERROR_MESSAGE);
-		
+		 
 	}
 
 	
@@ -57,7 +53,7 @@ public class MSCrearSorteoDao extends DaoImpl {
 	@Override
 	public boolean valid(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
-		 JOptionPane.showMessageDialog(null,"PASA 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+		
 		return false;
 	}
 
@@ -84,6 +80,12 @@ public class MSCrearSorteoDao extends DaoImpl {
 		        	
 		        }
 	   return null;
+	}
+
+	@Override
+	public String insert(ConcesionariaBean respuestaConcesionaria) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

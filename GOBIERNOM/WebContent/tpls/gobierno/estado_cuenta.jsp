@@ -32,6 +32,7 @@
 					<td><fmt:message key="Estado" bundle="${etq}"/></td>
 					<td><fmt:message key="Vencimiento" bundle="${etq}"/></td>
 					<td><fmt:message key="Monto" bundle="${etq}"/></td>
+					<td><fmt:message key="Fecha_Cobro" bundle="${etq}"/></td>
 			    </tr>
 			</thead>
 		<tbody>		
@@ -40,13 +41,15 @@
 			         <td>${Factura.getNro_factura()} </td>
 			         <td>${Factura.getEstado()} </td>
 			         <td>${Factura.getFecha()} </td>
+			         <td>${Factura.getCobro()} </td>
 			         <td>$${Factura.getMonto()} </td>
+			         
 		         </tr>
 		    </c:forEach>
 		</tbody>
 		<tfoot>
 		<tr>
-		<td><fmt:message key="Deuda" bundle="${etq}"/></td><td></td><td></td><td>$ ${Datos.getMonto_Adeudado()}</td>
+		<td><fmt:message key="Deuda" bundle="${etq}"/></td><td></td><td></td><td></td><td>$ ${Datos.getMonto_Adeudado()}</td>
 		</tr>
 		</tfoot>
 		</table>

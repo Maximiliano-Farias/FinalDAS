@@ -8,7 +8,16 @@ public class FacturasBean {
 	private float monto;
 	private String identificador;
 	private String fecha;
+	private String cobro;
 	
+	public String getCobro() {
+		return cobro;
+	}
+
+	public void setCobro(String Cobro) {
+		cobro = Cobro;
+	}
+
 	public FacturasBean() { }
 
 	public int getNro_factura() {

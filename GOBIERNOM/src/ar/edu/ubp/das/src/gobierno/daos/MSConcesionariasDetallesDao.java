@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 import ar.edu.ubp.das.src.gobierno.forms.AutoForm;
 import ar.edu.ubp.das.src.gobierno.forms.ConcesionariasDetalles;
 import ar.edu.ubp.das.src.gobierno.forms.EstadisticasForm;
@@ -77,6 +78,10 @@ public class MSConcesionariasDetallesDao extends DaoImpl {
 	        	detalles.setTelefono(result.getString("Telefono"));
 	        	detalles.setFecha_actualizacion(result.getString("Fecha_actualizacion"));
 	        	detalles.setId_concesionaria(result.getString("id_concesionaria"));
+	        	detalles.setMetodo(result.getString("Metodo"));
+	        	detalles.setDireccion_url(result.getString("direccion_url"));
+	        	detalles.setMetodo_pago(result.getString("Metodo_pago"));
+	        	detalles.setServicio(result.getString("Servicio"));
         	}
         	
         detalles.setPermiso(form.getItem("permiso"));   
@@ -90,6 +95,12 @@ public class MSConcesionariasDetallesDao extends DaoImpl {
 	public boolean valid(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String insert(ConcesionariaBean respuestaConcesionaria) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

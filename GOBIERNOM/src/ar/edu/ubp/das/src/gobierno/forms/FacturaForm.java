@@ -7,6 +7,19 @@ public class FacturaForm extends DynaActionForm {
 	private Integer   nro_factura;
 	private String    estado;
 	private String    Fecha;
+	private String    cobro;
+	public String getCobro() {
+		return cobro;
+	}
+
+
+
+	public void setCobro(String Cobro) {
+		cobro = Cobro;
+	}
+
+
+
 	private Integer   Monto;
 
 	

@@ -10,6 +10,45 @@ public class ConcesionariasDetalles extends DynaActionForm {
 	private String    Telefono;
 	private String    Fecha_actualizacion;
 	private String    Id_concesionaria;
+	private String    Direccion_url;
+	private String    Metodo;
+	private String    Metodo_pago;
+	private String    Servicio;
+	
+	
+	
+	public String getServicio() {
+		return Servicio;
+	}
+
+	public void setServicio(String servicios) {
+		Servicio = servicios;
+	}
+
+	public String getDireccion_url() {
+		return Direccion_url;
+	}
+
+	public void setDireccion_url(String direccion_url) {
+		Direccion_url = direccion_url;
+	}
+
+	public String getMetodo() {
+		return Metodo;
+	}
+
+	public void setMetodo(String metodo) {
+		Metodo = metodo;
+	}
+
+	public String getMetodo_pago() {
+		return Metodo_pago;
+	}
+
+	public void setMetodo_pago(String metodo_pago) {
+		Metodo_pago = metodo_pago;
+	}
+
 	private String    Permiso;
 	
    

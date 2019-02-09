@@ -34,7 +34,8 @@ CREATE TABLE Concesionaria
 	Email  varchar(40) NOT NULL ,
 	Servicio varchar (20) NOT NULL,
 	direccion_url varchar(70) NOT NULL,
-	Metodo varchar(20) NOT NULL
+	Metodo varchar(20) NOT NULL,
+	Metodo_pago varchar(20) NOT NULL
 	CONSTRAINT  PK_id_concesionarias PRIMARY KEY (id_concesionaria  ASC)
 )
 go
@@ -250,6 +251,7 @@ CREATE TABLE Facturas
 	Monto  money  NOT NULL ,
 	Identificador varchar(20) NOT NULL,
 	Fecha  date  NOT NULL ,
+	Cobro  date  NOT NULL ,
 	CONSTRAINT  PK_Facturas PRIMARY KEY (nro_factura  ASC,Identificador  ASC),
 
 )

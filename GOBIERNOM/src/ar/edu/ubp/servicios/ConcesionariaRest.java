@@ -2,7 +2,6 @@ package ar.edu.ubp.servicios;
 import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
@@ -18,7 +17,7 @@ import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 public class ConcesionariaRest {
 	
 	
-public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo )throws SQLException{
+public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo, String Id_concesionaria )throws SQLException{
 	String resultado;	  
     URI uri = URI.create(direccion_url + Metodo); 
     HttpPost req = new HttpPost();
@@ -60,6 +59,7 @@ public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo )thro
     if (!resultado.equals("OK"))
     {
     	concesionaria.setNombre("ERROR");
+    	concesionaria.setId_concesionaria(Id_concesionaria);
     }  	
   
     

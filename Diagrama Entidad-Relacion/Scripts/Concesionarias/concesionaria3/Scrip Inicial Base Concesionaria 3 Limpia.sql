@@ -114,6 +114,7 @@ CREATE TABLE Facturas
 	Monto  money  NOT NULL ,
 	Identificador varchar(20) NOT NULL,
 	Fecha  date  NOT NULL ,
+	Cobro  date  NOT NULL ,
 	CONSTRAINT  PK_Facturas PRIMARY KEY (nro_factura  ASC,Identificador  ASC),
 
 )

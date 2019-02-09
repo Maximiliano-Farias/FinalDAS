@@ -6,6 +6,7 @@ import java.util.List;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 
 public class MSLogueoDao extends DaoImpl {
 
@@ -46,6 +47,12 @@ public class MSLogueoDao extends DaoImpl {
 
 	@Override
 	public DynaActionForm select(DynaActionForm form) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(ConcesionariaBean respuestaConcesionaria) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
