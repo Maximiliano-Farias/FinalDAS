@@ -49,7 +49,7 @@ VALUES  ( @id_concesionaria,
 GO
 --------------------------------------------------------------------------------------
 
-alter Procedure Update_Concesionaria
+create Procedure Update_Concesionaria
 (
  @id_concesionaria varchar(40),
  @Nombre VARCHAR(30),
@@ -308,11 +308,11 @@ create Procedure Insertar_Sorteo
 AS
 
 INSERT INTO dbo.Sorteos
-        ( Fecha_sorteo, Descripcion, Estado )
+        ( Fecha_sorteo, Descripcion, Estado, Fecha_original )
 VALUES  ( @Fecha_Sorteo, -- Fecha_sorteo - datetime
           @Descripcion, -- Descripcion - varchar(200)
-          @Estado  -- Estado - char(1)
-          )
+          @Estado,  -- Estado - char(1)
+          @Fecha_Sorteo)
 GO
 -------------------------------------------------------------------------------------
 
@@ -341,14 +341,12 @@ UPDATE dbo.Sorteos
 SET Estado = @Estado
 WHERE Fecha_sorteo = (select TOP 1 Fecha_sorteo
 						from Sorteos
-						where Estado = 'P'
-						AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
-						order by Fecha_sorteo DESC)
+						where Estado IN ('P','E')
+						order by Fecha_original ASC)
 AND nro_sorteo = (select TOP 1 nro_sorteo
 						from Sorteos
-						where Estado = 'P'
-						AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
-						order by Fecha_sorteo DESC)
+						where Estado IN ('P','E')
+						order by Fecha_original ASC)
 
 GO
 
@@ -366,13 +364,39 @@ INSERT INTO dbo.Errores_Sorteos
         ( nro_sorteo, Descripcion )
 VALUES  (  
 (
-select TOP 1 nro_sorteo
+select TOP 1 S.nro_sorteo
+from Sorteos S
+where Estado IN ('P','E')
+AND Fecha_sorteo IN (
+select Fecha_sorteo
 from Sorteos
-where Estado = 'P'
-AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
-order by Fecha_sorteo DESC), @Descripcion  -- Descripcion - varchar(50)
+where Estado IN ('P','E')
+
+)
+order by S.Fecha_sorteo
+
+), @Descripcion  -- Descripcion - varchar(50)
           )
 GO
+
+--*********************** BORRAR ERROR ANTERIOR **********************************
+create PROCEDURE Borrar_Error_Sorteo
+AS
+
+delete from Errores_Sorteos
+where nro_sorteo = 
+					(select TOP 1 S.nro_sorteo
+					from Sorteos S
+					where Estado IN ('P','E')
+					AND Fecha_original IN (
+					select Fecha_original
+					from Sorteos
+					where Estado IN ('P','E')
+					)
+					order by S.Fecha_original
+					)
+
+go
 
 --***************************************PERMISOS*********************************
 go
@@ -428,7 +452,18 @@ INSERT INTO dbo.Actualizaciones
           Completado ,
           id_concesionaria
         )
-VALUES  ( GETDATE() , -- fecha_actualizacion - datetime
+VALUES  ( 
+
+    (select top 1 S.Fecha_original
+	from Sorteos S
+	where Estado IN ('P','E')
+	AND Fecha_sorteo IN (
+						select Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103)
+						from Sorteos
+						where Estado IN ('P','E')						
+      )
+    order by S.Fecha_sorteo  -- fecha_actualizacion - datetime
+	),
           @Completado , -- Completado - char(1)
           @id_concesionaria  -- id_concesionaria - int
         )
@@ -491,7 +526,16 @@ INSERT INTO dbo.concesionarias_actualizaciones
           Fecha_actualizacion
         )
 VALUES  ( @id_concesionaria , -- id_concesionaria - int
-          GETDATE()  -- Fecha_actualizacion - datetime
+          (select top 1 S.Fecha_original
+			from Sorteos S
+			where Estado IN ('P','E')
+			AND Fecha_sorteo IN (
+								select Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103)
+								from Sorteos
+								where Estado IN ('P','E')						
+			  )
+			order by S.Fecha_sorteo  
+			)   
         )
 
 GO
@@ -931,13 +975,13 @@ WHERE S.nro_sorteo = @nro_sorteo
 
 
 go
-/*******************OBTENER SORTEO PARA CABECERA********************************/
+/*******************OBTENER SORTEO PARA CABECERA ANTERIORES********************************/
 create procedure Obtener_Sorteos
 AS
-select nro_sorteo,Fecha=convert(varchar(10), Fecha_sorteo, 103),Descripcion
+select nro_sorteo,Fecha=convert(varchar(10), Fecha_original, 103),Descripcion
 from Sorteos
-where Estado <> 'P'
-order by Fecha_sorteo DESC
+where Fecha_original < GETDATE()
+order by Fecha_original DESC
 
 go
 
@@ -974,8 +1018,8 @@ create procedure SORTEOS_PENDIENTES
 AS
 select nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado
 from Sorteos
-where Estado IN ('P','A')
-order by Fecha_sorteo DESC
+where Estado IN ('P','A','E')
+order by convert (date,Fecha_sorteo) ASC
 go
 
 
@@ -986,9 +1030,9 @@ go
 create procedure SORTEOS_PENDIENTES_DETALLES
 (@nro_sorteo integer)
 AS
-select nro_sorteo,Fecha_sorteo = convert(varchar(10), Fecha_sorteo, 103), Descripcion,Estado
+select nro_sorteo,Fecha_sorteo = convert(varchar(10), Fecha_sorteo, 103), Descripcion,Estado,Fecha_original
 from Sorteos
-where Estado IN ('P','A')
+where Estado IN ('P','A','E')
 AND nro_sorteo = @nro_sorteo
 go
 
@@ -1305,7 +1349,7 @@ ON PD.Identificador = F.Identificador
 JOIN Personas P
 ON P.id_persona = PD.id_persona
 where P.Identificador = @Identificador
-ORDER BY F.Fecha DESC
+ORDER BY F.Fecha 
 
 GO
 
@@ -1449,33 +1493,52 @@ go
 
 --******************************OBTIENE SORTEO PARA HACER****************************************/
 
-CREATE procedure A_Sortear
+create procedure A_Sortear
 AS
 select TOP 1 nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado
+from Sorteos S
+where Estado IN ('P','E')
+AND Fecha_sorteo IN (
+select Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103)
 from Sorteos
-where Estado = 'P'
-AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
-order by Fecha_sorteo DESC
+where Estado IN ('P','E')
+
+)
+order by S.Fecha_sorteo,S.Descripcion,S.nro_sorteo,S.Estado 
 go
 
 
 -- *****************************VER SI EL SORTEO ES EL DIA ACTUAL*************************************/
 
-CREATE PROCEDURE En_Fecha
+create PROCEDURE En_Fecha
 AS
 	select top 1 HOY =case when CONVERT(varchar(10), Fecha_sorteo, 103) = CONVERT(varchar(10), GETDATE(), 103) THEN 'SI' ELSE 'NO' END 
+	from Sorteos S
+	where Estado IN ('P','E')
+	AND Fecha_sorteo IN (
+	select Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103)
 	from Sorteos
-	where Estado = 'P'
-	AND Fecha_sorteo >= dateadd(day,-1,GETDATE()) 
-	order by Fecha_sorteo ASC
-GO
+	where Estado IN ('P','E')
+							
+      )
+    order by S.Fecha_sorteo
 
+ 
+ go
 
 /****************************CONCESIONARIAS CON MENOS DE 15 DIAS ACTUALIZADAS************************************/
 
-Create PROCEDURE concesionarias_en_condiciones
+create PROCEDURE concesionarias_en_condiciones 
 AS
-	select CO.id_concesionaria,actualizada = case when ISNULL (DATEDIFF(day, CA.Fecha_actualizacion,GETDATE()),100) <=15 Then 'SI' ELSE 'NO' END
+	select CO.id_concesionaria,actualizada = case when  CA.Fecha_actualizacion = (
+	                                                                               select TOP 1 Fecha_sorteo=convert(varchar(10), Fecha_original, 103)
+																					from Sorteos S
+																					where Estado IN ('P','E')
+																					order by S.Fecha_original
+	                                                                              )
+	
+	
+	 Then 'SI' ELSE 'NO' END
 	from concesionarias_actualizaciones CA
 	FULL JOIN Concesionaria CO
 	ON CO.id_concesionaria = CA.id_concesionaria
@@ -1491,7 +1554,7 @@ AS
 	WHERE Identificador IN (
 							SELECT TOP 1 Identificador
 							FROM Sorteo_detalles SD
-							order by nro_sorteo DESC
+							order by Fecha DESC
 							)
 	AND ESTADO = '0'
 GO
@@ -1499,7 +1562,7 @@ GO
 
 --******************************PROCEDIMIENTO DE LOS PARTICIPANTES PARA EL SORTEO***************************************
 
-CREATE PROCEDURE Planes_Sorteo
+create PROCEDURE Planes_Sorteo
 AS
 		select PD.Identificador,P.Apellido,P.Nombre,PD.Nombre_Auto,PD.Tipo_modelo
 		from Planes_detalles PD 
@@ -1511,9 +1574,13 @@ AS
 								   )
 
 		AND PD.Identificador NOT IN  (
-									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA DE HOY
+									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA ORIGINAL DEL SORTEO
 									  from Facturas FA
-									  where Fecha < GETDATE()
+									  where Fecha < (select TOP 1 S.Fecha_sorteo
+													from Sorteos S
+													where Estado IN ('P','E')
+													order by S.fecha_original ASC
+													)
 									  AND Estado = 0
 									  GROUP BY Identificador
 								   )
@@ -1537,7 +1604,17 @@ AS
 		AND PD.Identificador NOT IN  (
 									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA DE HOY
 									  from Facturas FA
-									  where Fecha < GETDATE()
+									  where Fecha < (select top 1 CONVERT(varchar(10), Fecha_sorteo, 103) 
+													from Sorteos S
+													where Estado IN ('P','E')
+													AND Fecha_sorteo IN (
+													select Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103)
+													from Sorteos
+													where Estado IN ('P','E')
+							
+													  )
+													order by S.Fecha_sorteo
+													)
 									  AND Estado = 0
 									  GROUP BY Identificador
 								   )
@@ -1552,13 +1629,13 @@ AS
 insert into Sorteo_detalles
 select nro_sorteo=(select TOP 1 nro_sorteo
 					from Sorteos
-					where Estado = 'P'
+					where Estado IN ('P','E')
 					AND Fecha_sorteo >= (dateadd(day,-1,GETDATE()) )
-					order by Fecha_sorteo DESC),
+					order by Fecha_original ),
 	    id_persona,Identificador,id_concesionaria,Nombre_Auto,'N',nro_marca AS Nro_Marca,Tipo_modelo,GETDATE()
 from Planes_detalles 
 where Identificador = @identificador
-
+go
 --*********************************INSERTAR NOTIFICACION*************************************
 
 create procedure Set_Notificado(
@@ -1595,14 +1672,58 @@ where id_concesionaria =@id_concesionaria
 GO
 
 
---*************************************************************************************
+--*********************************CONCESIONARIAS CON ERRORES **************************
 
+create procedure Concesionarias_Desactualizadas
+AS
+select *
+from concesionarias_actualizaciones CA
+JOIN Concesionaria C
+ON C.id_concesionaria = CA.id_concesionaria
+AND C.Habilitado = 1
+where Fecha_actualizacion <> (
+select TOP 1 Fecha_original=convert(varchar(10), Fecha_original, 103)
+from Sorteos S
+where Estado IN ('P','E')
+AND Fecha_original IN (
+select Fecha_original=convert(varchar(10), Fecha_original, 103)
+from Sorteos
+where Estado IN ('P','E')
 
+)
+order by S.Fecha_original,S.Descripcion,S.nro_sorteo,S.Estado 
+)
 
+go
+--**************************** HAY GANADOR ************************************
 
+create procedure Hay_ganador
+AS
+select TOP 1 Respuesta = case when nro_sorteo IN (select nro_sorteo
+                                                   from Sorteo_detalles
+                                                  ) Then 'SI' ELSE 'NO' END
+from Sorteos
+where Estado IN ('P','E')
+order by Fecha_original ASC
 
+go
 
-
+--*************************** GANADOR DEL SORTEO ***************************
+create PROCEDURE datos_ganador
+AS
+select TOP 1 PD.Identificador,Ganador = P.Apellido +' ' +P.Nombre,PD.Nombre_Auto,PD.Tipo_modelo,C.Nombre,C.Email,P.Mail,P.Telefono,P.Direccion As Direccion_Ganador,C.Direccion As Direccion_Concesionaria
+		from Planes_detalles PD 
+		JOIN Personas P
+		ON PD.id_persona = P.id_persona
+		JOIN Concesionaria C
+		ON C.id_concesionaria = PD.id_concesionaria
+		JOIN Sorteo_detalles SD
+		ON SD.Identificador = PD.Identificador
+		JOIN Sorteos S
+		ON S.nro_sorteo = SD.nro_sorteo
+		where S.Estado  IN ('P','E')
+		ORDER BY S.Fecha_original ASC
+GO
 
 
 

@@ -605,12 +605,12 @@ var jGobierno = {
 							                if(document.getElementById('error_notificacion').value == "SI")
 							                	{
 							                	    jUtils.showing("ver_error");
-							                		alert("ERROR");
+							                	
 							                	}
 							                else
 							                	{
+							                	    jUtils.showing("ver_ganador");
 								                	jGobierno.Incrementar_Barra();
-								                	jUtils.showing("ver_ganador");
 								                	jUtils.hiding("sortear");
 							                	
 							                	}

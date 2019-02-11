@@ -92,8 +92,19 @@ public class MSNotificarGanadorDao extends DaoImpl {
 		               
 				this.disconnect();
 				
-                       if(error == 0){
-                    	   respuesta.setRespuesta("SI");
+                     if(error == 0){
+                    	this.connect();     	        		
+       	        		this.setProcedure("dbo.Set_Estado_Sorteo ( ?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);   
+       	        		this.setParameter(1,'F');        	
+       		         	this.executeUpdate();
+       	        	    this.disconnect();
+       	        	    
+	       	        	 this.connect();
+	       	        	this.setProcedure("dbo.Borrar_Error_Sorteo ()", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);   
+			       	  	this.executeUpdate();
+	   	        	    this.disconnect();
+	   	        	 
+		       	  		 respuesta.setRespuesta("SI");
                        }           	   
 			}
             
@@ -144,7 +155,6 @@ public class MSNotificarGanadorDao extends DaoImpl {
 			return true;
 	         
 		}catch (MessagingException me){
-			 JOptionPane.showMessageDialog(null,me.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		

@@ -57,7 +57,7 @@
 		<c:choose>
 		    <c:when test="${detalles.getServicio() == 'AXIS2'}">
 		        <select id="Servicio" name="Servicio">
-		        <option value="AXIS">AXIS</option>
+		        <option value="AXIS2">AXIS2</option>
 		        <option value="CXF">CXF</option>
 		        <option value="REST">REST</option>
 		        </select>
@@ -65,7 +65,7 @@
 		    <c:when test="${detalles.getServicio() == 'REST'}">
 		        <select id="Servicio" name="Servicio">
 		        <option value="REST">REST</option>
-		        <option value="AXIS">AXIS</option>
+		        <option value="AXIS2">AXIS2</option>
 		        <option value="CXF">CXF</option>
 		        </select>
 		     </c:when>
@@ -73,7 +73,7 @@
 		     <select id="Servicio" name="Servicio">
 		        <option value="CXF">CXF</option>
 		        <option value="REST">REST</option>
-		        <option value="AXIS">AXIS</option>     
+		        <option value="AXIS2">AXIS2</option>     
 		        </select>
 
 		     </c:otherwise> 

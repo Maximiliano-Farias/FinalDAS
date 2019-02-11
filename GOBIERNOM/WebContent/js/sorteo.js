@@ -176,7 +176,6 @@ var jSorteo = {
 	                else
 	                	{
 		                	jSorteo.Incrementar_Barra(20);
-		                	jUtils.showing("ver_ganador");
 		                	jSorteo.Notificar_Ganador();
 	                	}
 	            }
@@ -213,6 +212,7 @@ var jSorteo = {
 		                	}
 		                else
 		                	{
+		                	jUtils.showing("ver_ganador");
 			                	jSorteo.Incrementar_Barra(20);
 			                	jSorteo.Guardar_Notificacion();
 			                }

@@ -72,6 +72,7 @@ CREATE TABLE Sorteos
 (
 	nro_sorteo  integer  NOT NULL identity (1,1),
 	Fecha_sorteo  date NOT NULL ,
+	Fecha_original date NOT NULL ,
 	Descripcion  varchar(200) NOT NULL ,
 	Estado  char(1)  NOT NULL ,
 	CONSTRAINT  PK_nro_sorteo PRIMARY KEY (nro_sorteo  ASC)

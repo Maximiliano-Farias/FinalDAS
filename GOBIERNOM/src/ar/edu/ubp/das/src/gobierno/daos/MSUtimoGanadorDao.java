@@ -33,17 +33,18 @@ public class MSUtimoGanadorDao extends DaoImpl {
 		
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public DynaActionForm select(DynaActionForm form) throws SQLException {
     	
 		RespuestaForm respuesta = new RespuestaForm();
 		respuesta.setRespuesta("SI");
 		String condicion ="SI";
-		String error="";
+		String error="",res;
 
-		this.connect();
 		
-		this.setProcedure("dbo.ultimo_ganador", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		this.connect();
+        this.setProcedure("dbo.Hay_ganador", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
         ResultSet result = this.getStatement().executeQuery();
 
@@ -51,29 +52,47 @@ public class MSUtimoGanadorDao extends DaoImpl {
         	
         	while(result.getRow() > 0)
         	{	
-	            condicion= result.getString("actualizada");
-	            if(condicion.equals("SI")) 
+	            res= result.getString("Respuesta");
+	            if(res.equals("NO")) 
 	            {
-	            	condicion="SI";
-	            }
-	            else
-	            {
-	            	error = error + "ERROR";
-	            }
-	        	result.next();
-        	}     
-		this.disconnect();
 
-        if (error == "")
-        {
-        	respuesta.setRespuesta("SI");
-        }
-        else{
-        	respuesta.setRespuesta(error);
-        }
-
-		return  respuesta;
-		
+						this.connect();
+						
+						this.setProcedure("dbo.ultimo_ganador", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				        
+				         result = this.getStatement().executeQuery();
+				
+				        result.next();
+				        	
+				        	while(result.getRow() > 0)
+				        	{	
+					            condicion= result.getString("actualizada");
+					            if(condicion.equals("SI")) 
+					            {
+					            	condicion="SI";
+					            }
+					            else
+					            {
+					            	error = error + "ERROR";
+					            }
+					        	result.next();
+				        	}     
+						this.disconnect();
+				
+				        if (error == "")
+				        {
+				        	respuesta.setRespuesta("SI");
+				        }
+				        else{
+				        	respuesta.setRespuesta(error);
+				        }
+	            }
+	            else{
+	            	respuesta.setRespuesta("SI");
+	            }
+	            result.next();
+        	}
+       return  respuesta;	
 	}
 
 	@Override

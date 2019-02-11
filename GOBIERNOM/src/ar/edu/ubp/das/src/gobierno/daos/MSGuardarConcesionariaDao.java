@@ -71,7 +71,7 @@ public class MSGuardarConcesionariaDao extends DaoImpl {
 	        	this.setParameter(7,(form.getItem("metodo_1_concesionaria")));
 	        	this.setParameter(8,(form.getItem("metodo_2_concesionaria")));
 	        	this.setParameter(9,(form.getItem("Servicio")));
-	        	
+	        	 
 	        }
 		
 		this.executeQuery();

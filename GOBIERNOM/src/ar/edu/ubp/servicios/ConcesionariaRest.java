@@ -2,6 +2,9 @@ package ar.edu.ubp.servicios;
 import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
@@ -17,14 +20,17 @@ import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 public class ConcesionariaRest {
 	
 	
+@SuppressWarnings("null")
 public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo, String Id_concesionaria )throws SQLException{
+	
+	System.out.println("#\t -- Consumiendo REST :" + Id_concesionaria);
 	String resultado;	  
     URI uri = URI.create(direccion_url + Metodo); 
     HttpPost req = new HttpPost();
     req.setURI(uri); 
     HttpClient client = HttpClientBuilder.create().build();         
     HttpResponse resp = null;
-    ConcesionariaBean concesionaria=null;
+    ConcesionariaBean concesionaria=new ConcesionariaBean();
 	try {
 		resp = client.execute(req);
 	} catch (IOException e) {
@@ -49,17 +55,19 @@ public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo, Stri
 		resultado= e.toString();
 	}	
     if(responseStatus.getStatusCode() != 200) {
-    	throw new RuntimeException(restResp);
+    	restResp = "ERROR";  	
     }
-    if (!restResp.equals(null))
-    {
+    if (!restResp.equals("ERROR"))
+    {  
 	    Gson gson = new Gson();
 		concesionaria = gson.fromJson(restResp,ConcesionariaBean.class);
+		System.out.println("#\t -- Consumo Correcto !!!");
 	}
-    if (!resultado.equals("OK"))
-    {
+    else 
+    {   
     	concesionaria.setNombre("ERROR");
     	concesionaria.setId_concesionaria(Id_concesionaria);
+    	System.out.println("#\t -- ERROR CONSUMO REST ");
     }  	
   
     

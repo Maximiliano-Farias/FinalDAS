@@ -43,6 +43,17 @@ public class MSGuardarErrorDao extends DaoImpl {
 		RespuestaForm respuesta = new RespuestaForm();
 		respuesta.setRespuesta("SI");
 		String error="";
+		
+		
+		this.connect();
+		this.setProcedure("dbo.Borrar_Error_Sorteo ()", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        	try
+        	{	this.executeUpdate();
+        	    this.disconnect();
+        	}catch(SQLException e){
+        		error=e.getMessage();
+        	}
+		
 		this.connect();
 		this.setProcedure("dbo.Insertar_Error_Sorteo (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	       if(form.getItem("error").isEmpty()) {

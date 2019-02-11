@@ -27,45 +27,56 @@ public class ConsumirConcesionariasAction implements Action {
 			HttpServletResponse response) throws SQLException, RuntimeException {
 	form.setItem("idioma", String.valueOf(request.getSession().getAttribute("lang")));
 	    
-	     ConcesionariaBean RespuestaConcesionaria = new ConcesionariaBean();
+	    ConcesionariaBean RespuestaConcesionaria = new ConcesionariaBean();
 		Dao dao = DaoFactory.getDao("ConsumirConcesionarias", "gobierno");
 		ListadoConcesionariaConsumo Listado = new ListadoConcesionariaConsumo();
 		Listado = (ListadoConcesionariaConsumo) dao.select(form);
-		String Respuesta = "OK";
+		String Respuesta = "OK",Hay_error="";
 		for (ConcesionariaConsumo C : Listado.getConcesionarias())
 		{
 			 if(C.getServicio().equals("REST"))
     	    {
     	    	ConcesionariaRest concesionaria = new ConcesionariaRest();
     	    	RespuestaConcesionaria= concesionaria.Cargar_Datos(C.getDireccion_url(),C.getMetodo(),C.getId_concesionaria());
-    	    	if(!Respuesta.equals("ERROR"))
-    	    	{
-    	    		Respuesta= dao.insert(RespuestaConcesionaria);
-    	    	}
+    	    	    	    		
+    	            if(!Respuesta.equals("NO"))
+    	            {
+    	            	Respuesta= dao.insert(RespuestaConcesionaria);	
+    	            }
+    	            else{
+    	            	Hay_error= dao.insert(RespuestaConcesionaria);
+    	            }
     	    	
     	    }
 	    	if(C.getServicio().equals("CXF"))
     	    {   
     	    	ConcesionariaCxf concesionariacxf = new ConcesionariaCxf();
     	    	RespuestaConcesionaria = concesionariacxf.Cargar_Datos(C.getDireccion_url(),C.getMetodo(),C.getId_concesionaria());  	
-    	    	if(!Respuesta.equals("ERROR"))
-    	    	{
-    	    		Respuesta= dao.insert(RespuestaConcesionaria);
-    	    	}
+    	    	 if(!Respuesta.equals("NO"))
+ 	            {
+ 	            	Respuesta= dao.insert(RespuestaConcesionaria);	
+ 	            }
+ 	            else{
+ 	            	Hay_error= dao.insert(RespuestaConcesionaria);
+ 	            }
     	    }
 	    	if(C.getServicio().equals("AXIS2"))
     	    {   
     	    	ConcesionariaAxis2 concesionariaaxis = new ConcesionariaAxis2();
     	    	RespuestaConcesionaria = concesionariaaxis.Cargar_Datos(C.getDireccion_url(),C.getMetodo(),C.getId_concesionaria()); 	
-    	    	if(!Respuesta.equals("ERROR"))
-    	    	{
-    	    		Respuesta= dao.insert(RespuestaConcesionaria);
-    	    	}
+    	    	 if(!Respuesta.equals("NO"))
+ 	            {
+ 	            	Respuesta= dao.insert(RespuestaConcesionaria);	
+ 	            }
+ 	            else{
+ 	            	Hay_error= dao.insert(RespuestaConcesionaria);
+ 	            }
     	    }
     	   
 		}
+		
 	  
-		request.setAttribute("respuesta", Respuesta);
+		request.setAttribute("respuesta", "SI");
 
 		response.setContentType("text/html;charset=ISO-8859-1");
 		return mapping.getForwardByName("success");

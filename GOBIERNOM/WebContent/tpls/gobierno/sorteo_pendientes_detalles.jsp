@@ -11,8 +11,12 @@
 	    <c:when test="${detalles.getPermiso() == 'admin'}">
 	    	<table >
 			<tr>
-				<td>NRO: <input type="text" id="id_sorteo_nuevo" name="id_sorteo_nuevo" value="${detalles.getNro_sorteo()}" readonly="readonly" size="2"/></td>
-		    	<td><fmt:message key="Fecha" bundle="${etq}"/><input type="text" id="fecha_sorteo_nuevo" name="fecha_sorteo_nuevo" value="${detalles.getFecha()}"  size="25"maxlength="10" readonly="readonly"/></td>
+				<td>NRO: </td><td> <input type="text" id="id_sorteo_nuevo" name="id_sorteo_nuevo" value="${detalles.getNro_sorteo()}" readonly="readonly" size="2"/></td>
+		    	<td><fmt:message key="Fecha" bundle="${etq}"/></td><td><input type="text" id="fecha_sorteo_nuevo" name="fecha_sorteo_nuevo" value="${detalles.getFecha()}"  size="25"maxlength="10" /></td>		    
+			   <td rowspan='3'><input type="image" id="guardar_sorteo" name="guardar_sorteo" onclick="jGobierno.Guardar_Sorteo()" src="/img/guardar.jpg" title=<fmt:message key="Guardar" bundle="${etq}"/>  /></td>
+			</tr>
+			<tr>
+			<td><fmt:message key="Estado" bundle="${etq}"/></td>
 				    <td>
 				    <c2:choose>
 				    <c2:when test="${detalles.getEstado() == 'P'}">
@@ -29,10 +33,12 @@
 				    </c2:otherwise>
 				    </c2:choose>
 				    </td>
-				    <td><input type="text" id="descripcion_sorteo_nuevo" name="descripcion_sorteo_nuevo" value="${detalles.getDescripcion()}" size="40"  /></td>
-		            <td><input type="image" id="guardar_sorteo" name="guardar_sorteo" onclick="jGobierno.Guardar_Sorteo()" src="/img/guardar.jpg" title=<fmt:message key="Guardar" bundle="${etq}"/>  /></td>
-              </tr>
+				    <td><fmt:message key="Descripcion" bundle="${etq}"/></td><td><input type="text" id="descripcion_sorteo_nuevo" name="descripcion_sorteo_nuevo" value="${detalles.getDescripcion()}" size="25"  /></td>
+                    <td></td>
+                    <tr><td colspan='6'><fmt:message key="ORIGINAL" bundle="${etq}"/><input type="text" id="fecha_sorteo_original" name="fecha_sorteo_original" value="${detalles.getFecha_original()}"  size="10"maxlength="10" readonly="readonly"/><td></tr>
+                    
                 </table>
+                
                 <h1 id="titulo2"><fmt:message key="CREAR" bundle="${etq}"/>  </h1>
 				<div id="sorteos_nuevo">
 				<table >
@@ -46,6 +52,7 @@
 				        <br />
 				</td>
 				<td><input type="text" id="descripcion_sorteo_crear" name="descripcion_sorteo_crear" value="" size="40" /></td>
+				<td></td><td></td><td></td>
 				<td><input type="image" id="guardar_sorteo" name="guardar_sorteo" onclick="jGobierno.Crear_Sorteo()"src="/img/guardar.jpg" title=<fmt:message key="CREAR" bundle="${etq}"/> title=<fmt:message key="CREAR" bundle="${etq}"/>  /></td>
 				</tr>
 				</table>

@@ -386,9 +386,9 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 }
 
 #guardar_sorteo{
-	margin-left: 7px;
-    height :30px;
-	width : 30px;
+	margin-left: 45%;
+    height :50px;
+	width : 50px;
 }
 
 #guardar_concesionaria{
@@ -459,7 +459,7 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 }
 
 #sorteos_detalles_nuevos,#sorteos_nuevo{
-	margin-left:3%;
+	margin-left:20%;
 	width : 100%;
 	font-weight: bold;
 	font-size:20px;
@@ -904,5 +904,9 @@ letter-spacing: 2px;
 	font-size: 15px;
 	font-weight: bold;
 	text-align: center;
+}
+
+#sorteos_detalles_nuevos table tr td{
+	padding :20px;
 }
 
