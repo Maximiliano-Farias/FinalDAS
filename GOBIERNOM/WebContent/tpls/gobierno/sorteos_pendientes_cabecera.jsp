@@ -20,6 +20,11 @@
 <var><fmt:message key="Elegir_Sorteo" bundle="${etq}"/></var>
 
 <select name="Sorteo_Pendiente_Elegido" id="Sorteo_Pendiente_Elegido" onChange="jGobierno.Sorteo_Pendiente_Elegido()">
+        <c:choose>
+        <c:when test="${listado.getSorteos().size() == 0}">
+         <option value="SS"><fmt:message key="SIN_SORTEO" bundle="${etq}"/></option>
+        </c:when> 
+        </c:choose>
         <c:forEach var="sorteo" items="${listado.getSorteos()}">
          <option value="${sorteo.getNro_sorteo()}">${sorteo.getFecha()} - ${sorteo.getDescripcion()}</option>
          </c:forEach>

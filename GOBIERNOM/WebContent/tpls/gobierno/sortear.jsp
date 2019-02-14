@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <h1 id="titulo_sorteo"><fmt:message key="Sorteo" bundle="${etq}"/>  </h1>
+<c:if test="${detalles.getFecha() != 'SS'}">
 <div id="cabecera_sorteo">
 	<table >
 		<tr>
@@ -38,8 +39,16 @@
 <div id="informe_resultado">
 </div>
 
+
 <div id="botones_sorteo">
+
 	<input type="button" id="sortear" value="SORTEAR" onclick="jSorteo.Consumir_Concesionarias()" />
 	<input type="button" id="ver_ganador" value=<fmt:message key="Gana" bundle="${etq}"/> onclick="jPdf.ImprimirGanador()" />
 	<input type="button" id="ver_error" value="ERROR" onClick="jOpciones.SorteoAnterior()" />
 </div>
+
+</c:if>
+
+<c:if test="${detalles.getFecha().equals('SS')}">
+<div id="sin_sorteo">*** <fmt:message key="SIN_SORTEO" bundle="${etq}"/> ***</div>
+</c:if>

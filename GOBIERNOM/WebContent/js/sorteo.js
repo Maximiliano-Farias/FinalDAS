@@ -34,7 +34,13 @@ var jSorteo = {
 	                jUtils.showing("resultados", hr.responseText);
 	            },
 	            success: function(html) {  	
-	                jUtils.showing("en_fecha", html);	
+	                jUtils.showing("en_fecha", html);
+	                var en_fecha = $('#en_fecha_sorteo').val();
+	                if( en_fecha == "NO")
+	                	{
+	                	jUtils.hiding("sortear");
+	                	}
+	                	
 	               
 	            }
 	        });	

@@ -41,8 +41,16 @@ public class MSSorteosPendientesDetallesDao extends DaoImpl {
 	@Override
 	public DynaActionForm select(DynaActionForm form) throws SQLException {
     	
-		SorteosPendientes detalles;
-		detalles=null;
+		SorteosPendientes detalles = new SorteosPendientes();
+		
+		
+		if (form.getItem("Sorteo_Pendiente_Elegido").equals("SS"))
+		{
+			detalles.setDescripcion("SS");
+			detalles.setPermiso(form.getItem("permiso"));
+		}
+		else{
+		
 		this.connect();
 		
 		this.setProcedure("dbo.SORTEOS_PENDIENTES_DETALLES (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -73,6 +81,8 @@ public class MSSorteosPendientesDetallesDao extends DaoImpl {
       
         detalles.setPermiso(form.getItem("permiso"));
 		this.disconnect();
+		}
+		
 		return  detalles;
     	
 		
