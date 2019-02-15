@@ -202,22 +202,30 @@ var jGobierno = {
 		
 		
 		Crear_Concesionaria: function() {
+			var nombre_concesionaria_nueva= $("#nombre_concesionaria_nueva").val();
+			var id_concesionaria_nueva= $("#id_concesionaria_nueva").val();
+			var Habilitado_nueva= $("#Habilitado_nueva").val();
+			var direccion_concesionaria_nueva= $("#direccion_concesionaria_nueva").val();
+			var telefono_concesionaria_nueva= $("#telefono_concesionaria_nueva").val();
+			var url_concesionaria_nueva= $("#url_concesionaria_nueva").val();
+			var email_concesionaria_nueva= $("#email_concesionaria_nueva").val();
+			var metodo_1_concesionaria_nueva= $("#metodo_1_concesionaria_nueva").val();
+			var metodo_2_concesionaria_nueva= $("#metodo_2_concesionaria_nueva").val();
+			var Servicio_nueva= $("#Servicio_nueva").val();
 	        jUtils.executing("message");
 	        jUtils.hiding("message");
 	        $.ajax({
 	            url: "/gobierno/CrearConcesionariaAction.do",
 	            type: "post",
 	            dataType: "html",
-	            data: $.param($("input[name=nombre_concesionaria_nueva],input[name=id_concesionaria_nueva],select[name=Habilitado_nueva],input[name=direccion_concesionaria_nueva],input[name=telefono_concesionaria_nueva]", $("#form"))),
+	            data: $.param({"nombre_concesionaria_nueva":nombre_concesionaria_nueva,"id_concesionaria_nueva":id_concesionaria_nueva,"Habilitado_nueva":Habilitado_nueva,"direccion_concesionaria_nueva":direccion_concesionaria_nueva,"telefono_concesionaria_nueva":telefono_concesionaria_nueva,"url_concesionaria_nueva":url_concesionaria_nueva,"email_concesionaria_nueva":email_concesionaria_nueva,"metodo_1_concesionaria_nueva":metodo_1_concesionaria_nueva,"metodo_2_concesionaria_nueva":metodo_2_concesionaria_nueva,"Servicio_nueva":Servicio_nueva}),
 	            error: function(hr){
-	            	alert("OK");
-	            	jOpciones.Concesionarias();
+	            	
+	            	jUtils.showing("cabecera", html);
 	            },
 	            success: function(html) {
-	            	jUtils.showing("cabecera", '');
-	            	jUtils.showing("resultados", '');
-	                jUtils.showing("cabecera", html); 
-	                jGobierno.Concesionarias();
+	                alert("OK");
+	                jOpciones.Concesionarias();
 	            }
 	            
 	        });
@@ -446,21 +454,41 @@ var jGobierno = {
 		    Crear_Sor:function()
 		                        {
 		    	jUtils.hiding("message");
-						        $.ajax({
-						            url: "/gobierno/CrearSorAction.do",
-						            type: "post",
-						            dataType: "html",
-						            data: $.param({}),
-						            error: function(hr){
-						                jUtils.hiding("result");
-						                jUtils.showing("resultados", hr.responseText);
-						            },
-						            success: function(html) {  	
-						                jUtils.showing("resultados", html);	
-						                
-						            }
-						        });	
-                               },
+		        $.ajax({
+		            url: "/gobierno/CrearSorAction.do",
+		            type: "post",
+		            dataType: "html",
+		            data: $.param({}),
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("resultados", hr.responseText);
+		            },
+		            success: function(html) {  	
+		                jUtils.showing("resultados", html);	
+		                
+		            }
+		        });	
+               },
+               
+                               
+	           Crear_Con:function()
+	            {
+	            jUtils.hiding("message");
+		        $.ajax({
+		            url: "/gobierno/CrearConAction.do",
+		            type: "post",
+		            dataType: "html",
+		            data: $.param({}),
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("resultados", hr.responseText);
+		            },
+		            success: function(html) {  	
+		                jUtils.showing("resultados", html);	
+		                
+		            }
+		        });	
+	          },                   
 		 
 		    onload:function()
 		    {

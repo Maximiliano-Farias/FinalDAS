@@ -50,8 +50,7 @@ public class MSCrearConcesionariaDao extends DaoImpl {
 		ConcesionariasDetalles detalles;
 		detalles = null;
 		this.connect();
-		
-		this.setProcedure("dbo.Insertar_Concesionaria ( ?, ? , ?, ?, ?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		this.setProcedure("dbo.Insertar_Concesionaria ( ?, ? , ?, ?, ?, ?, ?, ?, ?, ?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
 		  if(form.getItem("nombre_concesionaria_nueva").isEmpty()) {
 			  JOptionPane.showMessageDialog(null,"Error al obtener datos concesionaria nueva", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -59,19 +58,29 @@ public class MSCrearConcesionariaDao extends DaoImpl {
 	        
 	        }
 	        else {
-	        	JOptionPane.showMessageDialog(null,"Error al obtener datos concesionaria nueva", "ERROR", JOptionPane.ERROR_MESSAGE);
 	        	this.setParameter(1,(form.getItem("id_concesionaria_nueva")));
 	        	this.setParameter(2,(form.getItem("nombre_concesionaria_nueva")));
 	        	this.setParameter(3,(form.getItem("Habilitado_nueva")));
 	        	this.setParameter(4,(form.getItem("direccion_concesionaria_nueva")));
 	        	this.setParameter(5,(form.getItem("telefono_concesionaria_nueva")));
+	        	this.setParameter(6,(form.getItem("email_concesionaria_nueva")));
+	        	this.setParameter(7,(form.getItem("Servicio_nueva")));
+	        	this.setParameter(8,(form.getItem("url_concesionaria_nueva")));
+	        	this.setParameter(9,(form.getItem("metodo_1_concesionaria_nueva")));
+	        	this.setParameter(10,(form.getItem("metodo_2_concesionaria_nueva")));
 	        	
 	        }
 		
-		this.executeQuery();
-       
-		this.disconnect();
-
+		  try{
+				this.executeUpdate();
+		       
+				this.disconnect();
+		  }
+		  catch(SQLException e)
+		  {
+			  e.getStackTrace();
+			  
+		  }
 		return detalles;
     	
 		

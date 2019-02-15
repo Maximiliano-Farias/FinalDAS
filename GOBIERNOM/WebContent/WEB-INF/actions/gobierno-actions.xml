@@ -109,6 +109,9 @@
         <action path="/CrearSorAction.do" type="CrearSorAction">
             <forward name="success" path="/gobierno/crear_sorteo.jsp"/>
         </action> 
+        <action path="/CrearConAction.do" type="CrearConAction">
+            <forward name="success" path="/gobierno/crear_concesionaria.jsp"/>
+        </action> 
         
         
         

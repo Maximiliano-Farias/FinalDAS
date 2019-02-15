@@ -409,6 +409,10 @@ box-shadow: inset #008000 #008000 #008000 3px #ffffff;
 	width : 250px;
 }
 
+#titulo1{
+	margin-left: 43%;
+}
+
 #titulo2{
 	width : 100px;
 	margin-left:45%;
@@ -539,7 +543,7 @@ letter-spacing: 2px;
 
 	
 
-#Sortear, #Crear_Sor{
+#Sortear, #Crear_Sor, #Crear_Con{
 	
 	float:left;
 	width : 500px;
@@ -555,7 +559,12 @@ letter-spacing: 2px;
 	margin-left: 10%;
 }
 
-#Sortear:hover, #Crear_Sor:hover{
+ #Crear_Con{
+ margin-left: 35%;
+ margin-top: 5%;
+ }
+
+#Sortear:hover, #Crear_Sor:hover, #Crear_Con:hover{
 	
 	float:left;
 	text-align: center;
@@ -779,15 +788,8 @@ letter-spacing: 2px;
 	margin-bottom: 8px;
 }
 
-#concesionaria_nueva{
-	margin-left:25%;
-}
 
-#estado_nueva{
-	margin-left:30%;
-}
-
-#crear_concesionaria{
+#crear_concesionaria_bt{
 	font-size:30px;
 	width: 300px;
 	height: 50px;
@@ -796,7 +798,7 @@ letter-spacing: 2px;
 	font-weight: bold;
 }
 
-#crear_concesionaria:hover{
+#crear_concesionaria_bt:hover{
 	font-size:32px;
 	text-decoration:underline;
 	background-color: #008040;
@@ -912,7 +914,31 @@ letter-spacing: 2px;
 }
 
 #sin_sorteo{
-font-size: 30;
-margin-top: 10%;
-text-align: center;
+	font-size: 30;
+	margin-top: 10%;
+	text-align: center;
+}
+
+
+#concesionarias_detalles, #concesionaria_nueva{
+	font-weight: bold;
+	letter-spacing: 0px;
+	margin-top: 30px;
+	margin-left: 3%;
+	width: auto;
+    height: auto;
+}
+
+#concesionarias_detalles table tr td,#concesionarias_nueva table tr td{
+	padding-top:15px;
+	padding-bottom:15px;
+}
+
+#concesionaria_nueva{
+	margin-left: 8%;	
+}
+
+#crear_concesionaria_bt{
+	margin-top: 9%;
+	margin-left: 45%;
 }

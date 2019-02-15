@@ -27,7 +27,11 @@ create Procedure Insertar_Concesionaria
  @Habilitado varchar(1),
  @Direccion varchar(40),
  @Telefono  varchar(40),
- @Email varchar(40)
+ @Email varchar(40),
+ @Servicio varchar (20),
+ @direccion_url varchar(70) ,
+ @Metodo varchar(20) ,
+ @Metodo_pago varchar(20) 
 
 )
 as
@@ -37,14 +41,22 @@ insert into dbo.Concesionaria
           Habilitado ,
           Direccion ,
           Telefono,
-		  Email
+		  Email,
+		  Servicio,
+		  direccion_url,
+		  Metodo,
+		  Metodo_pago
         )
 VALUES  ( @id_concesionaria,
           @Nombre , -- Nombre - varchar(40)
           @Habilitado , -- Habilitado - char(1)
           @Direccion , -- Direccion - varchar(40)
           @Telefono,  -- Telefono - varchar(40)
-          @Email
+          @Email,
+		  @Servicio,
+		  @direccion_url,
+		  @Metodo,
+		  @Metodo_pago
 	    ) 
 GO
 --------------------------------------------------------------------------------------

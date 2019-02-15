@@ -54,6 +54,7 @@
 	<tr>
 		<td></td> <td></td> 
 		<td colspan='2'>
+		<fmt:message key="Servicio" bundle="${etq}"/>
 		<c:choose>
 		    <c:when test="${detalles.getServicio() == 'AXIS2'}">
 		        <select id="Servicio" name="Servicio">
@@ -86,32 +87,7 @@
 
 <c3:choose>
 	<c3:when test="${detalles.getPermiso() == 'admin'}">
-		<h1 id="titulo2"><fmt:message key="CREAR" bundle="${etq}"/>  </h1>
-		<div id="concesionaria_nueva">
-		<table >
-			<tr>
-				<td>ID:</td><td><input type="text" id="id_concesionaria_nueva" name="id_concesionaria_nueva" value=""  size="40"/></td>
-				<td><fmt:message key="NOMBRE" bundle="${etq}"/>:</td><td><input type="text" id="nombre_concesionaria_nueva" name="nombre_concesionaria_nueva" value=""  size="25"/></td>
-			<tr>
-				<td>DIR:</td><td><input type="text" id="direccion_concesionaria_nueva" name="direccion_concesionaria_nueva" value="" size="40" /></td>
-				<td><fmt:message key="Telefono" bundle="${etq}"/></td><td><input type="text" id="telefono_concesionaria_nueva" name="telefono_concesionaria_nueva" value="" size="25"/></td>
-			</tr>
-			<tr>	
-				<td colspan='4'>
-					<div id="estado_nueva">
-					     <fmt:message key="Estado" bundle="${etq}"/>
-						 <select id="Habilitado_nueva" name="Habilitado_nueva">
-					        <option value="1"><fmt:message key="Habilitada" bundle="${etq}"/></option>
-					        <option value="0"><fmt:message key="Deshabilitada" bundle="${etq}"/></option>
-				         </select>
-			        </div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4"><input type="button" id="crear_concesionaria" name="crear_concesionaria" onclick="jGobierno.Crear_Concesionaria()"  value=<fmt:message key="CREAR" bundle="${etq}"/>  /></td>
-			</tr>
-		</table>
-		</div>
+		<input type="button" id="Crear_Con" name="Crear_Con" onclick="jGobierno.Crear_Con()" value=<fmt:message key="CREAR" bundle="${etq}"/> title=<fmt:message key="CREAR" bundle="${etq}"/>  />
 	</c3:when>
 </c3:choose>
 
