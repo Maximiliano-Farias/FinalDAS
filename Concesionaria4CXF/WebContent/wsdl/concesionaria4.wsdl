@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="Concesionaria4Service" targetNamespace="http://action.das.ubp.edu.ar/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://action.das.ubp.edu.ar/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+<wsdl:definitions name="Concesionaria3Service" targetNamespace="http://action.das.ubp.edu.ar/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://action.das.ubp.edu.ar/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://action.das.ubp.edu.ar/" version="1.0" xmlns:tns="http://action.das.ubp.edu.ar/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:element name="Concesionaria" type="tns:Concesionaria"/>
+  <xs:element name="Ganador" type="tns:Ganador"/>
 
-  <xs:element name="ConcesionariaResponse" type="tns:ConcesionariaResponse"/>
+  <xs:element name="GanadorResponse" type="tns:GanadorResponse"/>
 
-  <xs:complexType name="Concesionaria">
+  <xs:element name="Planes" type="tns:Planes"/>
+
+  <xs:element name="PlanesResponse" type="tns:PlanesResponse"/>
+
+  <xs:complexType name="Planes">
     <xs:sequence/>
   </xs:complexType>
 
-  <xs:complexType name="ConcesionariaResponse">
+  <xs:complexType name="PlanesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Ganador">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nro_sorteo" type="xs:string"/>
+      <xs:element minOccurs="0" name="id_persona" type="xs:string"/>
+      <xs:element minOccurs="0" name="Nombre" type="xs:string"/>
+      <xs:element minOccurs="0" name="Apellido" type="xs:string"/>
+      <xs:element minOccurs="0" name="Identificador" type="xs:string"/>
+      <xs:element minOccurs="0" name="Id_Consesionaria" type="xs:string"/>
+      <xs:element minOccurs="0" name="Nombre_Auto" type="xs:string"/>
+      <xs:element minOccurs="0" name="Nro_Marca" type="xs:string"/>
+      <xs:element minOccurs="0" name="Tipo_Modelo" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GanadorResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>
@@ -19,37 +43,60 @@
 
 </xs:schema>
   </wsdl:types>
-  <wsdl:message name="ConcesionariaResponse">
-    <wsdl:part name="parameters" element="tns:ConcesionariaResponse">
+  <wsdl:message name="PlanesResponse">
+    <wsdl:part name="parameters" element="tns:PlanesResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="Concesionaria">
-    <wsdl:part name="parameters" element="tns:Concesionaria">
+  <wsdl:message name="Planes">
+    <wsdl:part name="parameters" element="tns:Planes">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Ganador">
+    <wsdl:part name="parameters" element="tns:Ganador">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GanadorResponse">
+    <wsdl:part name="parameters" element="tns:GanadorResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="Concesionaria4">
-    <wsdl:operation name="Concesionaria">
-      <wsdl:input name="Concesionaria" message="tns:Concesionaria">
+    <wsdl:operation name="Planes">
+      <wsdl:input name="Planes" message="tns:Planes">
     </wsdl:input>
-      <wsdl:output name="ConcesionariaResponse" message="tns:ConcesionariaResponse">
+      <wsdl:output name="PlanesResponse" message="tns:PlanesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ganador">
+      <wsdl:input name="Ganador" message="tns:Ganador">
+    </wsdl:input>
+      <wsdl:output name="GanadorResponse" message="tns:GanadorResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="Concesionaria4ServiceSoapBinding" type="tns:Concesionaria4">
+  <wsdl:binding name="Concesionaria3ServiceSoapBinding" type="tns:Concesionaria4">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="Concesionaria">
-      <soap:operation soapAction="urn:Concesionaria" style="document"/>
-      <wsdl:input name="Concesionaria">
+    <wsdl:operation name="Planes">
+      <soap:operation soapAction="urn:Planes" style="document"/>
+      <wsdl:input name="Planes">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="ConcesionariaResponse">
+      <wsdl:output name="PlanesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ganador">
+      <soap:operation soapAction="urn:Ganador" style="document"/>
+      <wsdl:input name="Ganador">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GanadorResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="Concesionaria4Service">
-    <wsdl:port name="Concesionaria4Port" binding="tns:Concesionaria4ServiceSoapBinding">
-      <soap:address location="http://localhost:8080/Concesionaria4/services/Concesionaria4Port"/>
+  <wsdl:service name="Concesionaria3Service">
+    <wsdl:port name="Concesionaria3Port" binding="tns:Concesionaria3ServiceSoapBinding">
+      <soap:address location="http://localhost:8080/Concesionaria4/services"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

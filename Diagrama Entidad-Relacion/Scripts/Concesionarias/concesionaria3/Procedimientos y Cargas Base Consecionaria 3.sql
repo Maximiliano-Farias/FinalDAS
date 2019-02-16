@@ -650,18 +650,46 @@ from personas P JOIN Planes_detalles PD
 ON P.id_persona = PD.id_persona 
 GO
 
---****************************ACTUALIZAR  GANADOR*********************
-CREATE Procedure Ganador
-(   
-     @Identificador varchar(20)
-    
+--**************************Ganador Sorteo *************************
+
+create Procedure Insertar_Detalle_Sorteo
+(
+     @nro_sorteo  INT,
+     @id_persona  INT,
+	 @Nombre Varchar(30),
+	 @Apellido Varchar(30),
+	 @Identificador varchar(20),
+	 @id_consecionaria  varchar(10),
+	 @Nombre_Auto varchar(20),
+	 @Nro_Marca  INT,
+	 @Tipo_Modelo varchar(20)
+	 
+
 )
 AS
-update Facturas 
-set Estado = 1
-where Identificador = @Identificador
 
 
+INSERT INTO dbo.Sorteo_detalles
+        (  nro_sorteo,
+			id_persona  ,
+			Nombre,
+			Apellido,
+			Identificador ,
+			Id_Consesionaria  ,
+			Nombre_Auto ,
+			Nro_Marca  ,
+			Tipo_Modelo 
+        )
+VALUES  ( @nro_sorteo  ,
+     @id_persona  ,
+	 @Nombre,
+	 @Apellido,
+	 @Identificador ,
+	 @id_consecionaria  ,
+	 @Nombre_Auto ,
+	 @Nro_Marca  ,
+	 @Tipo_Modelo     )
+GO
 
 
 

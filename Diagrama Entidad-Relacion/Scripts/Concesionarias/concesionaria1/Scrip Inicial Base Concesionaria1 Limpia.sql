@@ -121,6 +121,23 @@ CREATE TABLE Facturas
 go
 
 
+create TABLE Sorteo_detalles
+(
+	nro_sorteo  integer  NOT NULL ,
+	id_persona  integer  NOT NULL ,
+	Nombre  Varchar(30) NOT NULL,
+	Apellido Varchar(30) NOT NULL,
+	Identificador varchar(20)  NOT NULL ,
+	Id_Consesionaria varchar(10) NOT NULL,
+	Nombre_Auto   varchar(20) NOT NULL,
+	Nro_Marca   Integer  NOT NULL,
+	Tipo_Modelo varchar(20) NOT NULL,
+	CONSTRAINT  PK_Sorteo_detalles PRIMARY KEY (nro_sorteo  ASC)
+
+)
+go
+
+
 
 
 

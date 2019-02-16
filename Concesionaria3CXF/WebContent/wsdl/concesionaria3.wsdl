@@ -49,7 +49,7 @@
   </wsdl:binding>
   <wsdl:service name="Concesionaria3Service">
     <wsdl:port name="Concesionaria3Port" binding="tns:Concesionaria3ServiceSoapBinding">
-      <soap:address location="http://localhost:8080/Concesionaria3/services/Concesionaria3Port"/>
+      <soap:address location="http://localhost:8080/Concesionaria3/services"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
