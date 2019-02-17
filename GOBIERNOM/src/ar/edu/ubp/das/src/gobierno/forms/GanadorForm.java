@@ -4,7 +4,6 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 public class GanadorForm extends DynaActionForm {
 
-	
 	private String    Fecha_Sorteo;
 	private String    Descripcion;
 	private String    Estado;
@@ -13,8 +12,86 @@ public class GanadorForm extends DynaActionForm {
 	private String    Consesionaria;
 	private String    Marca;
 	private String    Tipo_Modelo;
+	private String    nro_sorteo;
+	private String    id_persona;
+	private String    Identificador;
+	private String    Id_Concesioria;
+	private String    Nro_marca;
+	private String    Nombre;
+	private String    Apellido;
 	
+
 	
+	public String getNro_sorteo() {
+		return nro_sorteo;
+	}
+
+
+	public void setNro_sorteo(String nro_sorteo) {
+		this.nro_sorteo = nro_sorteo;
+	}
+
+
+	public String getId_persona() {
+		return id_persona;
+	}
+
+
+	public void setId_persona(String id_persona) {
+		this.id_persona = id_persona;
+	}
+
+
+	public String getIdentificador() {
+		return Identificador;
+	}
+
+
+	public void setIdentificador(String identificador) {
+		Identificador = identificador;
+	}
+
+
+	public String getId_Concesioria() {
+		return Id_Concesioria;
+	}
+
+
+	public void setId_Concesioria(String id_Concesioria) {
+		Id_Concesioria = id_Concesioria;
+	}
+
+
+	public String getNro_marca() {
+		return Nro_marca;
+	}
+
+
+	public void setNro_marca(String nro_marca) {
+		Nro_marca = nro_marca;
+	}
+
+
+	public String getNombre() {
+		return Nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		Nombre = nombre;
+	}
+
+
+	public String getApellido() {
+		return Apellido;
+	}
+
+
+	public void setApellido(String apellido) {
+		Apellido = apellido;
+	}
+
+
 	public GanadorForm() { }
 	
 	

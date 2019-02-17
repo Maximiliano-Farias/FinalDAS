@@ -535,7 +535,8 @@ AS
 
 INSERT INTO dbo.concesionarias_actualizaciones
         ( id_concesionaria ,
-          Fecha_actualizacion
+          Fecha_actualizacion,
+		  Fecha_Notificada
         )
 VALUES  ( @id_concesionaria , -- id_concesionaria - int
           (select top 1 S.Fecha_original
@@ -547,7 +548,8 @@ VALUES  ( @id_concesionaria , -- id_concesionaria - int
 								where Estado IN ('P','E')						
 			  )
 			order by S.Fecha_sorteo  
-			)   
+			),
+			'1900-01-01'   
         )
 
 GO
@@ -1736,6 +1738,64 @@ select TOP 1 PD.Identificador,Ganador = P.Apellido +' ' +P.Nombre,PD.Nombre_Auto
 		where S.Estado  IN ('P','E')
 		ORDER BY S.Fecha_original ASC
 GO
+
+
+--*********************** CONCESIONARIA NOTIFICADA DEL GANADOR **********************
+create procedure Concesionarias_Sin_Notificar
+AS
+select *
+from concesionarias_actualizaciones CA
+JOIN Concesionaria C
+ON C.id_concesionaria = CA.id_concesionaria
+AND C.Habilitado = 1
+where convert(varchar(10), CA.Fecha_notificada, 103) <> (
+select TOP 1 Fecha_original=convert(varchar(10), Fecha_original, 103)
+from Sorteos S
+where Estado IN ('P','E')
+AND Fecha_original IN (
+select Fecha_original=convert(varchar(10), Fecha_original, 103)
+from Sorteos
+where Estado IN ('P','E')
+                      ) 
+order by S.Fecha_original,S.Descripcion,S.nro_sorteo,S.Estado 
+)
+
+go
+
+
+--*********************** CONCESIONARIA NOTIFICADA DEL GANADOR **********************
+create procedure Datos_Ganador_Concesionarias
+AS
+select TOP 1 S.nro_sorteo,P.id_persona, PD.Identificador, P.Apellido,P.Nombre,PD.Nombre_Auto,PD.Tipo_modelo,PD.nro_marca,SD.Id_Consesionaria
+		from Planes_detalles PD 
+		JOIN Personas P
+		ON PD.id_persona = P.id_persona
+		JOIN Concesionaria C
+		ON C.id_concesionaria = PD.id_concesionaria
+		JOIN Sorteo_detalles SD
+		ON SD.Identificador = PD.Identificador
+		JOIN Sorteos S
+		ON S.nro_sorteo = SD.nro_sorteo
+		where S.Estado  IN ('P','E')
+		ORDER BY S.Fecha_original ASC
+
+go
+
+--*********************** GUARDAR LA NOTIFICACION DEL GANADOR *********************
+
+create procedure notificada_con_ganador (
+@id_concesionaria VARCHAR(20)
+)
+AS
+update  concesionarias_actualizaciones
+set Fecha_Notificada = Fecha_actualizacion
+where id_concesionaria = @id_concesionaria
+
+go
+
+
+
+
 
 
 

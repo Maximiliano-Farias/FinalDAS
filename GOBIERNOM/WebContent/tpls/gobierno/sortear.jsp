@@ -26,7 +26,8 @@
 			<tr><td><fmt:message key="Ultimo_ganador" bundle="${etq}"/></td><td><div id="sortear_ultimo_ganador"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
 			<tr><td><fmt:message key="Participantes" bundle="${etq}"/></td><td><div id="sortear_participantes"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
 			<tr><td><fmt:message key="Ganador_obtenido" bundle="${etq}"/></td><td><div id="sortear_ganador"><img id="cruz" src="/img/cruz-icon.png"/></div></tr>
-			<tr><td><fmt:message key="Notificando" bundle="${etq}"/></td><td><div id="sortear_notificado"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
+			<tr><td><fmt:message key="NotificandoConcesionaria" bundle="${etq}"/></td><td><div id="sortear_concesionaria_notificado"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
+			<tr><td><fmt:message key="NotificandoMail" bundle="${etq}"/></td><td><div id="sortear_notificado"><img id="cruz" src="/img/cruz-icon.png"/></div></td></tr>
 	    </tbody>
 	</table>
 </div>

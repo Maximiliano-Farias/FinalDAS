@@ -112,6 +112,10 @@
         <action path="/CrearConAction.do" type="CrearConAction">
             <forward name="success" path="/gobierno/crear_concesionaria.jsp"/>
         </action> 
+        <action path="/GanadorConcesionariasAction.do" type="GanadorConcesionariasAction">
+            <forward name="success" path="/gobierno/sortear_notificar_concesionaria.jsp"/>
+        </action> 
+        
         
         
         

@@ -3,7 +3,6 @@ package ar.edu.ubp.das.src.gobierno.forms;
 import java.util.LinkedList;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
-import ar.edu.ubp.das.src.videos.forms.VideoForm;
 
 public class EstadisticasForm extends DynaActionForm {
 

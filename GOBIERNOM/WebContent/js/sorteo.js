@@ -70,11 +70,14 @@ var jSorteo = {
 		                	}
 		                else
 		                	{
+		                	
 		                	jSorteo.Incrementar_Barra(7);
 			                jSorteo.Verificar_Concesionarias();		
 		                	}
 		            }
 		        });	
+		        
+		        
 			 },
 
 	 Verificar_Concesionarias: function (){
@@ -97,12 +100,14 @@ var jSorteo = {
 	                	}
 	                else
 	                	{
+	                	    
 		                	jSorteo.Incrementar_Barra(10);
 		                	jSorteo.Verificar_Ganador();
 	                	
 	                	}
 	            }
 	        });	
+	       
 		 },
 		 
 		 Verificar_Ganador: function (){
@@ -125,12 +130,14 @@ var jSorteo = {
 		                	}
 		                else
 		                	{
+		                	    
 			                	jSorteo.Incrementar_Barra(20);
 			                	jSorteo.Verificar_Participantes();
 			                				                	
 		                	}
 		            }
 		        });	
+		        
 			 },
 			 
 	 Verificar_Participantes: function (){
@@ -152,12 +159,13 @@ var jSorteo = {
 	                	    jSorteo.Guardar_Error("participantes");
 	                	}
 	                else
-	                	{
+	                	{   
 		                	jSorteo.Incrementar_Barra(20);
 		                	jSorteo.Obtener_Ganador();
 	                	}
 	            }
 	        });	
+	        
 		 },
 				 
 	 Obtener_Ganador: function (){
@@ -180,13 +188,46 @@ var jSorteo = {
 	                	    jSorteo.Guardar_Error("ganador");
 	                	}
 	                else
-	                	{
+	                	{   
 		                	jSorteo.Incrementar_Barra(20);
-		                	jSorteo.Notificar_Ganador();
+		                	jSorteo.Notificar_Concesionarias();
 	                	}
 	            }
 	        });	
+	        
 		 },
+		 
+		 
+		 Notificar_Concesionarias:function(){
+			 jUtils.hiding("message");
+			  $.ajax({
+		            url: "/gobierno/GanadorConcesionariasAction.do",
+		            type: "post",
+		            dataType: "html",
+		            data: $.param({}),
+		            error: function(hr){
+		                jUtils.hiding("result");
+		                jUtils.showing("resultados", hr.responseText);
+		            },
+		            success: function(html) {  	
+		                jUtils.showing("sortear_concesionaria_notificado", html);	
+		                if(document.getElementById('error_notificar_concesionaria').value == "SI")
+		                	{
+		                	    jSorteo.Guardar_Error("notificacion_error_concesionarias");
+		                	    jUtils.showing("ver_error");
+		                		alert("ERROR");
+		                	}
+		                else{
+		                	jSorteo.Incrementar_Barra(10);
+		                	jSorteo.Notificar_Ganador();
+		                }
+		            }
+		        });	
+		        
+			 },
+		 
+		 
+		 
 		 
 		 Notificar_Ganador: function (){
 			    var fecha = document.getElementById('fecha_sorteo').value.split(":")[1];								    
@@ -213,17 +254,20 @@ var jSorteo = {
 		      	        jSorteo.Guardar_Ganador();
 		                if(document.getElementById('error_notificacion').value == "SI")
 		                	{
+		                	    
 		                	    jUtils.showing("ver_error");
 		                	    jSorteo.Guardar_Error("notificacion_error");
 		                	}
 		                else
 		                	{
+		                	
 		                	jUtils.showing("ver_ganador");
-			                	jSorteo.Incrementar_Barra(20);
+			                	jSorteo.Incrementar_Barra(10);
 			                	jSorteo.Guardar_Notificacion();
 			                }
 			            }
 			        });	
+		        
 				 },		
 					 
 	 Guardar_Error: function (tipo){
@@ -271,6 +315,7 @@ var jSorteo = {
 
 		            }
 		        });	
+		        
 			 },
 			 
 			 Guardar_Notificacion:function(){
@@ -292,9 +337,9 @@ var jSorteo = {
 			                	    jUtils.showing("ver_error");
 			                		alert("ERROR");
 			                	}
-
 			            }
 			        });	
+			        
 				 },
  
 	 Incrementar_Barra:function( incremento){

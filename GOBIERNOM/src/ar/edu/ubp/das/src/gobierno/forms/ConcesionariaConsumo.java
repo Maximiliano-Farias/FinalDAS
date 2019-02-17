@@ -8,8 +8,23 @@ public class ConcesionariaConsumo extends DynaActionForm {
 	private String    Direccion_url;
 	private String    Metodo;
 	private String    Servicio;
+	private String    Metodo_pago;
 	
 	
+	public String getMetodo_pago() {
+		return Metodo_pago;
+	}
+
+
+
+
+	public void setMetodo_pago(String metodo_pago) {
+		Metodo_pago = metodo_pago;
+	}
+
+
+
+
 	public String getServicio() {
 		return Servicio;
 	}

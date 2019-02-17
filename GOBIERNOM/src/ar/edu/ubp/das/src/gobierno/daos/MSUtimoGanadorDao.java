@@ -33,7 +33,6 @@ public class MSUtimoGanadorDao extends DaoImpl {
 		
 	}
 
-	@SuppressWarnings("resource")
 	@Override
 	public DynaActionForm select(DynaActionForm form) throws SQLException {
     	
@@ -60,13 +59,13 @@ public class MSUtimoGanadorDao extends DaoImpl {
 						
 						this.setProcedure("dbo.ultimo_ganador", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 				        
-				         result = this.getStatement().executeQuery();
+						ResultSet result2 = this.getStatement().executeQuery();
 				
-				        result.next();
+				        result2.next();
 				        	
-				        	while(result.getRow() > 0)
+				        	while(result2.getRow() > 0)
 				        	{	
-					            condicion= result.getString("actualizada");
+					            condicion= result2.getString("actualizada");
 					            if(condicion.equals("SI")) 
 					            {
 					            	condicion="SI";
@@ -75,7 +74,7 @@ public class MSUtimoGanadorDao extends DaoImpl {
 					            {
 					            	error = error + "ERROR";
 					            }
-					        	result.next();
+					        	result2.next();
 				        	}     
 						this.disconnect();
 				

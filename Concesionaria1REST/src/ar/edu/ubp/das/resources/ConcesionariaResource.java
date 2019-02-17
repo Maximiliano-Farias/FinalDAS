@@ -18,7 +18,7 @@ import ar.edu.ubp.das.mvc.db.DaoFactory;
 public class ConcesionariaResource {
 	
 	@POST
-	@Path("/planes")
+	@Path("/Planes")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public ConcesionariaBean concesionaria1() {
         
@@ -38,7 +38,7 @@ public class ConcesionariaResource {
 	
 	
 	@POST
-	@Path("/ganador")
+	@Path("/Ganador")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String Ganador(@FormParam("nro_sorteo") String nro_sorteo, @FormParam("id_persona") String id_persona, @FormParam("Nombre") String Nombre, @FormParam("Apellido") String Apellido, @FormParam("Identificador") String Identificador, @FormParam("Id_Consesionaria") String Id_Consesionaria, @FormParam("Nombre_Auto") String Nombre_Auto, @FormParam("Nro_Marca") String Nro_Marca, @FormParam("Tipo_Modelo") String Tipo_Modelo) {
         

@@ -199,10 +199,13 @@ CREATE TABLE concesionarias_actualizaciones
 (
 	id_concesionaria varchar(10)  NOT NULL ,
 	Fecha_actualizacion  date NOT  NULL ,
+	Fecha_Notificada  date NOT  NULL ,
 	CONSTRAINT  PK_concesionarias_actualizaciones PRIMARY KEY (id_concesionaria  ASC , Fecha_actualizacion ASC),
 	CONSTRAINT  FK_Id_concesionarias_actualizaciones FOREIGN KEY (id_concesionaria) REFERENCES concesionaria(id_concesionaria)
 )
 go
+
+
 
 
 
