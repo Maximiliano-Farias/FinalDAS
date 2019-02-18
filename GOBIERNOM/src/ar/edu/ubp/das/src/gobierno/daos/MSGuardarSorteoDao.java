@@ -59,7 +59,7 @@ public class MSGuardarSorteoDao extends DaoImpl {
 	        	
 	        }
 		
-		this.executeQuery();
+		this.executeUpdate();
        
 		this.disconnect();
 

@@ -2,8 +2,6 @@ package ar.edu.ubp.das.src.tags.daos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;

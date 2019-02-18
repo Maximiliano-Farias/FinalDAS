@@ -3,19 +3,10 @@ package ar.edu.ubp.das.src.gobierno.daos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.servlet.http.Cookie;
-import javax.swing.JOptionPane;
-
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 import ar.edu.ubp.das.src.gobierno.forms.UsuarioForm;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 
 public class MSUsuarioDao extends DaoImpl {
 

@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
-<h1 id="titulo1"><fmt:message key="ACTUALIZAR" bundle="${etq}"/>  </h1>
+<h1 id="titulo_conce"><fmt:message key="ACTUALIZAR" bundle="${etq}"/>  </h1>
 
 
 <div id="concesionarias_detalles">

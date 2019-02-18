@@ -270,14 +270,10 @@ var jGobierno = {
 		            dataType: "html",
 		            data: $.param({"fecha_sorteo_nuevo":fecha_sorteo_nuevo,"id_sorteo_nuevo":id_sorteo_nuevo,"Estado_sorteo_nuevo":Estado_sorteo_nuevo,"descripcion_sorteo_nuevo":descripcion_sorteo_nuevo}),
 		            error: function(hr){
-		            	alert("OK!");
-		            	jOpciones.Sorteos_Pendientes();
+		            	alert("ERROR");	
 		            },
 		            success: function(html) {
-		            	alert("ERROR");
-		            	jUtils.showing("cabecera", '');
-		            	jUtils.showing("resultados", '');
-		                jUtils.showing("cabecera", html);    
+		            	jOpciones.Sorteos_Pendientes();
 		            }
 		            
 		        });

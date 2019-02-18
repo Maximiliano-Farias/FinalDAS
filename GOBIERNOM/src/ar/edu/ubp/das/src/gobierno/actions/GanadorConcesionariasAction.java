@@ -5,8 +5,6 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
-
 import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
@@ -34,7 +32,8 @@ public class GanadorConcesionariasAction implements Action {
 		DatosNotificaGanadorForm Datos_notificacion = new DatosNotificaGanadorForm();
 		Datos_notificacion = (DatosNotificaGanadorForm) dao.select(form);
 		Listado = Datos_notificacion.getConcesionarias();
-		String Respuesta = "OK",Hay_error="";
+		@SuppressWarnings("unused")
+		String Respuesta = "OK";
 		for (ConcesionariaConsumo C : Listado.getConcesionarias())
 		{
 			ConcesionariaBean conce = new ConcesionariaBean();
@@ -48,10 +47,7 @@ public class GanadorConcesionariasAction implements Action {
     	            if(!RespuestaConcesionaria.equals("NO"))
     	            {
     	            	Respuesta= dao.insert(conce);	
-    	            }
-    	            else{
-    	            	Hay_error= "SI";
-    	            }
+    	            }   	          
     	    	
     	    }
 	    	if(C.getServicio().equals("CXF"))
@@ -63,9 +59,7 @@ public class GanadorConcesionariasAction implements Action {
 	            {
 	            	Respuesta= dao.insert(conce);	
 	            }
-	            else{
-	            	Hay_error= "SI";
-	            }
+	            
     	    }
 	    	if(C.getServicio().equals("AXIS2"))
     	    {   
@@ -76,9 +70,7 @@ public class GanadorConcesionariasAction implements Action {
 	            {
 	            	Respuesta= dao.insert(conce);	
 	            }
-	            else{
-	            	Hay_error= "SI";
-	            }
+	            
     	    }
     	   
 		}

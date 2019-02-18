@@ -2,9 +2,6 @@ package ar.edu.ubp.das.src.gobierno.daos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
-
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;

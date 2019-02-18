@@ -5,8 +5,6 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
-
 import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
@@ -31,7 +29,8 @@ public class ConsumirConcesionariasAction implements Action {
 		Dao dao = DaoFactory.getDao("ConsumirConcesionarias", "gobierno");
 		ListadoConcesionariaConsumo Listado = new ListadoConcesionariaConsumo();
 		Listado = (ListadoConcesionariaConsumo) dao.select(form);
-		String Respuesta = "OK",Hay_error="";
+		@SuppressWarnings("unused")
+		String Respuesta = "OK";
 		for (ConcesionariaConsumo C : Listado.getConcesionarias())
 		{
 			 if(C.getServicio().equals("REST"))
@@ -39,12 +38,9 @@ public class ConsumirConcesionariasAction implements Action {
     	    	ConcesionariaRest concesionaria = new ConcesionariaRest();
     	    	RespuestaConcesionaria= concesionaria.Cargar_Datos(C.getDireccion_url(),C.getMetodo(),C.getId_concesionaria());
     	    	    	    		
-    	            if(!Respuesta.equals("NO"))
+    	    	if (!RespuestaConcesionaria.getNombre().equals("ERROR"))
     	            {
     	            	Respuesta= dao.insert(RespuestaConcesionaria);	
-    	            }
-    	            else{
-    	            	Hay_error= dao.insert(RespuestaConcesionaria);
     	            }
     	    	
     	    }
@@ -52,25 +48,21 @@ public class ConsumirConcesionariasAction implements Action {
     	    {   
     	    	ConcesionariaCxf concesionariacxf = new ConcesionariaCxf();
     	    	RespuestaConcesionaria = concesionariacxf.Cargar_Datos(C.getDireccion_url(),C.getMetodo(),C.getId_concesionaria());  	
-    	    	 if(!Respuesta.equals("NO"))
+    	    	if (!RespuestaConcesionaria.getNombre().equals("ERROR"))
  	            {
  	            	Respuesta= dao.insert(RespuestaConcesionaria);	
  	            }
- 	            else{
- 	            	Hay_error= dao.insert(RespuestaConcesionaria);
- 	            }
+ 	           
     	    }
 	    	if(C.getServicio().equals("AXIS2"))
     	    {   
     	    	ConcesionariaAxis2 concesionariaaxis = new ConcesionariaAxis2();
     	    	RespuestaConcesionaria = concesionariaaxis.Cargar_Datos(C.getDireccion_url(),C.getMetodo(),C.getId_concesionaria()); 	
-    	    	 if(!Respuesta.equals("NO"))
+    	    	if (!RespuestaConcesionaria.getNombre().equals("ERROR"))
  	            {
  	            	Respuesta= dao.insert(RespuestaConcesionaria);	
  	            }
- 	            else{
- 	            	Hay_error= dao.insert(RespuestaConcesionaria);
- 	            }
+ 	            
     	    }
     	   
 		}

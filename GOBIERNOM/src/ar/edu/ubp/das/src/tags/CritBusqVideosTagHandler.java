@@ -2,15 +2,12 @@ package ar.edu.ubp.das.src.tags;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
-
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
@@ -18,6 +15,7 @@ import ar.edu.ubp.das.mvc.db.DaoFactory;
 public class CritBusqVideosTagHandler extends SimpleTagSupport {
 
 	private String onClick1;
+	@SuppressWarnings("unused")
 	private String onClick2;
 	
 	@Override
@@ -37,7 +35,8 @@ public class CritBusqVideosTagHandler extends SimpleTagSupport {
             DynaActionForm form = new DynaActionForm();
                            form.setItem("lang", lang);
                            
-            Dao dao = DaoFactory.getDao("Logueo", "tags");
+            @SuppressWarnings("unused")
+			Dao dao = DaoFactory.getDao("Logueo", "tags");
                  out.println("<div id=\"Logueado\" name=\"Logueado\"></div>");
             	 out.println("<label for=\"us\" id=\"us\">" + bundle.getString("usuario") + " </label><input type=\"text\" name=\"usuario\" id=\"usuario\" text=\"\" value=\"\" maxlength=\"30\" size=\"20\" />");
                  out.println("<label for=\"con\"id=\"con\">" + bundle.getString("contrasena") + "</label><input type=\"password\" name=\"contrasena\" id=\"contrasena\" text=\"\"  value=\"\" maxlength=\"30\" size=\"20\" />");

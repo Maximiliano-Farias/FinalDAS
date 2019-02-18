@@ -26,8 +26,7 @@ public class ConcesionariaRest {
 	
 public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo, String Id_concesionaria )throws SQLException{
 	
-	System.out.println("#\t -- Consumiendo REST :" + Id_concesionaria);
-	String resultado;	  
+	System.out.println("#\t -- Consumiendo REST :" + Id_concesionaria);	  
     URI uri = URI.create(direccion_url + Metodo); 
     HttpPost req = new HttpPost();
     req.setURI(uri); 
@@ -48,14 +47,13 @@ public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo, Stri
 	try {
 		try {
 			restResp = EntityUtils.toString(responseEntity);
-			resultado="OK";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			resultado= e.toString();
+			e.toString();
 		}
 	} catch (ParseException e) {
 		// TODO Auto-generated catch block
-		resultado= e.toString();
+		 e.toString();
 	}	
     if(responseStatus.getStatusCode() != 200) {
     	restResp = "ERROR";  	
@@ -74,16 +72,14 @@ public 	ConcesionariaBean Cargar_Datos(String direccion_url, String Metodo, Stri
     }  	
   
     
-    return concesionaria;
-    
+    return concesionaria;    
     	
 }
 
 
 public 	String Ganador(String Id_concesionaria,String direccion_url, String Metodo_pago, GanadorForm Ganador )throws SQLException{
 	
-	System.out.println("#\t -- Notificando ganador REST :" + Id_concesionaria);
-	String resultado;	  
+	System.out.println("#\t -- Notificando ganador REST :" + Id_concesionaria);  
     URI uri = URI.create(direccion_url + Metodo_pago); 
     HttpPost req = new HttpPost();
     req.setURI(uri); 
@@ -127,12 +123,12 @@ public 	String Ganador(String Id_concesionaria,String direccion_url, String Meto
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			resultado= e.toString();
+			e.toString();
 			
 		}
 	} catch (ParseException e) {
 		// TODO Auto-generated catch block
-		resultado= e.toString();
+		e.toString();
 	}	
     if(responseStatus.getStatusCode() != 200) {
     	restResp = "ERROR";  	

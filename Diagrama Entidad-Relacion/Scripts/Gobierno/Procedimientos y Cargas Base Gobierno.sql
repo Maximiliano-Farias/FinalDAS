@@ -83,23 +83,41 @@ GO
 ------------------------------------------------------------------------------------
 
 
-EXEC dbo.Insertar_Concesionaria
-    @id_concesionaria = 'A1A1A1A1A1',
-    @Nombre = 'Mundo Maipu Cordoba', -- varchar(40)
-    @Habilitado = '1', -- char(1)
-    @Direccion = 'Av. Colón 4000, CBA CAPITAL', -- varchar(40)
-    @Telefono = '0351-4859610', -- varchar(40)
-	@Email = 'maxi.f@live.com.ar'
+INSERT INTO Concesionaria
+VALUES
+( 'A1A1A1A1A1', 'Mundo Maipu Cordoba', '1', 'Av. Colón 4000, CBA CAPITAL', '0351-4859610', 'maxi.f@live.com.ar',  'REST',  'http://localhost:8080/Concesionaria1/rest/concesionaria1/', 'Planes','Ganador' )
 go
 
-EXEC dbo.Insertar_Concesionaria
-    @id_concesionaria = 'B1B1B1B1B1',
-    @Nombre = 'PETTI FORD RIO TERCERO', -- varchar(40)
-    @Habilitado = '1', -- char(1)
-    @Direccion = 'AVENIDA SAVIO 211', -- varchar(40)
-    @Telefono = '03571-434782', -- varchar(40)
-	@Email = 'maxi.f@live.com.ar'
+INSERT INTO Concesionaria
+VALUES
+( 'B1B1B1B1B1', 'PETTI FORD RIO TERCERO', '1', 'AVENIDA SAVIO 211', '03571-4347811', 'maxi.f@live.com.ar', 'REST', 'http://localhost:8080/Concesionaria2/rest/concesionaria2/', 'Planes', 'Ganador' )
 go
+
+INSERT INTO Concesionaria
+VALUES
+( 'C1C1C1C1C1', 'TAGLE RENAULT', '1', 'Sagrada Familia 1100', '0351-4334552', 'maxi.f@live.com.ar',  'CXF', 'http://localhost:9090/Concesionaria3Port?wsdl','Planes', 'Ganador' )
+go
+
+INSERT INTO Concesionaria
+VALUES
+( 'D1D1D1D1D1', 'Montironi Fiat', '1', 'Av. Colon 2100', '0351-4333551', 'maxi.f@live.com.ar',  'CXF',  'http://localhost:9091/Concesionaria4Port?wsdl','Planes', 'Ganador' )
+go
+
+INSERT INTO Concesionaria
+VALUES
+( 'E1E1E1E1E1', 'Auto City', '1', 'Av. Colon 3200', '0351-4333456', 'maxi.f@live.com.ar',  'AXIS2', 'http://localhost:8080/Concesionaria5/services/Concesionaria?wsdl', 'Planes', 'Ganador' )
+
+go
+
+insert into concesionarias_actualizaciones
+values ('A1A1A1A1A1','1900-01-01','1900-01-01'),
+('B1B1B1B1B1','1900-01-01','1900-01-01'),
+('C1C1C1C1C1','1900-01-01','1900-01-01'),
+('D1D1D1D1D1','1900-01-01','1900-01-01'),
+('E1E1E1E1E1','1900-01-01','1900-01-01')
+
+go
+
 
 --********************************PERSONA*******************************************--
 create Procedure Insertar_Persona
@@ -141,89 +159,15 @@ VALUES  ( @id_persona , -- id_persona - int
 END
 GO
 
-EXEC dbo.Insertar_Persona @id_persona = 37525605, -- int
-    @Nombre = 'Eduardo Martin', -- varchar(40)
-    @Apellido = 'Farias', -- varchar(40)
-    @Direccion = 'Atahualpa Yupanqui 784', -- varchar(40)
-    @Mail = 'edu@live.com.ar', -- varchar(40)
+
+EXEC dbo.Insertar_Persona @id_persona = 111111111, -- int
+    @Nombre = 'Administrador', -- varchar(40)
+    @Apellido = 'Administrador', -- varchar(40)
+    @Direccion = 'Juan del Campillo 779', -- varchar(40)
+    @Mail = 'sistemas@live.com.ar', -- varchar(40)
     @nro_identificador = 1, -- int
     @Telefono = '03571-15415853', -- varchar(18)
-	@Identificador = 'A1A1A1A1A12'
-go
-
-
-
-EXEC dbo.Insertar_Persona @id_persona = 20078920, -- int
-    @Nombre = 'Gabriela Rosanna', -- varchar(40)
-    @Apellido = 'Quiroga', -- varchar(40)
-    @Direccion = 'Atahulpa yupanqui 784', -- varchar(40)
-    @Mail = 'gabyquiroga1@hotmail.com', -- varchar(40)
-    @nro_identificador = 1, -- int
-    @Telefono = '03571-15513157', -- varchar(18)
-	@Identificador = 'A1A1A1A1A13'
-go
-EXEC dbo.Insertar_Persona @id_persona = 20345643, -- int
-    @Nombre = 'Pedro Ernesto', -- varchar(40)
-    @Apellido = 'Fernandez', -- varchar(40)
-    @Direccion = 'Av. Colon 222', -- varchar(40)
-    @Mail = 'p.fernandez@hotmail.com', -- varchar(40)
-    @nro_identificador = 1, -- int
-    @Telefono = '03571-153456543', -- varchar(18)
-	@Identificador = 'A1A1A1A1A11'
-go
-
-
-
-EXEC dbo.Insertar_Persona @id_persona = 17834564, -- int
-    @Nombre = 'Marcos Jose', -- varchar(40)
-    @Apellido = 'Perez', -- varchar(40)
-    @Direccion = 'Avenida Savio 211', -- varchar(40)
-    @Mail = 'm.perez@live.com.ar', -- varchar(40)
-    @nro_identificador = 1, -- int
-    @Telefono = '03571-15344333', -- varchar(18)
-	@Identificador = 'B1B1B1B1B14'
-go
-
-
-
-EXEC dbo.Insertar_Persona @id_persona = 33784567, -- int
-    @Nombre = 'Manuel Alejandro', -- varchar(40)
-    @Apellido = 'Velez', -- varchar(40)
-    @Direccion = 'Dean funes 368 1B', -- varchar(40)
-    @Mail = 'alejandro.perez@hotmail.com', -- varchar(40)
-    @nro_identificador = 1, -- int
-    @Telefono = '03571-15663454', -- varchar(18)
-	@Identificador = 'B1B1B1B1B12'
-go
-
-
-
-EXEC dbo.Insertar_Persona @id_persona = 20245920, -- int
-    @Nombre = 'Sonia Lorena', -- varchar(40)
-    @Apellido = 'Rosaroli', -- varchar(40)
-    @Direccion = 'Rio limay 338', -- varchar(40)
-    @Mail = 's.rosaroli@hotmail.com', -- varchar(40)
-    @nro_identificador = 1, -- int
-    @Telefono = '03571-15415758', -- varchar(18)
-	@Identificador = 'B1B1B1B1B13'
-go
-EXEC dbo.Insertar_Persona @id_persona = 20356433, -- int
-    @Nombre = 'Miguel', -- varchar(40)
-    @Apellido = 'Jasni', -- varchar(40)
-    @Direccion = 'San Martin 222', -- varchar(40)
-    @Mail = 'miguel.j@hotmail.com', -- varchar(40)
-    @nro_identificador = 1, -- int
-    @Telefono = '03571-15344564', -- varchar(18)
-	@Identificador = 'B1B1B1B1B11'
-go
-EXEC dbo.Insertar_Persona @id_persona = 37525606, -- int
-    @Nombre = 'Nahuel', -- varchar(40)
-    @Apellido = 'Bustos', -- varchar(40)
-    @Direccion = 'Balcarce 331', -- varchar(40)
-    @Mail = 'nahubustos@hotmail.com', -- varchar(40)
-    @nro_identificador = 1, -- int
-    @Telefono = '03571-15456789', -- varchar(18)
-    @Identificador = 'B1B1B1B1B15'
+	@Identificador = 'ADMIN'
 go
 
 
@@ -823,6 +767,10 @@ VALUES  (
 GO
 
 
+exec Insertar_Planes 'ADMIN','A1A1A1A1A1','111111111','GOL','3','TREND PACK II'
+
+go
+
 --******************************************FACTURAS****************************
 
 create Procedure Insertar_Facturas
@@ -892,44 +840,6 @@ GROUP BY P.Nombre,P.Apellido,P.id_persona,PU.Nombre_usuario,UP.nro_permiso,PU.Id
 
 GO
 
-
-
-
-
---**********************INSERTAR PLAN DETALLE--********************
-
-exec Insertar_Planes 'A1A1A1A1A11','A1A1A1A1A1',20345643,'GOL',3,'TREND PACK III'
-go
-exec Insertar_Planes 'A1A1A1A1A12','A1A1A1A1A1',37525605,'CRUZE',5,'LTZ'
-go
-exec Insertar_Planes 'A1A1A1A1A13','A1A1A1A1A1',20078920,'ARGO',1,'1.4 LX'
-go
-exec Insertar_Planes 'B1B1B1B1B11','B1B1B1B1B1',20356433,'KA',2,'KINETIC LX 1.3'
-go
-exec Insertar_Planes 'B1B1B1B1B12','B1B1B1B1B1',33784567,'KA',2,'KINETIC LX 1.3'
-go
-exec Insertar_Planes 'B1B1B1B1B13','B1B1B1B1B1',20245920,'Ecosport',2,'KINETIC LT 1.3'
-go
-exec Insertar_Planes 'B1B1B1B1B14','B1B1B1B1B1',17834564,'Fiesta',2,'MAX 1.6 NAFTA'
-go
-exec Insertar_Planes 'B1B1B1B1B15','B1B1B1B1B1',37525606,'KA',2,'KINETIC LX 1.3'
-go
-
-
-
------------------INSERTAR SORTEO PRUEBA----------------------------
-
-insert into Sorteos values ('05-09-2018','Primer Sorteo','F')
-go
-insert into Sorteos values ('10-09-2018','Segundo Sorteo','E')
-go
-
-exec Insertar_Detalle_Sorteo '1','37525605','A1A1A1A1A12','A1A1A1A1A1','Gol','S','3','TREND PACK III','05-09-2018'
-
-
-insert into Errores_Sorteos values ('2','NO todas las concesionarias fueron actualizadas')
-go
-
 --**********************OBTENER ULTIMO SORTEO**********************
 
 create PROCEDURE Ultimo_Sorteo
@@ -988,6 +898,7 @@ ON C.id_concesionaria =SD.Id_Consesionaria
 WHERE S.nro_sorteo = @nro_sorteo
 
 
+
 go
 /*******************OBTENER SORTEO PARA CABECERA ANTERIORES********************************/
 create procedure Obtener_Sorteos
@@ -995,7 +906,9 @@ AS
 select nro_sorteo,Fecha=convert(varchar(10), Fecha_original, 103),Descripcion
 from Sorteos
 where Fecha_original < GETDATE()
+AND Estado <>'P'
 order by Fecha_original DESC
+
 
 go
 
@@ -1026,8 +939,6 @@ go
 
 /*******************CREAR OBTENER SORTEOS PENDIENTES *************/
 
-EXEC Insertar_Sorteo '2019-10-03', 'SORTEO MARZO','P'
-go
 create procedure SORTEOS_PENDIENTES
 AS
 select nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado
@@ -1077,276 +988,6 @@ update personas
 set direccion = @Direccion, Mail = @Mail, Telefono = @Telefono
 where Identificador = @Identificador
 GO
-
-/*************************** DATOS PARA INSERTAR DESDE CONCESIONARIA **********/
-
-
-
-SELECT *
-FROM Facturas
-
-SELECT *
-FROM Facturas_detalles
-
-select *
-from Planes_detalles
-
-select *
-from Planes_detalles
-
-select *
-from Autos
-
-select *
-from Marcas
-
-
-select *
-from Concesionaria
-
-select *
-from Facturas
-
-
-
---**********************INSERTAR FACTURAS--********************
-exec Insertar_Facturas '0024561914','1','8150.25','A1A1A1A1A11','2018-07-30'
-go
-exec Insertar_Facturas '0024561919','1','8150.25','A1A1A1A1A11','2018-08-30'
-go
-exec Insertar_Facturas '0029831919','1','8200.25','A1A1A1A1A11','2018-09-30'
-go
-exec Insertar_Facturas '0029291919','0','8500.25','A1A1A1A1A11','2018-10-30'
-go
-exec Insertar_Facturas '0029291230','0','8400.85','A1A1A1A1A11','2018-11-30'
-go
-exec Insertar_Facturas '0029291402','0','8400.85','A1A1A1A1A11','2018-12-30'
-go
-exec Insertar_Facturas '0029923302','0','8450.85','A1A1A1A1A11','2019-01-30'
-go
-exec Insertar_Facturas '0029295678','0','5600.85','A1A1A1A1A11','2019-02-28'
-go
-exec Insertar_Facturas '0029293345','0','5700.20','A1A1A1A1A11','2019-03-30'
-go
-exec Insertar_Facturas '0029291432','0','8400.85','A1A1A1A1A11','2019-04-29'
-go
-exec Insertar_Facturas '0027923302','0','8450.85','A1A1A1A1A11','2019-05-30'
-go
-exec Insertar_Facturas '0029295978','0','5600.85','A1A1A1A1A11','2019-06-29'
-go
-exec Insertar_Facturas '0029295345','0','5700.20','A1A1A1A1A11','2019-07-30'
-go
-/************************************************************************/
-
-exec Insertar_Facturas '0024561919','1','8150.25','A1A1A1A1A12','2018-07-30'
-go
-exec Insertar_Facturas '0035561919','1','8150.25','A1A1A1A1A12','2018-08-30'
-go
-exec Insertar_Facturas '0024831919','1','8200.25','A1A1A1A1A12','2018-09-30'
-go
-exec Insertar_Facturas '0025291919','1','8500.25','A1A1A1A1A12','2018-10-30'
-go
-exec Insertar_Facturas '0023491230','1','8400.85','A1A1A1A1A12','2018-11-30'
-go
-exec Insertar_Facturas '0039291402','1','8400.85','A1A1A1A1A12','2018-12-30'
-go
-exec Insertar_Facturas '0042923302','1','8450.85','A1A1A1A1A12','2019-01-30'
-go
-exec Insertar_Facturas '0044295678','0','5600.85','A1A1A1A1A12','2019-02-28'
-go
-exec Insertar_Facturas '0012293345','0','5700.20','A1A1A1A1A12','2019-03-30'
-go
-exec Insertar_Facturas '0030291432','0','8400.85','A1A1A1A1A12','2019-04-29'
-go
-exec Insertar_Facturas '0030923302','0','8450.85','A1A1A1A1A12','2019-05-30'
-go
-exec Insertar_Facturas '0030295978','0','5600.85','A1A1A1A1A12','2019-06-29'
-go
-exec Insertar_Facturas '0031295345','0','5700.20','A1A1A1A1A12','2019-07-30'
-go
-/*******************************************************************/
-
-
-exec Insertar_Facturas '0011561913','1','8130.25','A1A1A1A1A13','2018-07-30'
-go
-exec Insertar_Facturas '0011561919','0','8150.25','A1A1A1A1A13','2018-08-30'
-go
-exec Insertar_Facturas '0011831919','0','8200.25','A1A1A1A1A13','2018-09-30'
-go
-exec Insertar_Facturas '0011291919','0','8500.25','A1A1A1A1A13','2018-10-30'
-go
-exec Insertar_Facturas '0011491230','0','8400.85','A1A1A1A1A13','2018-11-30'
-go
-exec Insertar_Facturas '0011291402','0','8400.85','A1A1A1A1A13','2018-12-30'
-go
-exec Insertar_Facturas '0011923302','0','8450.85','A1A1A1A1A13','2019-01-30'
-go
-exec Insertar_Facturas '0011295678','0','5600.85','A1A1A1A1A13','2019-02-28'
-go
-exec Insertar_Facturas '0011293345','0','5700.20','A1A1A1A1A13','2019-03-30'
-go
-exec Insertar_Facturas '0011291432','0','8400.85','A1A1A1A1A13','2019-04-29'
-go
-exec Insertar_Facturas '0011923307','0','8450.85','A1A1A1A1A13','2019-05-30'
-go
-exec Insertar_Facturas '0011295978','0','5600.85','A1A1A1A1A13','2019-06-29'
-go
-exec Insertar_Facturas '0011295345','0','5700.20','A1A1A1A1A13','2019-07-30'
-
-exec Insertar_Facturas '0024561914','1','8150.25','B1B1B1B1B11','2018-07-30'
-go
-exec Insertar_Facturas '0024561919','1','8150.25','B1B1B1B1B11','2018-08-30'
-go
-exec Insertar_Facturas '0029831919','1','8200.25','B1B1B1B1B11','2018-09-30'
-go
-exec Insertar_Facturas '0029291919','0','8500.25','B1B1B1B1B11','2018-10-30'
-go
-exec Insertar_Facturas '0029291230','0','8400.85','B1B1B1B1B11','2018-11-30'
-go
-exec Insertar_Facturas '0029291402','0','8400.85','B1B1B1B1B11','2018-12-30'
-go
-exec Insertar_Facturas '0029923302','0','8450.85','B1B1B1B1B11','2019-01-30'
-go
-exec Insertar_Facturas '0029295678','0','5600.85','B1B1B1B1B11','2019-02-28'
-go
-exec Insertar_Facturas '0029293345','0','5700.20','B1B1B1B1B11','2019-03-30'
-go
-exec Insertar_Facturas '0029291432','0','8400.85','B1B1B1B1B11','2019-04-29'
-go
-exec Insertar_Facturas '0027923302','0','8450.85','B1B1B1B1B11','2019-05-30'
-go
-exec Insertar_Facturas '0029295978','0','5600.85','B1B1B1B1B11','2019-06-29'
-go
-exec Insertar_Facturas '0029295345','0','5700.20','B1B1B1B1B11','2019-07-30'
-go
-/************************************************************************/
-
-exec Insertar_Facturas '0024561919','1','8150.25','B1B1B1B1B12','2018-07-30'
-go
-exec Insertar_Facturas '0035561919','1','8150.25','B1B1B1B1B12','2018-08-30'
-go
-exec Insertar_Facturas '0024831919','1','8200.25','B1B1B1B1B12','2018-09-30'
-go
-exec Insertar_Facturas '0025291919','1','8500.25','B1B1B1B1B12','2018-10-30'
-go
-exec Insertar_Facturas '0023491230','1','8400.85','B1B1B1B1B12','2018-11-30'
-go
-exec Insertar_Facturas '0039291402','1','8400.85','B1B1B1B1B12','2018-12-30'
-go
-exec Insertar_Facturas '0042923302','1','8450.85','B1B1B1B1B12','2019-01-30'
-go
-exec Insertar_Facturas '0044295678','0','5600.85','B1B1B1B1B12','2019-02-28'
-go
-exec Insertar_Facturas '0012293345','0','5700.20','B1B1B1B1B12','2019-03-30'
-go
-exec Insertar_Facturas '0030291432','0','8400.85','B1B1B1B1B12','2019-04-29'
-go
-exec Insertar_Facturas '0030923302','0','8450.85','B1B1B1B1B12','2019-05-30'
-go
-exec Insertar_Facturas '0030295978','0','5600.85','B1B1B1B1B12','2019-06-29'
-go
-exec Insertar_Facturas '0031295345','0','5700.20','B1B1B1B1B12','2019-07-30'
-go
-/*******************************************************************/
-
-
-exec Insertar_Facturas '0011561913','1','8130.25','B1B1B1B1B13','2018-07-30'
-go
-exec Insertar_Facturas '0011561919','0','8150.25','B1B1B1B1B13','2018-08-30'
-go
-exec Insertar_Facturas '0011831919','0','8200.25','B1B1B1B1B13','2018-09-30'
-go
-exec Insertar_Facturas '0011291919','0','8500.25','B1B1B1B1B13','2018-10-30'
-go
-exec Insertar_Facturas '0011491230','0','8400.85','B1B1B1B1B13','2018-11-30'
-go
-exec Insertar_Facturas '0011291402','0','8400.85','B1B1B1B1B13','2018-12-30'
-go
-exec Insertar_Facturas '0011923302','0','8450.85','B1B1B1B1B13','2019-01-30'
-go
-exec Insertar_Facturas '0011295678','0','5600.85','B1B1B1B1B13','2019-02-28'
-go
-exec Insertar_Facturas '0011293345','0','5700.20','B1B1B1B1B13','2019-03-30'
-go
-exec Insertar_Facturas '0011291432','0','8400.85','B1B1B1B1B13','2019-04-29'
-go
-exec Insertar_Facturas '0011923307','0','8450.85','B1B1B1B1B13','2019-05-30'
-go
-exec Insertar_Facturas '0011295978','0','5600.85','B1B1B1B1B13','2019-06-29'
-go
-exec Insertar_Facturas '0011295345','0','5700.20','B1B1B1B1B13','2019-07-30'
-go
-
-/******************************************************************************/
-exec Insertar_Facturas '0011561913','1','6500.25','B1B1B1B1B14','2018-07-30'
-go
-exec Insertar_Facturas '0011561919','1','6510.25','B1B1B1B1B14','2018-08-30'
-go
-exec Insertar_Facturas '0011831919','1','6700.25','B1B1B1B1B14','2018-09-30'
-go
-exec Insertar_Facturas '0011291919','1','7100.25','B1B1B1B1B14','2018-10-30'
-go
-exec Insertar_Facturas '0011491230','1','7100.85','B1B1B1B1B14','2018-11-30'
-go
-exec Insertar_Facturas '0011291402','1','7150.85','B1B1B1B1B14','2018-12-30'
-go
-exec Insertar_Facturas '0011923302','1','7250.85','B1B1B1B1B14','2019-01-30'
-go
-exec Insertar_Facturas '0011295678','0','7250.85','B1B1B1B1B14','2019-02-28'
-go
-exec Insertar_Facturas '0011293345','0','7250.20','B1B1B1B1B14','2019-03-30'
-go
-exec Insertar_Facturas '0011291432','0','7260.85','B1B1B1B1B14','2019-04-29'
-go
-exec Insertar_Facturas '0011923307','0','7450.85','B1B1B1B1B14','2019-05-30'
-go
-exec Insertar_Facturas '0011295978','0','7700.85','B1B1B1B1B14','2019-06-29'
-go
-exec Insertar_Facturas '0011295345','0','7700.20','B1B1B1B1B14','2019-07-30'
-go
-exec Insertar_Facturas '0011291433','0','7260.85','B1B1B1B1B14','2019-08-29'
-go
-exec Insertar_Facturas '0011923308','0','7450.85','B1B1B1B1B14','2019-09-30'
-go
-exec Insertar_Facturas '0011295979','0','7700.85','B1B1B1B1B14','2019-10-29'
-go
-exec Insertar_Facturas '0011295346','0','7700.20','B1B1B1B1B14','2019-11-30'
-go
-
-/***************************************************************************/
-exec Insertar_Facturas '0011561913','1','6500.25','B1B1B1B1B15','2018-07-30'
-go
-exec Insertar_Facturas '0011561919','1','6510.25','B1B1B1B1B15','2018-08-30'
-go
-exec Insertar_Facturas '0011831919','1','6700.25','B1B1B1B1B15','2018-09-30'
-go
-exec Insertar_Facturas '0011291919','1','7100.25','B1B1B1B1B15','2018-10-30'
-go
-exec Insertar_Facturas '0011491230','1','7100.85','B1B1B1B1B15','2018-11-30'
-go
-exec Insertar_Facturas '0011291402','1','7150.85','B1B1B1B1B15','2018-12-30'
-go
-exec Insertar_Facturas '0011923302','1','7250.85','B1B1B1B1B15','2019-01-30'
-go
-exec Insertar_Facturas '0011295678','0','7250.85','B1B1B1B1B15','2019-02-28'
-go
-exec Insertar_Facturas '0011293345','0','7250.20','B1B1B1B1B15','2019-03-30'
-go
-exec Insertar_Facturas '0011291432','0','7260.85','B1B1B1B1B15','2019-04-29'
-go
-exec Insertar_Facturas '0011923307','0','7450.85','B1B1B1B1B15','2019-05-30'
-go
-exec Insertar_Facturas '0011295978','0','7700.85','B1B1B1B1B15','2019-06-29'
-go
-exec Insertar_Facturas '0011295345','0','7700.20','B1B1B1B1B15','2019-07-30'
-go
-exec Insertar_Facturas '0011291433','0','7260.85','B1B1B1B1B15','2019-08-29'
-go
-exec Insertar_Facturas '0011923308','0','7450.85','B1B1B1B1B15','2019-09-30'
-go
-exec Insertar_Facturas '0011295979','0','7700.85','B1B1B1B1B15','2019-10-29'
-go
-exec Insertar_Facturas '0011295346','0','7700.20','B1B1B1B1B15','2019-11-30'
 
 
 
@@ -1416,22 +1057,25 @@ GO
 
 -------------------------------------------------------------------------------------
 
+
 EXECUTE dbo.Insertar_Usuario @Nombre_usuario = 'maxi', -- varchar(18)
     @Clave = 'maxi', -- varchar(18)
-	@Identificador = 'A1A1A1A1A12'
+	@Identificador = 'ADMIN'
 go
+
 
 ----------------------------------------------------------------------------
 
-EXEC dbo.Insertar_Permisos_Usuarios @Identificador = 'A1A1A1A1A12', -- varchar(18)
+EXEC dbo.Insertar_Permisos_Usuarios @Identificador = 'ADMIN', -- varchar(18)
     @nro_permiso = 'admin', -- varchar(18)
     @detalle = 'propietario del sistema y administrador' -- varchar(150)
 go
 
 
+
 -------------------------------------------------------------------------------------
 
-select TOP 1 Nombre_Auto,Tipo_modelo,C.Nombre,c.id_concesionaria,CA.Fecha_actualizacion
+/*select TOP 1 Nombre_Auto,Tipo_modelo,C.Nombre,c.id_concesionaria,CA.Fecha_actualizacion
 from planes_detalles PD
 JOIN CONCESIONARIA C
 ON C.id_concesionaria = PD.id_concesionaria
@@ -1449,11 +1093,11 @@ JOIN concesionarias_actualizaciones CA
 ON CA.id_concesionaria = C.id_concesionaria
 WHERE Identificador = @Identificador
 order by CA.Fecha_actualizacion DESC
-
+*/
 
 
 --***********************ALTA DE USUARIO INEXISTENTE***********************
-
+go
 CREATE PROCEDURE EXISTE_PERSONA(
 
 @Identificador Varchar(20),
@@ -1633,7 +1277,7 @@ AS
 									  GROUP BY Identificador
 								   )
 		ORDER BY NEWID()
-
+go
 --******************************** INSERTAR GANADOR DEL SORTEO********************
 create procedure Insertar_resultado (
 
@@ -1646,7 +1290,7 @@ select nro_sorteo=(select TOP 1 nro_sorteo
 					where Estado IN ('P','E')
 					AND Fecha_sorteo >= (dateadd(day,-1,GETDATE()) )
 					order by Fecha_original ),
-	    id_persona,Identificador,id_concesionaria,Nombre_Auto,'N',nro_marca AS Nro_Marca,Tipo_modelo,GETDATE()
+	    id_persona,Identificador,id_concesionaria,Nombre_Auto,'N',nro_marca AS Nro_Marca,Tipo_modelo,NULL
 from Planes_detalles 
 where Identificador = @identificador
 go
@@ -1657,9 +1301,9 @@ create procedure Set_Notificado(
 )
 AS
 update Sorteo_detalles
-set Notificado = 'S'
+set Notificado = 'S',Fecha_notificacion = GETDATE()
 where Identificador = @identificador
-
+go
 --***********************************LIMPIAR FACTURAS***********************************
 
 CREATE procedure Limpiar_Facturas(
@@ -1674,7 +1318,7 @@ select Identificador
 from Planes_detalles
 where id_concesionaria = @id_concesionaria
 )
-
+go
 --**********************************BORRAR Actualizacion*******************************
 
 create procedure Borrar_Actualizacion(

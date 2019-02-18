@@ -33,7 +33,13 @@ var jOpciones = {
             success: function(html) {
             	jUtils.showing("resultados", '');
                 jUtils.showing("cabecera", html);
+                var id_sorteo = $("select[name=Sorteo_Elegido]").val();
+                var id=(id_sorteo).toString();
+                if(!(id === 'SS'))
+                { 
                 jGobierno.Elegido();
+                }
+                
             }
         });		
 	   },

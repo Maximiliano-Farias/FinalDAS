@@ -3,12 +3,7 @@
 use GOBIERNO
 
 /*
-DROP TABLE Facturas_detalles
-DROP TABLE Items
 DROP TABLE Facturas
-DROP TABLE Planes_detalles
-DROP TABLE Autos
-DROP TABLE Marcas
 DROP TABLE concesionarias_actualizaciones
 DROP TABLE Actualizaciones
 DROP TABLE Usuarios_Permisos
@@ -16,13 +11,43 @@ DROP TABLE Permisos
 DROP TABLE Errores_Sorteos
 DROP TABLE Sorteo_detalles
 DROP TABLE Sorteos
-DROP TABLE Avisos
 DROP TABLE Personas_Usuarios
 DROP TABLE Personas
 DROP TABLE Identificadores
-DROP TABLE Concesionarias
-*/
+DROP TABLE Planes_detalles
+DROP TABLE Autos
+DROP TABLE Marcas
+DROP TABLE Concesionaria
 
+********** BORRAR PROCEDIMINETOS*********************
+
+declare @procName varchar(500)
+
+declare cur cursor 
+
+
+
+for select [name] from sys.objects where type = 'p'
+
+open cur
+
+fetch next from cur into @procName
+
+while @@fetch_status = 0
+
+begin
+
+    exec('drop procedure ' + @procName)
+
+    fetch next from cur into @procName
+
+end
+
+close cur
+
+deallocate cur
+
+*/
 
 CREATE TABLE Concesionaria
 (
@@ -177,22 +202,6 @@ CREATE TABLE Actualizaciones
 go
 
 
-create TABLE Avisos
-(
-	nro_aviso  integer  NOT NULL identity(1,1) ,
-	titulo  varchar(30)  NOT NULL ,
-	descripcion  varchar(1000) NOT NULL ,
-	prioridad  integer  NOT NULL  ,
-	url  varchar(30)  NULL ,
-	id_concesionaria  varchar(10),
-	Identificador varchar(20) NOT NULL, 
-	CONSTRAINT  PK_Avisos PRIMARY KEY (nro_aviso  ASC),
-	CONSTRAINT  FK_id_concesionaria FOREIGN KEY (id_concesionaria) REFERENCES concesionaria(id_concesionaria),
-    CONSTRAINT  FK_Usuario_Inexistente FOREIGN KEY (Identificador) REFERENCES Personas_Usuarios(Nombre_usuario)
-
-)
-go
-
 
 
 CREATE TABLE concesionarias_actualizaciones
@@ -208,17 +217,6 @@ go
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 CREATE TABLE Sorteo_detalles
 (
 	nro_sorteo  integer  NOT NULL ,
@@ -229,7 +227,7 @@ CREATE TABLE Sorteo_detalles
 	Notificado  char(1)  NOT NULL default 'N' ,
 	Nro_Marca   Integer  NOT NULL,
 	Tipo_Modelo varchar(20) NOT NULL,
-	Fecha_notificacion  date  NOT NULL ,
+	Fecha_notificacion  date   NULL ,
 	CONSTRAINT  PK_Sorteo_detalles PRIMARY KEY (nro_sorteo  ASC),
 	CONSTRAINT  FK_Nro_Sorteo_detalle FOREIGN KEY (nro_sorteo) REFERENCES Sorteos(nro_sorteo),
     CONSTRAINT  FK_Id_plan_sorteo_detalle FOREIGN KEY (Identificador) REFERENCES Planes_detalles(Identificador),
@@ -237,14 +235,6 @@ CREATE TABLE Sorteo_detalles
 
 )
 go
-
-
-select *
-from Planes_detalles
-
-
-
-
 
 
 
@@ -255,7 +245,7 @@ CREATE TABLE Facturas
 	Monto  money  NOT NULL ,
 	Identificador varchar(20) NOT NULL,
 	Fecha  date  NOT NULL ,
-	Cobro  date  NOT NULL ,
+	Cobro  date  NULL ,
 	CONSTRAINT  PK_Facturas PRIMARY KEY (nro_factura  ASC,Identificador  ASC),
 
 )

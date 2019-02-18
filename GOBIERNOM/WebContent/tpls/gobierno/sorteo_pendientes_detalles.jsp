@@ -8,6 +8,7 @@
 
 <div id="sorteos_detalles_nuevos">
 
+
 	    <c:if test="${detalles.getPermiso() == 'admin' && detalles.getDescripcion() != 'SS'}">
 	    	<h1 id="titulo1"><fmt:message key="ACTUALIZAR" bundle="${etq}"/>  </h1>
 	    	<table >
@@ -20,7 +21,7 @@
 			<td><fmt:message key="Estado" bundle="${etq}"/></td>
 				    <td>
 				   
-				    <c:if test="${detalles.getEstado() == 'P'}">
+				    <c:if test="${detalles.getEstado() == 'P' || detalles.getEstado() == 'E' }">
 				        <select id="Estado_sorteo_nuevo" name="Estado_sorteo_nuevo">
 				        <option value="P"><fmt:message key="PENDIENTE" bundle="${etq}"/></option>
 				        <option value="A"><fmt:message key="ANULADO" bundle="${etq}"/></option>
