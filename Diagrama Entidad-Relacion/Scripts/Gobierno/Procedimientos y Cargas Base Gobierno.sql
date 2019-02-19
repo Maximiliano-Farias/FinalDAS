@@ -241,16 +241,7 @@ VALUES  ( @titulo , -- titulo - varchar(30)
         )
 
 GO
---------------------------------------------------------------------------------------
 
-create Procedure Borrar_Aviso
-(
-  @titulo varchar(30)
-)
-as
-DELETE FROM dbo.Avisos
-WHERE titulo = @titulo
-GO
 
 --*****************************************SORTEO************************************
 
@@ -262,14 +253,17 @@ create Procedure Insertar_Sorteo
    
 )
 AS
-
+if( @Fecha_Sorteo ) >(dateadd(day,-1,GETDATE()) )
 INSERT INTO dbo.Sorteos
         ( Fecha_sorteo, Descripcion, Estado, Fecha_original )
 VALUES  ( @Fecha_Sorteo, -- Fecha_sorteo - datetime
           @Descripcion, -- Descripcion - varchar(200)
           @Estado,  -- Estado - char(1)
           @Fecha_Sorteo)
+else
+RAISERROR ('ERROR',10, 1)
 GO
+
 -------------------------------------------------------------------------------------
 
 create PROCEDURE Update_Sorteo
@@ -279,10 +273,12 @@ create PROCEDURE Update_Sorteo
    @Descripcion VARCHAR(30)
 )
 AS
-
+if @Fecha_Sorteo  >= dateadd(day,-1,GETDATE()) 
 UPDATE dbo.Sorteos
 SET Fecha_sorteo = @Fecha_Sorteo, Estado = @Estado,Descripcion = @Descripcion
 WHERE nro_sorteo = @nro_sorteo
+else
+RAISERROR ('ERROR',10, 1)
 GO
 
 -------------------------------------------------------------------------------------

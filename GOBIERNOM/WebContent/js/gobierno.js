@@ -291,19 +291,12 @@ var jGobierno = {
 		            dataType: "html",
 		            data: $.param({"fecha_sorteo_crear":fecha_sorteo_crear,"Estado_sorteo_crear":Estado_sorteo_crear,"descripcion_sorteo_crear":descripcion_sorteo_crear}),
 		            error: function(hr){
-		            	var x1 = $("#fecha_sorteo_crear").val().split("-")[1];
-		            	var x2 = $("#fecha_sorteo_crear").val().split("-")[2];
-		            	if(x1>12 || x2>31)
-		            		{
-		            		alert("ERROR");
-		            		}
-		            	else{
 		            	jOpciones.Sorteos_Pendientes();  
-		            	    }
+		            	    
 		            },
 		            success: function(html) {	  	
 		            	alert("OK");
-		            	jGobierno.Sorteos_Pendientes();   
+		            	jGobierno. Sorteos_Pendientes();   
 		            }
 		            
 		        });

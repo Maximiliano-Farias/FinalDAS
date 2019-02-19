@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
+import ar.edu.ubp.das.src.gobierno.forms.RespuestaForm;
 
 
 public class MSCrearSorteoDao extends DaoImpl {
@@ -49,11 +50,11 @@ public class MSCrearSorteoDao extends DaoImpl {
 	@Override
 	public DynaActionForm select(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		RespuestaForm respuesta =new RespuestaForm();
 
 		if(form.getItem("fecha_sorteo_crear").isEmpty()) {
 			JOptionPane.showMessageDialog(null,"Error al obtener datos concesionaria nueva", "ERROR", JOptionPane.ERROR_MESSAGE);
-			
+			respuesta.setRespuesta("ERROR");
 		}
 		
 		else {
@@ -65,10 +66,10 @@ public class MSCrearSorteoDao extends DaoImpl {
 		        	this.setParameter(3,(form.getItem("Estado_sorteo_crear")));
 		        	this.executeQuery();
 					this.disconnect(); 	
-		        	
+					respuesta.setRespuesta("OK");
 		        	
 		        }
-	   return null;
+	   return respuesta;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
 
-public class CritBusqVideosTagHandler extends SimpleTagSupport {
+public class LoguinTagHandler extends SimpleTagSupport {
 
 	private String onClick1;
 	@SuppressWarnings("unused")

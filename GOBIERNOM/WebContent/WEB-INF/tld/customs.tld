@@ -7,8 +7,8 @@
 	<short-name>customs</short-name>
 	<uri>/WEB-INF/tld/customs</uri>
 	<tag>
-		<name>critbusqvideos</name>
-		<tag-class>ar.edu.ubp.das.src.tags.CritBusqVideosTagHandler</tag-class>
+		<name>loguin</name>
+		<tag-class>ar.edu.ubp.das.src.tags.LoguinTagHandler</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>onClick1</name>

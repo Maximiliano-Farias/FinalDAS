@@ -18,10 +18,9 @@ public class MSGuardarSorteoDao extends DaoImpl {
     	return null;
 	}
 
-	@Override
+
 	public void insert(DynaActionForm form) throws SQLException {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -38,9 +37,7 @@ public class MSGuardarSorteoDao extends DaoImpl {
 
 	@Override
 	public DynaActionForm select(DynaActionForm form) throws SQLException {
-    	
-		ConcesionariasDetalles detalles;
-		detalles = null;
+
 		this.connect();
 		this.setProcedure("dbo.Update_Sorteo (?, ? , ?, ?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         
@@ -51,7 +48,7 @@ public class MSGuardarSorteoDao extends DaoImpl {
 	        
 	        }
 	        else {
-	        	 
+	        	  
 	        	this.setParameter(1,(form.getItem("id_sorteo_nuevo")));
 	        	this.setParameter(2,(form.getItem("fecha_sorteo_nuevo")));
 	        	this.setParameter(3,(form.getItem("Estado_sorteo_nuevo")));
@@ -62,8 +59,7 @@ public class MSGuardarSorteoDao extends DaoImpl {
 		this.executeUpdate();
        
 		this.disconnect();
-
-		return detalles;
+        return null;
     	
 	}
 

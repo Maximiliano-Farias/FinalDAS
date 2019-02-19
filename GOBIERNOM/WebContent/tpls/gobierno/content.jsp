@@ -23,7 +23,7 @@
 	<div id="message"></div>
 	<div id="response"></div>
 	<div id="main">
-			<ct:critbusqvideos onClick1="jGobierno.entrar()" onClick2="jGobierno.salir()" />
+			<ct:loguin onClick1="jGobierno.entrar()" onClick2="jGobierno.salir()" />
 			<div id="result">			
 			</div>
 			<div id="cabecera">

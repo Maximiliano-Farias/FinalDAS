@@ -31,8 +31,8 @@
 					<td>NRO</td>
 					<td><fmt:message key="Estado" bundle="${etq}"/></td>
 					<td><fmt:message key="Vencimiento" bundle="${etq}"/></td>
-					<td><fmt:message key="Monto" bundle="${etq}"/></td>
 					<td><fmt:message key="Fecha_Cobro" bundle="${etq}"/></td>
+				    <td><fmt:message key="Monto" bundle="${etq}"/></td>
 			    </tr>
 			</thead>
 		<tbody>		
