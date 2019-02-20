@@ -10,6 +10,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
 import ar.edu.ubp.das.src.gobierno.forms.MailForm;
 
 public class EnviaMail {
@@ -52,6 +53,7 @@ public class EnviaMail {
 				message.setText(cuerpo);
 				Transport.send(message);
 			}
+			 	  
 			return true;
 	         
 		}catch (MessagingException me){

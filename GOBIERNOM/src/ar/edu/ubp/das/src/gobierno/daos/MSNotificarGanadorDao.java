@@ -4,6 +4,9 @@ package ar.edu.ubp.das.src.gobierno.daos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
+
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
@@ -33,11 +36,10 @@ public class MSNotificarGanadorDao extends DaoImpl {
      	    this.disconnect();
      	 
      	 
-     	    this.connect();     	        		
-    		this.setProcedure("dbo.Set_Estado_Sorteo ( ?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);   
-    		this.setParameter(1,'F');        	
+     	    this.connect();     
+			this.setProcedure("dbo.Set_Estado_Sorteo ('F')", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);          	
          	this.executeUpdate();
-    	    this.disconnect();
+         	this.disconnect();
     	    
 		
 		

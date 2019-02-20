@@ -41,6 +41,9 @@ public class NotificarGanadorAction implements Action {
 		catch(Exception e){
 			respuesta.setRespuesta("NO");	
 		}
+		
+		
+		
 		request.setAttribute("respuesta",respuesta );
 		response.setContentType("text/html;charset=ISO-8859-1");
 		return mapping.getForwardByName("success");
