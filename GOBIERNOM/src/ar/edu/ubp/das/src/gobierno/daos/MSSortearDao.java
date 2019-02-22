@@ -57,7 +57,7 @@ public class MSSortearDao extends DaoImpl {
 	        	
         	}
         	else{
-        		detalles.setFecha("SS");
+        		detalles.setDescripcion("SS");
         	}
         	      
 		this.disconnect();

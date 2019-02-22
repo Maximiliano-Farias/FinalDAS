@@ -8,7 +8,7 @@ public class SorteosPendientes extends DynaActionForm {
 
 	private String    nro_sorteo;
 	private String    Fecha;
-	private Date    Fecha_original;
+	private Date      Fecha_original;
 	private String    Descripcion;
 	private String    Estado;
 	private String    Permiso;
