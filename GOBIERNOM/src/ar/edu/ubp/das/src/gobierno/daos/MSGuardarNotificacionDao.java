@@ -55,18 +55,14 @@ public class MSGuardarNotificacionDao extends DaoImpl {
         	try
         	{	this.executeUpdate();
         	    this.disconnect();
-        		this.connect();
-        		this.setProcedure("dbo.Set_Estado_Sorteo (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        	       if(form.getItem("ganador").isEmpty()) {
-        			  JOptionPane.showMessageDialog(null,"Error al obtener ID GANADOR", "ERROR", JOptionPane.ERROR_MESSAGE);
-        			  this.setNull(1, Types.CHAR);		        	
-        	        }
-        	        else {
-        	        	this.setParameter(1,"F");        	
-        	        }
+        		
+	     	    this.connect();     
+				this.setProcedure("dbo.Set_Estado_Sorteo ('F')", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);          	
+	         	this.executeUpdate();
+	         	this.disconnect();
+        	        
         	       
-        	       this.executeUpdate();
-           	       this.disconnect();
+        	       
 	       }catch(SQLException e){
 		         error=e.getMessage();
         	}

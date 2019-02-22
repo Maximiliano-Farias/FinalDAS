@@ -4,9 +4,6 @@ package ar.edu.ubp.das.src.gobierno.daos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-
-import javax.swing.JOptionPane;
-
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
@@ -34,15 +31,7 @@ public class MSNotificarGanadorDao extends DaoImpl {
 	        	this.setProcedure("dbo.Borrar_Error_Sorteo ()", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);   
      	  	this.executeUpdate();
      	    this.disconnect();
-     	 
-     	 
-     	    this.connect();     
-			this.setProcedure("dbo.Set_Estado_Sorteo ('F')", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);          	
-         	this.executeUpdate();
-         	this.disconnect();
-    	    
-		
-		
+     	 		
 	}
 
 	@Override
@@ -76,7 +65,12 @@ public class MSNotificarGanadorDao extends DaoImpl {
 		mail.setConcesionaria(concesionaria);
 		mail.setDireccion_concesionaria(direccion_concesionaria);
 	    mails.add(email_ganador);
-		this.connect();
+		
+	    
+	    
+	    /*
+	     * HABILITAR PARA QUE TAMBIEN NOTIFIQUE LAS CONCESIONARIAS
+	     * this.connect();
 		
 		this.setProcedure("dbo.Obtener_Concesionarias_habilitadas()", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		
@@ -91,7 +85,7 @@ public class MSNotificarGanadorDao extends DaoImpl {
 				result.next();
 			}
 				       
-		this.disconnect(); 
+		this.disconnect(); */
 		mail.setMails(mails);
 		
 

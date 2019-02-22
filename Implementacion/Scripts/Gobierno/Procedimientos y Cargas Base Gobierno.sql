@@ -1120,16 +1120,19 @@ go
 
 --**********************************BUSCADOR DE PLANES PARA ADMIN******************
 create Procedure Buscador_Planes(
-@texto varchar(30)
+@texto varchar(30),
+@id_concesionaria varchar(30)
 )
 AS
 select P.id_persona,P.Identificador,P.Apellido,P.Nombre,PD.Nombre_Auto,PD.Tipo_modelo
 from Personas P join Planes_detalles PD
 ON P.Identificador = PD.Identificador
-where P.id_persona like '%'+@texto+'%'
+where (P.id_persona like '%'+@texto+'%'
 OR Nombre like '%'+@texto+'%'
 OR Apellido like '%'+@texto+'%'
-OR P.Identificador like '%'+@texto+'%'
+OR P.Identificador like '%'+@texto+'%')
+AND PD.id_concesionaria like '%'+@id_concesionaria+'%'
+AND PD.Identificador <>'ADMIN'
 
 go
 

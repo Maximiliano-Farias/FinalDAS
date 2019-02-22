@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.gobierno.forms;
 import java.util.LinkedList;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.src.concesionarias.beans.ConcesionariaBean;
 
 public class EstadoCuentaForm extends DynaActionForm {
 
@@ -12,7 +13,47 @@ public class EstadoCuentaForm extends DynaActionForm {
 	private String Tipo_Modelo;
 	private String Nombre;
 	private String Fecha_actualizada;
+	private String Dominio;
+	private String Chasis;
+	private String Motor;
 	
+	
+	
+	
+	public String getDominio() {
+		return Dominio;
+	}
+
+	public void setDominio(String dominio) {
+		Dominio = dominio;
+	}
+
+	public String getChasis() {
+		return Chasis;
+	}
+
+	public void setChasis(String chasis) {
+		Chasis = chasis;
+	}
+
+	public String getMotor() {
+		return Motor;
+	}
+
+	public void setMotor(String motor) {
+		Motor = motor;
+	}
+
+	private LinkedList<ConcesionariaBean> Concesionarias;
+	
+	public LinkedList<ConcesionariaBean> getConcesionarias() {
+		return Concesionarias;
+	}
+
+	public void setConcesionarias(LinkedList<ConcesionariaBean> concesionarias) {
+		Concesionarias = concesionarias;
+	}
+
 	public String getFecha_actualizada() {
 		return Fecha_actualizada;
 	}

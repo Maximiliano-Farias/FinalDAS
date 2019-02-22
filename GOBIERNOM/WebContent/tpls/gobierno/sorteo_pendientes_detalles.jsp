@@ -7,14 +7,20 @@
 
 
 <div id="sorteos_detalles_nuevos">
-
+<fmt:setLocale value="${lang}" />
 
 	    <c:if test="${detalles.getPermiso() == 'admin' && detalles.getDescripcion() != 'SS'}">
 	    	<h1 id="titulo1"><fmt:message key="ACTUALIZAR" bundle="${etq}"/>  </h1>
 	    	<table >
 			<tr>
-				<td>NRO: </td><td> <input type="text" id="id_sorteo_nuevo" name="id_sorteo_nuevo" value="${detalles.getNro_sorteo()}" readonly="readonly" size="2"/></td>
+				<td>NRO: </td><td> <LABEL id="id_sorteo_nuevo" >${detalles.getNro_sorteo()} </LABEL> </td>
+				<c:if test="${detalles.getEstado() == 'P' || detalles.getEstado() == 'A' }">
 		    	<td><fmt:message key="Fecha" bundle="${etq}"/></td><td><input type="text" id="fecha_sorteo_nuevo" name="fecha_sorteo_nuevo" value="${detalles.getFecha()}"  size="25"maxlength="10" /></td>		    
+			    </c:if>
+			    <c:if test="${detalles.getEstado() == 'E' }">
+		    	<td colspan='6'><fmt:message key="ORIGINAL" bundle="${etq}"/><label id="fecha_sorteo_original"><fmt:formatDate value="${detalles.getFecha_original()}" dateStyle="full" /> </label><td>	   
+			    </c:if>
+			    
 			   <td rowspan='3'><input type="image" id="guardar_sorteo" name="guardar_sorteo" onclick="jGobierno.Guardar_Sorteo()" src="/img/guardar.jpg" title=<fmt:message key="Guardar" bundle="${etq}"/>  /></td>
 			</tr>
 			<tr>
@@ -36,8 +42,9 @@
 				    </td>
 				    <td><fmt:message key="Descripcion" bundle="${etq}"/></td><td><input type="text" id="descripcion_sorteo_nuevo" name="descripcion_sorteo_nuevo" value="${detalles.getDescripcion()}" size="25"  /></td>
                     <td></td>
-                    <tr><td colspan='6'><fmt:message key="ORIGINAL" bundle="${etq}"/><input type="text" id="fecha_sorteo_original" name="fecha_sorteo_original" value="${detalles.getFecha_original()}"  size="10"maxlength="10" readonly="readonly"/><td></tr>
-                    
+                    <c:if test="${detalles.getEstado() == 'P' || detalles.getEstado() == 'A' }">
+                    <tr><td colspan='6'><fmt:message key="ORIGINAL" bundle="${etq}"/><label id="fecha_sorteo_original" ><fmt:formatDate value="${detalles.getFecha_original()}" dateStyle="full" /> </label><td>	</tr>
+                    </c:if>
                 </table>
                 
                 <input type="button" id="Crear_Sor" name="Crear_Sor" onclick="jGobierno.Crear_Sor()" value=<fmt:message key="CREAR" bundle="${etq}"/> title=<fmt:message key="CREAR" bundle="${etq}"/>  />           

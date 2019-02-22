@@ -38,16 +38,13 @@ public class MSEnFechaDao extends DaoImpl {
     	
 		RespuestaForm respuesta = new RespuestaForm();
 		respuesta.setRespuesta("SI");
-		String condicion ="SI";
-
-		this.connect();
+		String condicion ="NO";
 		
-		this.setProcedure("dbo.En_Fecha", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        
+		
+		this.connect();
+		this.setProcedure("dbo.CON_ERROR", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ResultSet result = this.getStatement().executeQuery();
-
-        result.next();
-        	
+        result.next();	
         	while(result.getRow() > 0)
         	{ 
 	            condicion= result.getString("HOY");
@@ -63,6 +60,29 @@ public class MSEnFechaDao extends DaoImpl {
         	}     
 		this.disconnect();
 		respuesta.setRespuesta(condicion);
+		
+		if (condicion.equals("NO"))
+		{
+			this.connect();
+			this.setProcedure("dbo.En_Fecha", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	        ResultSet result2 = this.getStatement().executeQuery();
+	        result2.next();	
+	        	while(result2.getRow() > 0)
+	        	{ 
+		            condicion= result2.getString("HOY");
+		            if(condicion.equals("SI")) 
+		            {
+		            	condicion="SI";
+		            }
+		            else
+		            {
+		            	condicion="NO";;
+		            }
+		        	result2.next();
+	        	}     
+			this.disconnect();
+			respuesta.setRespuesta(condicion);
+		}
 		return  respuesta;
 		
 	}

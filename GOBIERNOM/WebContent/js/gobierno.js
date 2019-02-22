@@ -75,12 +75,19 @@ var jGobierno = {
 	
 		Buscando: function(){
 		        var texto = $('#buscador_plan').val();
+		        var id_concesionaria = $('#concesionaria_elegida').val();
+		        var dominio = $('#dominio').val();
+		        if ((id_concesionaria.length == 0) && (texto.length ==0))
+		        	{
+		        	texto='';
+		        	id_concesionaria='';
+		        	}
 				 jUtils.executing("buscando");
 	            $.ajax({
 	            url: "/gobierno/BuscarEstadoAction.do",
 	            type: "post",
 	            dataType: "html", 
-	            data: $.param({"texto":texto}),
+	            data: $.param({"texto":texto,"id_concesionaria":id_concesionaria,"dominio":dominio}),
 	            error: function(hr){
 	                jUtils.hiding("result");
 	                jUtils.showing("message", hr.responseText);
@@ -259,7 +266,7 @@ var jGobierno = {
 			
 			Guardar_Sorteo: function() {
 				var fecha_sorteo_nuevo=  $('#fecha_sorteo_nuevo').val();
-				var id_sorteo_nuevo=  $('#id_sorteo_nuevo').val();
+				var id_sorteo_nuevo= document.getElementById("id_sorteo_nuevo").innerHTML;
 				var Estado_sorteo_nuevo=  $('#Estado_sorteo_nuevo').val();
 				var descripcion_sorteo_nuevo=  $('#descripcion_sorteo_nuevo').val();
 				jUtils.executing("message");
@@ -428,12 +435,12 @@ var jGobierno = {
 		    rotarImagenes:function()
 		    {
 			    var imagenes=new Array(
-				        ['../img/maipu.jpg'],
-				        ['../img/publicidad_esp.jpg'],
-				        ['../img/up.jpg'],
-				        ['../img/fiat.jpg'],
-				        ['../img/onix.jpg'],
-				        ['../img/tiguan.jpg']
+				        ['../../img/maipu.jpg'],
+				        ['../../img/publicidad_esp.jpg'],
+				        ['../../img/up.jpg'],
+				        ['../../img/fiat.jpg'],
+				        ['../../img/onix.jpg'],
+				        ['../../img/tiguan.jpg']
 				    );
 
 		        var index=Math.floor((Math.random()*imagenes.length));		        

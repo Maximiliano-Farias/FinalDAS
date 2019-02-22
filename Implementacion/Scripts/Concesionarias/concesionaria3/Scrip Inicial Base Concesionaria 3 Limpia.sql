@@ -3,6 +3,7 @@
 use CONCESIONARIA3
 
 /*
+use CONCESIONARIA3
 DROP TABLE Facturas
 DROP TABLE Planes_detalles
 DROP TABLE Autos

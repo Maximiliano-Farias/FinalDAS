@@ -130,7 +130,6 @@ var jSorteo = {
 		                	}
 		                else
 		                	{
-		                	    
 			                	jSorteo.Incrementar_Barra(20);
 			                	jSorteo.Verificar_Participantes();
 			                				                	
@@ -169,6 +168,7 @@ var jSorteo = {
 		 },
 				 
 	 Obtener_Ganador: function (){
+
 	        jUtils.hiding("message");
 	        var fecha = document.getElementById('fecha').innerHTML;
 	        $.ajax({
@@ -215,7 +215,7 @@ var jSorteo = {
 		                	{
 		                	    jSorteo.Guardar_Error("notificacion_error_concesionarias");
 		                	    jUtils.showing("ver_error");
-		                		alert("ERROR");
+		                	
 		                	}
 		                else{
 		                	jSorteo.Incrementar_Barra(10);
@@ -249,7 +249,7 @@ var jSorteo = {
 		                jUtils.hiding("result");
 		                jUtils.showing("resultados", hr.responseText);
 		            },
-		            success: function(html) {  	
+		            success: function(html) {  
 		                jUtils.showing("sortear_notificado", html);	
 		      	        jSorteo.Guardar_Ganador();
 		                if(document.getElementById('error_notificacion').value == "SI")
@@ -310,7 +310,7 @@ var jSorteo = {
 		                if(document.getElementById('error_guardado_ganador').value == "SI")
 		                	{
 		                	    jUtils.showing("ver_error");
-		                		alert("ERROR");
+		                	
 		                	}
 
 		            }

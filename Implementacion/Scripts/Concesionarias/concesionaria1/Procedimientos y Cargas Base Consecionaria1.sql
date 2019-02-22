@@ -566,7 +566,7 @@ CREATE Procedure Ganador
 )
 AS
 update Facturas 
-set Estado = 1
+set Estado = 1,Cobro=GETDATE()
 where Identificador = @Identificador
 
 go

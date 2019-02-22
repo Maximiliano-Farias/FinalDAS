@@ -617,14 +617,6 @@ letter-spacing: 2px;
 }
 
 
-
-#Estado_detalles{
-	margin-top:5%;
-	float:left;
-	margin-left :8%;
-
-}
-
 #nomb,#mod,#conc,#fec{
 	margin-left:8px;
 	margin-rigth:10px;
@@ -697,7 +689,7 @@ letter-spacing: 2px;
 
 #tabla_conce
 {
-	margin-left:25%;
+	margin-left:15%;
 	margin-top:6px;
 }
 

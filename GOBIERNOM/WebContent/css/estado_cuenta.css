@@ -1,23 +1,25 @@
 @CHARSET "ISO-8859-1";
 
-#cabecera_buscador label{
+#cabecera_buscador, #cabecera_buscador label{
 	margin-top:2%;
 	margin-bottom:4%;
-	margin-left:19%;
+	margin-left:30%;
 	font-size:20px;
 	font-weight: bold;
-	text-decoration:underline;
 	color:black;
 }
 
 
 #cabecera_buscador label{
 	color:black;
+	margin-left:0px;
 }
 
 #boton_buscador{
-	margin-left:8px;
-	font-size:15px;
+	font-size: 20px;
+	text-decoration: none;
+	width: 300px;
+	margin-left: 20%;
 }
 
 #boton_buscador:hover{
@@ -37,6 +39,18 @@
 	margin-bottom: 2%;
 	width: 40px;
 	height: 40px;
+}
+
+#Estado_detalles{
+	margin-top:5%;
+	float:left;
+	margin-left :2%;
+
+}
+
+#id_sorteo_nuevo, #fecha_sorteo_original{
+	font-size:20px;
+	color :black;
 }
 
 #Facturas_detalles{

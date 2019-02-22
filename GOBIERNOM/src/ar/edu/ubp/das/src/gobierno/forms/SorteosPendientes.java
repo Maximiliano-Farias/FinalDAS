@@ -1,26 +1,28 @@
 package ar.edu.ubp.das.src.gobierno.forms;
 
+import java.sql.Date;
+
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 public class SorteosPendientes extends DynaActionForm {
 
 	private String    nro_sorteo;
 	private String    Fecha;
-	private String    Fecha_original;
+	private Date    Fecha_original;
 	private String    Descripcion;
 	private String    Estado;
 	private String    Permiso;
 	
 
 
-	public String getFecha_original() {
+	public Date getFecha_original() {
 		return Fecha_original;
 	}
 
 
 
-	public void setFecha_original(String fecha_original) {
-		Fecha_original = fecha_original;
+	public void setFecha_original(Date date) {
+		Fecha_original = date;
 	}
 
 

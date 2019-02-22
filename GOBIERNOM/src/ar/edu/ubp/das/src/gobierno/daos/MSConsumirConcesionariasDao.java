@@ -3,6 +3,9 @@ package ar.edu.ubp.das.src.gobierno.daos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
+
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.beans.*;
@@ -123,13 +126,16 @@ public  class MSConsumirConcesionariasDao extends DaoImpl {
 		for(PlanesBean p : planes)
 		{   
 			this.connect();
-    		this.setProcedure("dbo.Insertar_Planes (?, ?, ?, ? ,? ,?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+    		this.setProcedure("dbo.Insertar_Planes (?, ?, ?, ? ,? ,?,?,?,?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
     	    this.setParameter(1,p.getIdentificador());
     	    this.setParameter(2,p.getId_concesionaria());
     	    this.setParameter(3,p.getId_persona());
     	    this.setParameter(4,p.getNombre_Auto());
     	    this.setParameter(5,p.getNro_marca());
     	    this.setParameter(6,p.getTipo_Modelo());
+    	    this.setParameter(7,p.getDominio());
+    	    this.setParameter(8,p.getChasis());
+    	    this.setParameter(9,p.getMotor());
     	    this.executeUpdate();           
     		this.disconnect();	
 		}

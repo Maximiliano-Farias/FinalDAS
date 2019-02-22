@@ -10,6 +10,39 @@ public class PlanesBean {
 	private int nro_marca;
 	private String nombre_Auto;
 	private String tipo_Modelo;
+	private String  dominio;
+	private String  chasis;
+	private String  motor;
+	
+
+	public String getDominio() {
+		return dominio;
+	}
+
+
+	public void setDominio(String Dominio) {
+		dominio = Dominio;
+	}
+
+
+	public String getChasis() {
+		return chasis;
+	}
+
+
+	public void setChasis(String Chasis) {
+		chasis = Chasis;
+	}
+
+
+	public String getMotor() {
+		return motor;
+	}
+
+
+	public void setMotor(String Motor) {
+		motor = Motor;
+	}
 	
 	
 

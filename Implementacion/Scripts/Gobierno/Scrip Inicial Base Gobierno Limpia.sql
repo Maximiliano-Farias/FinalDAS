@@ -3,6 +3,7 @@
 use GOBIERNO
 
 /*
+use GOBIERNO
 DROP TABLE Facturas
 DROP TABLE concesionarias_actualizaciones
 DROP TABLE Actualizaciones
@@ -46,6 +47,13 @@ end
 close cur
 
 deallocate cur
+
+
+
+
+
+
+
 
 */
 

@@ -34,6 +34,13 @@ public class MSConcesionariaDao extends DaoImpl {
 		this.setParameter(9,form.getItem("Tipo_Modelo"));
 		this.getStatement().execute();
 		this.disconnect();
+		
+		
+		this.connect();
+		this.setProcedure("Ganador(?)");
+		this.setParameter(1,form.getItem("Identificador"));
+		this.getStatement().execute();
+		this.disconnect();
 
 	}
 
@@ -93,6 +100,9 @@ public class MSConcesionariaDao extends DaoImpl {
             	plan.setNombre_Auto(result.getString("Nombre_Auto"));
             	plan.setNro_marca(result.getInt("nro_marca"));
             	plan.setTipo_Modelo(result.getString("Tipo_Modelo"));
+            	plan.setDominio(result.getString("Dominio"));
+            	plan.setChasis(result.getString("Chasis"));
+            	plan.setMotor(result.getString("Motor"));
             	planes.add(plan);
             	result.next();
             }

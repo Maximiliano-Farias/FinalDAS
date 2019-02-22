@@ -5,12 +5,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c3"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<fmt:setLocale value="${lang}" />
 <h1 id="titulo_sorteo"><fmt:message key="Sorteo" bundle="${etq}"/>  </h1>
-<c:if test="${detalles.getFecha() != 'SS'}">
+<c:if test="${detalles.getDescripcion() != 'SS'}">
 <div id="cabecera_sorteo">
 	<table >
 		<tr>
-			<td class="subrayado">NRO:</td><td>${detalles.getNro_sorteo()}</td><td class="subrayado"><fmt:message key="Fecha" bundle="${etq}"/></td><td><div id="fecha" >${detalles.getFecha()}</div></td><td class="subrayado"><fmt:message key="Descripcion" bundle="${etq}"/></td><td>${detalles.getDescripcion()}</td>
+			<td class="subrayado">NRO:</td><td>${detalles.getNro_sorteo()}</td><td class="subrayado"><fmt:message key="Fecha" bundle="${etq}"/></td><td><div id="fecha" ><fmt:formatDate value="${detalles.getFecha()}" dateStyle="full" /></div></td><td class="subrayado"><fmt:message key="Descripcion" bundle="${etq}"/></td><td>${detalles.getDescripcion()}</td>
 		</tr>
 		<tr><td colspan="6"><div id="en_fecha"></div></td></tr>
 	</table>

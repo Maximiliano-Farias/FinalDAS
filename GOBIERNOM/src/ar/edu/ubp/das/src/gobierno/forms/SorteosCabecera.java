@@ -1,5 +1,6 @@
 package ar.edu.ubp.das.src.gobierno.forms;
 
+
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 public class SorteosCabecera extends DynaActionForm {
@@ -32,8 +33,8 @@ public class SorteosCabecera extends DynaActionForm {
 
 
 
-	public void setFecha(String fecha) {
-		Fecha = fecha;
+	public void setFecha(String string) {
+		Fecha = string;
 	}
 
 

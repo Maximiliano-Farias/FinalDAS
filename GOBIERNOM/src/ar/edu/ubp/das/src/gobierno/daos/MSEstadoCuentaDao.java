@@ -48,6 +48,25 @@ public class MSEstadoCuentaDao extends DaoImpl {
     	Datos = new EstadoCuentaForm();
     	if(form.getItem("permiso").equals("admin")) { 	   		
     		Datos.setNombre("admin"); 
+
+			LinkedList<ConcesionariaBean>Listado = new LinkedList<ConcesionariaBean>();
+			ConcesionariaBean Concesionaria = new ConcesionariaBean();
+			this.connect();
+			this.setProcedure("dbo.Obtener_Concesionarias()", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		       
+	        ResultSet result3 = this.getStatement().executeQuery();		
+	        result3.next();		        	
+	        	while(result3.getRow() > 0)
+	        		
+	        	{	
+	        		Concesionaria=new ConcesionariaBean();		            
+		        	Concesionaria.setId_concesionaria(result3.getString("id_concesionaria"));
+		        	Concesionaria.setNombre(result3.getString("Nombre"));
+		        	Listado.add(Concesionaria);
+		        	result3.next();
+	        	}		        	     
+			this.disconnect();	
+			Datos.setConcesionarias(Listado);
     	}
     	else{
 				this.connect();				
@@ -110,10 +129,20 @@ public class MSEstadoCuentaDao extends DaoImpl {
 			        	Datos.setTipo_Modelo(result2.getString("Tipo_modelo"));
 			        	Datos.setNombre(result2.getString("Nombre"));
 			        	Datos.setFecha_actualizada(result2.getString("Fecha_actualizacion"));
+			        	Datos.setDominio(result2.getString("Dominio"));
+			        	Datos.setChasis(result2.getString("Chasis"));
+			        	Datos.setMotor(result2.getString("Motor"));
 			        	result2.next();
 		        	}		        	     
-				this.disconnect();		
+				this.disconnect();	
+				
+				
+				
+				
     	}
+    	
+    	
+    	
 		return  Datos;	
 	}
 	@Override

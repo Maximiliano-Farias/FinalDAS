@@ -76,7 +76,7 @@ public class MSSorteosPendientesDetallesDao extends DaoImpl {
 	        	detalles.setFecha(result.getString("Fecha_sorteo"));
 	        	detalles.setDescripcion(result.getString("Descripcion"));
 	        	detalles.setEstado(result.getString("Estado"));
-	        	detalles.setFecha_original(result.getString("Fecha_original"));
+	        	detalles.setFecha_original(result.getDate("Fecha_original"));
         	}
       
         detalles.setPermiso(form.getItem("permiso"));

@@ -8,8 +8,37 @@
 </div>
 <c:choose>
 	<c:when test="${requestScope.Datos.getNombre() == 'admin'}">
-	<table></table>
-   <div id="cabecera_buscador"><label><fmt:message key="BUSCADOR_PLANES" bundle="${etq}" /></label><input type="text" name="buscador_plan" id="buscador_plan" size="35"  /><input type="button" id="boton_buscador" name="boton_buscador" onclick="jGobierno.Buscando()" value ="<fmt:message key="Buscar" bundle="${etq}" />"  /></div>
+    <div id="cabecera_buscador">
+    
+    <table>
+    	<tr>
+    		<td>
+				<fmt:message key="Consesionaria" bundle="${etq}" />
+			</td>
+			<td>
+			   <select id="concesionaria_elegida">
+			   <option value=""><fmt:message key="TODAS" bundle="${etq}" /></option>
+			   <c:forEach var="Concesionaria" items="${Datos.getConcesionarias()}">         
+					         <option value="${Concesionaria.getId_concesionaria()}">${Concesionaria.getNombre()}</option>	         
+					    </c:forEach>
+			   </select>
+			</td>
+	     </tr>
+		<tr>
+			<td>
+			   <label><fmt:message key="BUSCADOR_PLANES" bundle="${etq}" /></label>
+			</td>
+			<td>
+			   <input type="text" name="buscador_plan" id="buscador_plan" size="20" value="" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2'>
+   				<input type="button" id="boton_buscador" name="boton_buscador" onclick="jGobierno.Buscando()" value ="<fmt:message key="Buscar" bundle="${etq}" />" src="/img/busca.png"  />
+            </td>
+        </tr>
+   </table>
+   </div>
     <div id="resultado_busqueda"></div>
     </c:when>
     <c:otherwise> 
@@ -21,7 +50,14 @@
 					<td id= 'mod'><fmt:message key="Tipo_Modelo" bundle="${etq}"/>:</td><td id= 'mode'> ${Datos.getTipo_Modelo()}</td>
 					<td id= 'conc'><fmt:message key="Consesionaria" bundle="${etq}"/></td><td id= 'conce'> ${Datos.getNombre()}</td>
 					<td id= 'fec'><fmt:message key="Actualizacion" bundle="${etq}"/></td><td id= 'fech'> ${Datos.getFecha_actualizada()}</td>		
-				</tr>		
+				</tr>	
+				<c:if test="${Datos.getDominio() != '-'}">
+				<tr>
+					<td colspan='8'><fmt:message key="ADJUDICADO" bundle="${etq}"/>: <fmt:message key="DOMINIO" bundle="${etq}"/>: ${Datos.getDominio()} -
+					<fmt:message key="CHASIS" bundle="${etq}"/>: ${Datos.getChasis()} - 
+					<fmt:message key="MOTOR" bundle="${etq}"/>: ${Datos.getMotor()} </td>			
+				</tr>
+				</c:if>	
 			</table>		
 		</div>
 		<div id="Facturas_detalles">

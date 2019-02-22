@@ -49,17 +49,9 @@ public class MSPlanesDao extends DaoImpl {
    	
 				this.connect();
 				
-				this.setProcedure("dbo.Buscador_Planes (?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		
-			       if(form.getItem("texto").isEmpty()) {
-					  JOptionPane.showMessageDialog(null,"ERROR TEXTO BUSQUEDA", "ERROR", JOptionPane.ERROR_MESSAGE);
-					  this.setNull(1, Types.TINYINT);	
-			        	
-			        }
-			        else {
-			        	this.setParameter(1,(form.getItem("texto"))); 	
-			        }
-				
+				this.setProcedure("dbo.Buscador_Planes (?,?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			        	this.setParameter(1,(form.getItem("texto")));
+			        	this.setParameter(2,(form.getItem("id_concesionaria"))); 
 		        ResultSet result = this.getStatement().executeQuery();
 		
 		        result.next();
@@ -72,6 +64,7 @@ public class MSPlanesDao extends DaoImpl {
 			        	plan.setNombre(result.getString("Nombre"));
 			        	plan.setNombre_Auto(result.getString("Nombre_Auto"));
 			        	plan.setTipo_modelo(result.getString("Tipo_modelo"));
+			        	plan.setDominio(result.getString("Dominio"));
 			        	plans.add(plan);
 			        	result.next();
 		        	}
