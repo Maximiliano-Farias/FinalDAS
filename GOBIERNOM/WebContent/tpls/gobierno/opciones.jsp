@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<fmt:setLocale value="${lang}" />
 <table>
 <tr>
 <td>
@@ -28,7 +28,7 @@
 
 	<c:choose>
 		<c:when test="${requestScope.ganador.getFecha_Sorteo() != 'Error'}">		
-		   <h3><label><fmt:message key="Fecha" bundle="${etq}" /></label> <var id='Fecha' >${ganador.getFecha_Sorteo()} </var></h3>
+		   <h3><label><fmt:message key="Fecha" bundle="${etq}" /></label> <fmt:formatDate value="${ganador.getFecha_original()}" dateStyle="full" /></h3>
 		   <h3><label><fmt:message key="Ganador" bundle="${etq}" /></label> <var id='Ganador' >${ganador.getGanador()} </var></h3>
 		   <h3><label><fmt:message key="Descripcion" bundle="${etq}" /></label> <var id='Descripcion' >${ganador.getDescripcion()} </var></h3>
 		   <h3><label><fmt:message key="Estado" bundle="${etq}" /></label> <var id='Estado' >${ganador.getEstado()} </var></h3>

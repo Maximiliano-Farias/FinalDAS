@@ -9,6 +9,28 @@
 	color:black;
 }
 
+#titulo_estado{
+	
+	margin-top:10px;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+	float:left;
+}
+
+
+
+#nomb,#mod,#conc,#fec,#domi,#cha,#mot{
+	margin-left:8px;
+	margin-rigth:10px;
+	float:left;
+    color: #000;
+    text-align: center;
+    font-size:20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 
 #cabecera_buscador label{
 	color:black;
@@ -44,8 +66,12 @@
 #Estado_detalles{
 	margin-top:5%;
 	float:left;
-	margin-left :2%;
+	margin-left :33%;
 
+}
+
+#tabla_conce{
+	margin-left:20%;
 }
 
 #id_sorteo_nuevo, #fecha_sorteo_original{

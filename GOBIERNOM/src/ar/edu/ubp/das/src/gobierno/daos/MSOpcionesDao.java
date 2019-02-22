@@ -50,7 +50,7 @@ public class MSOpcionesDao extends DaoImpl {
         	{	
         	ganador.setGanador(result.getString("Ganador"));
         	ganador.setDescripcion(result.getString("Descripcion"));
-        	ganador.setFecha_Sorteo(result.getString("Fecha_sorteo"));
+        	ganador.setFecha_original(result.getDate("Fecha_original"));
         	ganador.setEstado(result.getString("Estado"));
         	ganador.setNombre_Auto(result.getString("Nombre_Auto"));
         	ganador.setConsesionaria(result.getString("Consesionaria"));

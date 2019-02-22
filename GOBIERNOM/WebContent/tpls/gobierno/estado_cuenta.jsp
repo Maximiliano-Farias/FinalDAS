@@ -42,20 +42,35 @@
     <div id="resultado_busqueda"></div>
     </c:when>
     <c:otherwise> 
-		<h1 id="titulo_estado"><fmt:message key="Cuentas" bundle="${etq}"/>  </h1>	
+		
 		<div id="Estado_detalles">		
 			<table >
+			<tr>
+				<td colspan='2'>
+				<h1 id="titulo_estado"><fmt:message key="Cuentas" bundle="${etq}"/>  </h1>	
+				</td>
+			</tr>
 				<tr>
 					<td id= 'nomb'><fmt:message key="Nombre_Auto" bundle="${etq}"/>:</td><td id= 'nombr'> ${Datos.getNombre_Auto()}</td>
-					<td id= 'mod'><fmt:message key="Tipo_Modelo" bundle="${etq}"/>:</td><td id= 'mode'> ${Datos.getTipo_Modelo()}</td>
+				</tr>
+				<tr>	
+					<td id= 'mod'><fmt:message key="Tipo_Modelo" bundle="${etq}"/></td><td id= 'mode'> ${Datos.getTipo_Modelo()}</td>
+				</tr>
+				<tr>
 					<td id= 'conc'><fmt:message key="Consesionaria" bundle="${etq}"/></td><td id= 'conce'> ${Datos.getNombre()}</td>
+				</tr>
+				<tr>
 					<td id= 'fec'><fmt:message key="Actualizacion" bundle="${etq}"/></td><td id= 'fech'> ${Datos.getFecha_actualizada()}</td>		
 				</tr>	
 				<c:if test="${Datos.getDominio() != '-'}">
 				<tr>
-					<td colspan='8'><fmt:message key="ADJUDICADO" bundle="${etq}"/>: <fmt:message key="DOMINIO" bundle="${etq}"/>: ${Datos.getDominio()} -
-					<fmt:message key="CHASIS" bundle="${etq}"/>: ${Datos.getChasis()} - 
-					<fmt:message key="MOTOR" bundle="${etq}"/>: ${Datos.getMotor()} </td>			
+				   <td id= 'domi'> <fmt:message key="DOMINIO" bundle="${etq}"/>: </td><td>${Datos.getDominio()} </td>
+				</tr>
+				<tr>
+					<td id= 'cha'><fmt:message key="CHASIS" bundle="${etq}"/>:</td><td> ${Datos.getChasis()} </td>
+				</tr>
+				<tr>
+					<td id= 'mot'><fmt:message key="MOTOR" bundle="${etq}"/>:</td><td> ${Datos.getMotor()} </td>			
 				</tr>
 				</c:if>	
 			</table>		

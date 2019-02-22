@@ -68,7 +68,7 @@ public class MSSorteosDetallesDao extends DaoImpl {
 	        	detalles.setConcesionaria(result.getString("Concesionaria"));
 	        	detalles.setNombre_Auto(result.getString("Nombre_Auto"));
 	        	detalles.setTipo_Modelo(result.getString("Tipo_Modelo"));
-	        	detalles.setFecha_Notificacion(result.getString("Fecha_notificacion"));
+	        	detalles.setFecha_Notificacion(result.getDate("Fecha_notificacion"));
 	        	detalles.setGanador(result.getString("Ganador"));
 	        	detalles.setGanador(result.getString("Ganador"));
 	        	detalles.setError(result.getString("Error"));

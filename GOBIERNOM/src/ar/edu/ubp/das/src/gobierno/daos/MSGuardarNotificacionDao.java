@@ -60,7 +60,11 @@ public class MSGuardarNotificacionDao extends DaoImpl {
 				this.setProcedure("dbo.Set_Estado_Sorteo ('F')", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);          	
 	         	this.executeUpdate();
 	         	this.disconnect();
-        	        
+        	    this.connect();
+				this.setProcedure("dbo.Ganador(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				this.setParameter(1,(form.getItem("ganador"))); 
+				this.executeUpdate();
+        	    this.disconnect();
         	       
         	       
 	       }catch(SQLException e){

@@ -11,7 +11,7 @@
 <div id="cabecera_sorteo">
 	<table >
 		<tr>
-			<td class="subrayado">NRO:</td><td>${detalles.getNro_sorteo()}</td><td class="subrayado"><fmt:message key="Fecha" bundle="${etq}"/></td><td><div id="fecha" >${detalles.getFecha()}</div></td><td class="subrayado"><fmt:message key="Descripcion" bundle="${etq}"/></td><td>${detalles.getDescripcion()}</td>
+			<td class="subrayado">NRO:</td><td>${detalles.getNro_sorteo()}</td><td class="subrayado"><fmt:message key="Fecha" bundle="${etq}"/></td><td><div id="fecha" ><fmt:formatDate value="${detalles.getFecha_original()}" dateStyle="full" /></div></td><td class="subrayado"><fmt:message key="Descripcion" bundle="${etq}"/></td><td>${detalles.getDescripcion()}</td>
 		</tr>
 		<tr><td colspan="6"><div id="en_fecha"></div></td></tr>
 	</table>

@@ -1,10 +1,13 @@
 package ar.edu.ubp.das.src.gobierno.forms;
 
+import java.util.Date;
+
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 public class GanadorForm extends DynaActionForm {
 
 	private String    Fecha_Sorteo;
+	private Date      Fecha_original;
 	private String    Descripcion;
 	private String    Estado;
 	private String    Ganador;
@@ -21,6 +24,14 @@ public class GanadorForm extends DynaActionForm {
 	private String    Apellido;
 	
 
+	public Date getFecha_original() {
+		return Fecha_original;
+	}
+
+
+	public void setFecha_original(Date fecha_original) {
+		Fecha_original = fecha_original;
+	}
 	
 	public String getNro_sorteo() {
 		return nro_sorteo;

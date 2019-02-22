@@ -844,9 +844,9 @@ GO
 
 --**********************OBTENER ULTIMO SORTEO**********************
 
-create PROCEDURE Ultimo_Sorteo
+Create PROCEDURE Ultimo_Sorteo
 AS
-select TOP 1 Fecha_sorteo=convert(varchar(10), S.Fecha_sorteo, 103),S.Descripcion,Estado = case when S.Estado = 'F' then 'FINALIZADO' WHEN S.Estado = 'N' then 'NO NOTIFICADO'  WHEN S.Estado = 'P'then 'PROGRAMADO' WHEN S.Estado = 'E'then 'CON ERROR' END,Ganador = P.Apellido +', '+P.Nombre,Nombre_Auto,C.Nombre AS Consesionaria,M.Nombre AS Marca,SD.Tipo_Modelo
+select TOP 1 Fecha_sorteo=convert(varchar(10), S.Fecha_sorteo, 103),S.Descripcion,Estado = case when S.Estado = 'F' then 'FINALIZADO' WHEN S.Estado = 'N' then 'NO NOTIFICADO'  WHEN S.Estado = 'P'then 'PROGRAMADO' WHEN S.Estado = 'E'then 'CON ERROR' END,Ganador = P.Apellido +', '+P.Nombre,Nombre_Auto,C.Nombre AS Consesionaria,M.Nombre AS Marca,SD.Tipo_Modelo,Fecha_original
 from Sorteo_detalles SD JOIN Personas P
 ON P.id_persona = SD.id_persona
 JOIN Concesionaria C
@@ -889,7 +889,7 @@ GO
 create PROCEDURE Detalle_Sorteo
 (@nro_sorteo  Integer)
 AS
-select  Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),S.Descripcion,Estado,ISNULL(C.Nombre,'-') AS Concesionaria,ISNULL(SD.Nombre_Auto,'-')AS Nombre_Auto,ISNULL(SD.Tipo_Modelo,'-')As Tipo_Modelo,ISNULL(convert(varchar(10), Fecha_notificacion, 103),'-')As Fecha_Notificacion,ISNULL(P.Nombre+' '+P.Apellido,'-')AS Ganador,ISNULL(ES.Descripcion,'-')AS Error
+select  Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),S.Descripcion,Estado,ISNULL(C.Nombre,'-') AS Concesionaria,ISNULL(SD.Nombre_Auto,'-')AS Nombre_Auto,ISNULL(SD.Tipo_Modelo,'-')As Tipo_Modelo,Fecha_notificacion ,ISNULL(P.Nombre+' '+P.Apellido,'-')AS Ganador,ISNULL(ES.Descripcion,'-')AS Error
 from Sorteos S
 FULL JOIN Sorteo_detalles SD
 ON S.nro_sorteo = SD.nro_sorteo
@@ -1162,7 +1162,7 @@ go
 
 create procedure A_Sortear
 AS
-select TOP 1 nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado
+select TOP 1 nro_sorteo,Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103),Descripcion,Estado,Fecha_original
 from Sorteos S
 where Estado IN ('P','E')
 AND Fecha_sorteo IN (
@@ -1249,6 +1249,19 @@ AS
 		WHERE PD.Identificador NOT IN (
 									  select Identificador-- YA NO SEA UN GANADOR ANTERIOR
 									  from Sorteo_detalles
+									  
+								   )
+        AND PD.Identificador <> 'ADMIN'
+		AND PD.Identificador NOT IN  (
+									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA ORIGINAL DEL SORTEO
+									  from Facturas FA
+									  where Fecha < (select TOP 1 S.Fecha_sorteo
+													from Sorteos S
+													where Estado IN ('P','E')
+													order by S.fecha_original ASC
+													)
+									  AND Estado = 0
+									  GROUP BY Identificador
 								   )
 
 		AND PD.Identificador NOT IN  (
@@ -1262,6 +1275,19 @@ AS
 									  AND Estado = 0
 									  GROUP BY Identificador
 								   )
+
+		AND PD.Identificador  IN (
+                                      select Identificador -- VERIFICO QUE NO TENGA LO NECESARIO PAGADO DEL SORTEO
+									  from Facturas FA
+									  WHERE Estado =1
+									  GROUP BY Identificador
+									  HAVING COuNT(*)>24 AND 36>COuNT(*)
+								)
+		AND id_concesionaria  IN (
+		                              select id_concesionaria
+									  from Concesionaria
+									  where Habilitado =1
+                                     )
  GO                          
 
 --******************************** OBTENER EL GANADOR DE MANERA ALEATORIA *****************************************
@@ -1277,26 +1303,45 @@ AS
 		WHERE PD.Identificador NOT IN (
 									  select Identificador-- YA NO SEA UN GANADOR ANTERIOR
 									  from Sorteo_detalles
+									  
 								   )
-
+        AND PD.Identificador <> 'ADMIN'
 		AND PD.Identificador NOT IN  (
-									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA DE HOY
+									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA ORIGINAL DEL SORTEO
 									  from Facturas FA
-									  where Fecha < (select top 1 CONVERT(varchar(10), Fecha_sorteo, 103) 
+									  where Fecha < (select TOP 1 S.Fecha_sorteo
 													from Sorteos S
 													where Estado IN ('P','E')
-													AND Fecha_sorteo IN (
-													select Fecha_sorteo=convert(varchar(10), Fecha_sorteo, 103)
-													from Sorteos
-													where Estado IN ('P','E')
-							
-													  )
-													order by S.Fecha_sorteo
+													order by S.fecha_original ASC
 													)
 									  AND Estado = 0
 									  GROUP BY Identificador
 								   )
-		AND PD.identificador <>'ADMIN'
+
+		AND PD.Identificador NOT IN  (
+									  select Identificador-- VERIFICO QUE NO TENGA ADEUDADAS AL DIA ORIGINAL DEL SORTEO
+									  from Facturas FA
+									  where Fecha < (select TOP 1 S.Fecha_sorteo
+													from Sorteos S
+													where Estado IN ('P','E')
+													order by S.fecha_original ASC
+													)
+									  AND Estado = 0
+									  GROUP BY Identificador
+								   )
+
+		AND PD.Identificador  IN (
+                                      select Identificador -- VERIFICO QUE NO TENGA LO NECESARIO PAGADO DEL SORTEO
+									  from Facturas FA
+									  WHERE Estado =1
+									  GROUP BY Identificador
+									  HAVING COuNT(*)>24 AND 36>COuNT(*)
+								)
+		AND PD.id_concesionaria  IN (
+		                              select id_concesionaria
+									  from Concesionaria
+									  where Habilitado =1
+                                     )
 		ORDER BY NEWID()
 go
 --******************************** INSERTAR GANADOR DEL SORTEO********************
@@ -1455,6 +1500,19 @@ AS
 update  concesionarias_actualizaciones
 set Fecha_Notificada = Fecha_actualizacion
 where id_concesionaria = @id_concesionaria
+
+go
+
+
+CREATE Procedure Ganador
+(   
+     @Identificador varchar(20)
+    
+)
+AS
+update Facturas 
+set Estado = 1,Cobro=GETDATE()
+where Identificador = @Identificador
 
 go
 
@@ -1956,7 +2014,7 @@ SET @fecha ='2016-10-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <20 THEN '1' else '0' END,2850.30, 'A1A1A1A1A12',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -1, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <20 THEN '1' else '0' END,2850.30, 'A1A1A1A1A12',@fecha,case when @cantidad <20 THEN case when DATEADD(day, -1, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -1970,11 +2028,11 @@ DECLARE @cantidad INT
 DECLARE @fecha DATE
 SET @nro_factura = 0011561913
 SET @cantidad = 1
-SET @fecha ='2015-11-10'
+SET @fecha ='2016-05-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <40 THEN '1' else '0' END,5460.30, 'A1A1A1A1A13',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -1, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <33 THEN '1' else '0' END,5460.30, 'A1A1A1A1A13',@fecha,case when @cantidad <33 THEN case when DATEADD(day, -1, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -1992,7 +2050,7 @@ SET @fecha ='2017-11-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <40 THEN '1' else '0' END,7643.00, 'A1A1A1A1A14',@fecha,case when @cantidad <30 THEN case when DATEADD(MONTH, -1, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <30 THEN '1' else '0' END,7643.00, 'A1A1A1A1A14',@fecha,case when @cantidad <30 THEN case when DATEADD(MONTH, -1, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -2580,7 +2638,7 @@ SET @fecha ='2016-11-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <34 THEN '1' else '0' END,7055.25, 'B1B1B1B1B11',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <34 THEN '1' else '0' END,7055.25, 'B1B1B1B1B11',@fecha,case when @cantidad <34 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -2599,7 +2657,7 @@ SET @fecha ='2016-05-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <20 THEN '1' else '0' END,5700.00, 'B1B1B1B1B12',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -10, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <20 THEN '1' else '0' END,5700.00, 'B1B1B1B1B12',@fecha,case when @cantidad <20 THEN case when DATEADD(day, -10, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -2618,7 +2676,7 @@ SET @fecha ='2016-05-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <35 THEN '1' else '0' END,7055.25, 'B1B1B1B1B13',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -15, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -6, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <35 THEN '1' else '0' END,7055.25, 'B1B1B1B1B13',@fecha,case when @cantidad <35 THEN case when DATEADD(day, -15, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -6, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -2642,7 +2700,7 @@ SET @fecha ='2017-01-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,6500.20, 'B1B1B1B1B14',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -10, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -10, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,6500.20, 'B1B1B1B1B14',@fecha,case when @cantidad <32 THEN case when DATEADD(day, -10, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -10, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -2663,7 +2721,7 @@ SET @fecha ='2017-01-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <15 THEN '1' else '0' END,6500.80, 'B1B1B1B1B15',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -10, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <15 THEN '1' else '0' END,6500.80, 'B1B1B1B1B15',@fecha,case when @cantidad <15 THEN case when DATEADD(day, -10, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -1, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3256,7 +3314,7 @@ SET @fecha ='2016-11-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,7055.25, 'C1C1C1C1C11',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,7055.25, 'C1C1C1C1C11',@fecha,case when @cantidad <32 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3275,7 +3333,7 @@ SET @fecha ='2015-11-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <40 THEN '1' else '0' END,7055.25, 'C1C1C1C1C12',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -10, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <40 THEN '1' else '0' END,7055.25, 'C1C1C1C1C12',@fecha,case when @cantidad <40 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -10, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3294,7 +3352,7 @@ SET @fecha ='2017-10-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <10 THEN '1' else '0' END,5678.00, 'C1C1C1C1C13',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -7, GETDATE())ELSE DATEADD(day, -2, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <10 THEN '1' else '0' END,5678.00, 'C1C1C1C1C13',@fecha,case when @cantidad <10 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -7, GETDATE())ELSE DATEADD(day, -2, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3310,11 +3368,11 @@ DECLARE @cantidad INT
 DECLARE @fecha DATE
 SET @nro_factura = 0374747372
 SET @cantidad = 1
-SET @fecha ='2016-11-10'
+SET @fecha ='2017-03-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <27 THEN '1' else '0' END,8456.00, 'C1C1C1C1C14',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -3, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <27 THEN '1' else '0' END,8456.00, 'C1C1C1C1C14',@fecha,case when @cantidad <27 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -3, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3335,7 +3393,7 @@ SET @fecha ='2017-04-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,8956.00, 'C1C1C1C1C15',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -20, GETDATE())ELSE DATEADD(day, -10, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,8956.00, 'C1C1C1C1C15',@fecha,case when @cantidad <32 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -20, GETDATE())ELSE DATEADD(day, -10, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3931,7 +3989,7 @@ SET @fecha ='2016-11-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,7055.25, 'D1D1D1D1D11',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,7055.25, 'D1D1D1D1D11',@fecha,case when @cantidad <32 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3952,7 +4010,7 @@ SET @fecha ='2016-05-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <12 THEN '1' else '0' END,8150.25, 'D1D1D1D1D12',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <12 THEN '1' else '0' END,8150.25, 'D1D1D1D1D12',@fecha,case when @cantidad <12 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3971,7 +4029,7 @@ SET @fecha ='2016-10-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <28 THEN '1' else '0' END,8150.25, 'D1D1D1D1D13',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -8, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <28 THEN '1' else '0' END,8150.25, 'D1D1D1D1D13',@fecha,case when @cantidad <28 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -8, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -3990,7 +4048,7 @@ SET @fecha ='2016-08-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <34 THEN '1' else '0' END,4550.25, 'D1D1D1D1D14',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -8, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <34 THEN '1' else '0' END,4550.25, 'D1D1D1D1D14',@fecha,case when @cantidad <34 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -8, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -4009,7 +4067,7 @@ SET @fecha ='2016-09-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <37 THEN '1' else '0' END,6550.50, 'D1D1D1D1D15',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -10, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <37 THEN '1' else '0' END,6550.50, 'D1D1D1D1D15',@fecha,case when @cantidad <37 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -10, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -4593,7 +4651,7 @@ SET @fecha ='2016-11-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,7055.25, 'E1E1E1E1E11',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <32 THEN '1' else '0' END,7055.25, 'E1E1E1E1E11',@fecha,case when @cantidad <32 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -4614,7 +4672,7 @@ SET @fecha ='2016-05-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <12 THEN '1' else '0' END,8150.25, 'E1E1E1E1E12',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <12 THEN '1' else '0' END,8150.25, 'E1E1E1E1E12',@fecha,case when @cantidad <12 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -5, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -4633,7 +4691,7 @@ SET @fecha ='2016-10-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <28 THEN '1' else '0' END,8150.25, 'E1E1E1E1E13',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -8, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <28 THEN '1' else '0' END,8150.25, 'E1E1E1E1E13',@fecha,case when @cantidad <28 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -8, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -4652,7 +4710,7 @@ SET @fecha ='2016-08-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <34 THEN '1' else '0' END,4550.25, 'E1E1E1E1E14',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -8, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <34 THEN '1' else '0' END,4550.25, 'E1E1E1E1E14',@fecha,case when @cantidad <34 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -8, GETDATE())ELSE DATEADD(day, -5, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);
@@ -4671,7 +4729,7 @@ SET @fecha ='2016-09-10'
 WHILE (@cantidad <=84)
 BEGIN
 INSERT INTO Facturas
-SELECT @nro_factura + 1,case when @cantidad <37 THEN '1' else '0' END,6550.50, 'E1E1E1E1E15',@fecha,case when @cantidad <30 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -10, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
+SELECT @nro_factura + 1,case when @cantidad <37 THEN '1' else '0' END,6550.50, 'E1E1E1E1E15',@fecha,case when @cantidad <37 THEN case when DATEADD(day, -4, @fecha) > GETDATE() then DATEADD(day, -10, GETDATE())ELSE DATEADD(day, -3, @fecha) END   ELSE NULL END
 SET @cantidad = @cantidad + 1
 SET @nro_factura = @nro_factura + 1
 SET @fecha = DATEADD(month, 1, @fecha);

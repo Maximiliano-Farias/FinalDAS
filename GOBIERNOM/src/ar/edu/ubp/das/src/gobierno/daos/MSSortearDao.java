@@ -51,7 +51,7 @@ public class MSSortearDao extends DaoImpl {
         	if(result.getRow() > 0)
         	{	
 	            detalles = new SorteosPendientes();
-	        	detalles.setFecha(result.getString("Fecha_sorteo"));
+	        	detalles.setFecha_original(result.getDate("Fecha_original"));
 	        	detalles.setDescripcion(result.getString("Descripcion"));
 	        	detalles.setNro_sorteo(result.getString("nro_sorteo"));
 	        	
